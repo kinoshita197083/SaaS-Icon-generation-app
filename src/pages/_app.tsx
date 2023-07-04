@@ -5,6 +5,9 @@ import { SessionProvider } from "next-auth/react";
 import { api } from "~/utils/api";
 
 import "~/styles/globals.css";
+import "~/styles/designToken.css";
+import "~/styles/utility.css";
+import Navbar from "~/component/navbar/navbar";
 
 const MyApp: AppType<{ session: Session | null }> = ({
   Component,
@@ -12,6 +15,7 @@ const MyApp: AppType<{ session: Session | null }> = ({
 }) => {
   return (
     <SessionProvider session={session}>
+      <Navbar logo={'/logo.svg'} projectName='Imagin' navbarItems={['About', 'Contact', 'Generate']} />
       <Component {...pageProps} />
     </SessionProvider>
   );

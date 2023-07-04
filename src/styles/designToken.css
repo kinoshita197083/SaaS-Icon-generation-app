@@ -1,0 +1,16 @@
+:root {
+    font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+    line-height: 1.5;
+    font-weight: 400;
+
+    --bg-color: white;
+    --font-color: black;
+    --btn-font-color: white;
+
+    --btn-color: #272831;
+
+    --nav-menu-bg-color: rgb(255, 255, 255, 0.8);
+
+    --vapp-bg: rgb(153, 156, 251);
+    --test: rgb(71, 85, 128);
+}
