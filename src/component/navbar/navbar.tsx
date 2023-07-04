@@ -3,10 +3,15 @@ import styles from './navbar.module.css';
 import { useEffect, useState } from 'react';
 import { faGhost } from '@fortawesome/free-solid-svg-icons';
 
+type NavItem = {
+    text: string,
+    type: string
+}
+
 type NavbarProps = {
     logo?: string,
     projectName?: string,
-    navbarItems: string[]
+    navbarItems: NavItem[]
 }
 
 const Navbar = (props: NavbarProps) => {
@@ -45,12 +50,12 @@ const Navbar = (props: NavbarProps) => {
                     <span className={click ? [styles.bar, styles.active].join(' ') : styles.bar} />
                 </div>
                 <div className={[styles.logoGroup, 'font-semibold'].join(' ')}>
-                    <FontAwesomeIcon icon={faGhost} size='2x' />
+                    <FontAwesomeIcon icon={faGhost} size='2x' className={styles.navLogo} />
                     <h2 className='text-[1.6rem]'>{projectName}</h2>
                 </div>
                 <ul className={click ? styles.navMenu : [styles.navMenu, styles.closed].join(' ')}>
                     {navbarItems.map((item, index) => {
-                        return (<li key={index} className={styles.navItem}>{item}</li>)
+                        return (<li key={index} className={item.type === 'button' ? [styles.navBtn, styles.navItem].join(' ') : styles.navItem}>{item.text}</li>)
                     })}
                 </ul>
             </nav>

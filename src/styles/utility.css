@@ -27,11 +27,6 @@ main::-webkit-scrollbar {
     /* For Chrome, Safari, and Opera */
 }
 
-.page {
-    flex: 0 0 100%;
-    scroll-snap-align: center;
-}
-
 .container {
     padding: 5% 10%;
 }
@@ -44,12 +39,12 @@ main::-webkit-scrollbar {
     padding: 5% 18%;
 }
 
-.bg-black {
+.bgBlack {
     background-color: black;
     transition: all 0.3s ease-in-out;
 }
 
-.bg-white {
+.bgWhite {
     background-color: white;
     transition: all 0.3s ease-in-out;
 }

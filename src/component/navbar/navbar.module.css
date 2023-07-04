@@ -14,7 +14,7 @@
 .navbar {
     width: 95%;
     display: grid;
-    grid-template-columns: 1.5fr 2fr;
+    grid-template-columns: 1.5fr 1fr;
     align-items: center;
 }
 
@@ -61,13 +61,22 @@
     gap: 25%
 }
 
+.navBtn {
+    @apply bg-gradient-to-r from-sky-500 to-indigo-500 transition-all;
+    color: rgb(255, 255, 255);
+}
+
+.navBtn:hover {
+    @apply bg-gradient-to-r from-sky-400 to-indigo-400;
+}
+
 .navItem {
     text-decoration: none;
-    padding: 5px;
-    width: 4.5rem;
+    padding: 3px 8px;
+    width: 5rem;
     text-align: center;
     border-radius: 15px;
-    transition: all 0.1s ease-in-out;
+    transition: all 0.2s ease-in-out;
     cursor: pointer;
 }
 

@@ -1,0 +1,8 @@
+.collection {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(30rem, 100%), 1fr));
+    @apply bg-gradient-to-r from-violet-500 to-blue-500;
+    /* backdrop-filter: blur(33px); */
+    padding: 3%;
+    border-radius: 25px;
+}
