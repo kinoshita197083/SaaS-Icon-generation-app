@@ -1,5 +1,7 @@
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import styles from './navbar.module.css';
 import { useEffect, useState } from 'react';
+import { faGhost } from '@fortawesome/free-solid-svg-icons';
 
 type NavbarProps = {
     logo?: string,
@@ -42,11 +44,8 @@ const Navbar = (props: NavbarProps) => {
                     <span className={click ? [styles.bar, styles.active].join(' ') : styles.bar} />
                     <span className={click ? [styles.bar, styles.active].join(' ') : styles.bar} />
                 </div>
-                <div className='logoGroup'>
-                    {/* <img className='nav-logo'
-                        src={logo}
-                    /> */}
-                    <i className="fa-solid fa-ghost navLogo"></i>
+                <div className={[styles.logoGroup, 'font-semibold'].join(' ')}>
+                    <FontAwesomeIcon icon={faGhost} size='2x' />
                     <h2 className='text-[1.6rem]'>{projectName}</h2>
                 </div>
                 <ul className={click ? styles.navMenu : [styles.navMenu, styles.closed].join(' ')}>

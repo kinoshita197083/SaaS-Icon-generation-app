@@ -8,15 +8,18 @@ import "~/styles/globals.css";
 import "~/styles/designToken.css";
 import "~/styles/utility.css";
 import Navbar from "~/component/navbar/navbar";
+import Footer from "~/component/footer";
 
 const MyApp: AppType<{ session: Session | null }> = ({
   Component,
   pageProps: { session, ...pageProps },
 }) => {
+
   return (
     <SessionProvider session={session}>
       <Navbar logo={'/logo.svg'} projectName='Imagin' navbarItems={['About', 'Contact', 'Generate']} />
       <Component {...pageProps} />
+      <Footer />
     </SessionProvider>
   );
 };

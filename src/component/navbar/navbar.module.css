@@ -27,6 +27,7 @@
 .logoGroup {
     display: flex;
     gap: 2%;
+    align-items: center;
     cursor: pointer;
 }
 

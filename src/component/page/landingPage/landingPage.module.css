@@ -1,0 +1,12 @@
+.cardContainer {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(28rem, 100%), 1fr));
+    padding: 0 9% 3% 9%;
+    width: 100%;
+}
+
+@media (max-width: 800px) {
+    .cardContainer {
+        padding: 0 0;
+    }
+}

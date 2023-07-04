@@ -9,10 +9,8 @@ const Button = (props: ButtonProps) => {
 
     const { boxShadow, color, ...rest } = props;
 
-    const condition = boxShadow ? 'button box-shadow' : 'button';
-
     return (
-        <button className={boxShadow ? [styles.button, styles.boxShadow].join(" ") : styles.button} {...rest} style={{ backgroundColor: color }} />
+        <button className={boxShadow ? [styles.button, 'drop-shadow-xl'].join(" ") : styles.button} {...rest} style={{ backgroundColor: color }} />
     )
 }
 

@@ -8,6 +8,9 @@ const config = {
       },
       fontFamily: {
         'sans': ['sans-serif'],
+      },
+      gridTemplateColumns: {
+        'card': 'repeat(auto-fit, minmax(min(20rem, 100%), 1fr))'
       }
     },
   },
