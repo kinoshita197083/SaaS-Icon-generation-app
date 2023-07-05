@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import styles from './navbar.module.css';
 import { useEffect, useState } from 'react';
@@ -49,10 +50,12 @@ const Navbar = (props: NavbarProps) => {
                     <span className={click ? [styles.bar, styles.active].join(' ') : styles.bar} />
                     <span className={click ? [styles.bar, styles.active].join(' ') : styles.bar} />
                 </div>
-                <div className={[styles.logoGroup, 'font-semibold'].join(' ')}>
-                    <FontAwesomeIcon icon={faGhost} size='2x' className={styles.navLogo} />
-                    <h2 className='text-[1.6rem]'>{projectName}</h2>
-                </div>
+                <Link href={'/'}>
+                    <div className={[styles.logoGroup, 'font-semibold'].join(' ')}>
+                        <FontAwesomeIcon icon={faGhost} size='2x' className={styles.navLogo} />
+                        <h2 className='text-[1.6rem]'>{projectName}</h2>
+                    </div>
+                </Link>
                 <ul className={click ? styles.navMenu : [styles.navMenu, styles.closed].join(' ')}>
                     {navbarItems.map((item, index) => {
                         return (<li key={index} className={item.type === 'button' ? [styles.navBtn, styles.navItem].join(' ') : styles.navItem}>{item.text}</li>)

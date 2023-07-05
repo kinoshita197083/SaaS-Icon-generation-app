@@ -101,7 +101,7 @@
         justify-self: center;
         top: 3.5rem;
         width: 100%;
-        height: 30rem;
+        /* height: 30rem; */
         margin: 0;
         gap: 0;
         visibility: visible;
@@ -116,10 +116,12 @@
     }
 
     .navItem {
-        background-color: rgba(231, 231, 231, 0.8);
+        /* background-color: rgba(231, 231, 231, 0.8); */
+        background-color: rgb(255 255 255 / 0.3);
+        backdrop-filter: blur(10px);
         font-size: 1.2rem;
         width: 100%;
-        height: 100%;
+        height: 200%;
         border-radius: 0;
         padding: 0;
         display: flex;

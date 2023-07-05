@@ -11,7 +11,10 @@ const config = {
       },
       gridTemplateColumns: {
         'card': 'repeat(auto-fit, minmax(min(20rem, 100%), 1fr))'
-      }
+      },
+      // animation: {
+      //   rapidSpin
+      // }
     },
   },
   plugins: [],

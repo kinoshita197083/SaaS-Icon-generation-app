@@ -4,6 +4,7 @@ import MainHeading from '~/component/mainHeading/mainHeading';
 import Button from '~/component/button/button';
 import Poster from '~/component/poster/poster';
 import Card from '~/component/card/Card';
+import Link from 'next/link';
 
 const LandingPage = () => {
 
@@ -29,7 +30,9 @@ const LandingPage = () => {
                 </article>
 
                 <div className='flex items-center justify-center gap-[5%] mb-[5%] absolute bottom-0 right-10'>
-                    <Button boxShadow>Start imagining</Button>
+                    <Link href={'/generate'}>
+                        <Button boxShadow>Start imagining</Button>
+                    </Link>
                 </div>
             </section>
 
