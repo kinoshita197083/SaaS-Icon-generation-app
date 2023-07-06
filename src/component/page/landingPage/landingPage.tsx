@@ -5,6 +5,8 @@ import Button from '~/component/button/button';
 import Poster from '~/component/poster/poster';
 import Card from '~/component/card/Card';
 import Link from 'next/link';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faProductHunt } from '@fortawesome/free-brands-svg-icons';
 
 const LandingPage = () => {
 
@@ -13,14 +15,23 @@ const LandingPage = () => {
             <section className='pl-[8%] md:pl-[15%] lg:pl-[15%]'>
                 <MainHeading heading={'An Icon generator App that XXX XXX'} />
                 <br />
-                <Button boxShadow>Get started</Button>
+                <div className='flex items-center gap-[3%] lg:gap-[1%]'>
+                    <Link href={'/generate'}>
+                        <Button boxShadow>Get started</Button>
+                    </Link>
+                    <Button
+                        bgColor={'transparent'}
+                        borderColor='tomato'
+                        textColor='tomato'
+                    ><FontAwesomeIcon icon={faProductHunt} /> Product Hunt</Button>
+                </div>
             </section>
 
             <Poster />
 
             <section className={styles.cardContainer}>
                 <Card mainHeading='Just a bunch of text' subHeading='another text' bgImage='./matrix.jpg'></Card>
-                <Card mainHeading='Just a bunch of text' subHeading='another text' bgImage='./brad.jpg'></Card>
+                <Card mainHeading='XXX icons have been created so far!' subHeading='another text' bgImage='./brad.jpg'></Card>
             </section>
 
             <section className='w-full lg:w-[78%] h-[20rem] bg-sky-800 rounded-[25px] mx-auto flex relative p-8 bg-gradient-to-r from-sky-500 to-indigo-500'>

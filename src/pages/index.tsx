@@ -45,7 +45,6 @@ const Home: NextPage = () => {
   return (
     <>
       <Head>
-
       </Head>
       <main ref={main} className='py-[8%] px-[4%] lg:py-[5%] lg:px-[8%] font-sans'>
         {pages.map((page, index) => {
