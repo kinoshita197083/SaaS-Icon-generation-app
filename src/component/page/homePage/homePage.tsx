@@ -1,31 +1,29 @@
 import React from 'react';
-import styles from '../../../styles/homePage.module.css';
 import BannerCard from '~/component/bannerCard';
-import Collection from '~/component/collection';
-import Link from 'next/link';
 
 const HomePage = () => {
     return (
-        <div className='min-h-full p-[8%] pt-[5%]'>
+        <div className='min-h-full px-[8%] lg:px-[18%] lg:py-[5%]'>
+
             <section className='bg-[url(/scenery.jpg)] bg-cover bg-no-repeat bg-center rounded-[25px]'>
-                <Collection
-                    collectionName='App'
-                    darkness
-                >
-                    <Link href={'/generate'}>
+                <div className='container-s blur-dark flex flex-col'>
+                    <h3 className='text-white text-[1.6rem] lg:text-[3rem] mx-auto'>App</h3>
+                    <div className='even-cols'>
                         <BannerCard
                             mainHeading='Icon Generation'
                             subHeading='FEATURED'
                             bgImage='/ape.jpg'
+                            link='/generate'
                         />
-                    </Link>
 
-                    <BannerCard
-                        mainHeading='Community'
-                        subHeading='COLLECTION'
-                        bgImage='/community.png'
-                    />
-                </Collection>
+                        <BannerCard
+                            mainHeading='Remove Background'
+                            subHeading='FEATURED'
+                            bgImage='/chihuahua.png'
+                            link='removebackground'
+                        />
+                    </div>
+                </div>
             </section>
 
             <section className=''>

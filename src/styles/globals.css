@@ -1,8 +1,68 @@
+@import url("https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900");
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-.page {
-    flex: 0 0 100%;
-    scroll-snap-align: center;
+* {
+    font-family: "Poppins", sans-serif;
+}
+
+/* .webkit {
+    -webkit-padding-end: 8%;
+} */
+
+.container-s {
+    padding: 5% 5%;
+}
+
+.even-cols {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(6rem, 100%), 1fr));
+    padding: 3% 0;
+}
+
+.even-cols-generate {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(20rem, 100%), 1fr));
+}
+
+.blur-white {
+    background-color: rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(33px);
+}
+
+.blur-dark {
+    background-color: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(33px);
+    border-radius: 25px;
+}
+
+.page-transition {
+    animation: entry 1s;
+}
+
+@keyframes entry {
+    from {
+        padding: 0
+    }
+
+    to {
+        padding: 7% 8%;
+    }
+}
+
+@keyframes entryMobile {
+    from {
+        padding: 0
+    }
+
+    to {
+        padding: 20% 2%;
+    }
+}
+
+@media (max-width: 650px) {
+    .page-transition {
+        animation: entryMobile 1s;
+    }
 }

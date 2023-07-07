@@ -21,7 +21,7 @@ const config = {
       },
       animation: {
         fadein: 'fadein 1s ease-in-out',
-      }
+      },
     }
   },
   plugins: [],

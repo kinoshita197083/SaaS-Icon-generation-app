@@ -11,7 +11,7 @@ const Poster = (props: PosterProps) => {
     const { src, alt } = props;
 
     return (
-        <section className={[styles.poster, 'max-w-[100%]'].join(' ')}>
+        <section className={[styles.poster, 'max-w-full]'].join(' ')}>
             <div className='relative'>
                 <img className={styles.portrait} src={'https://assets.website-files.com/5e51c674258ffe10d286d30a/5e53552ff5fa1a9d22f727e2_peep-35.svg'} alt={alt} />
                 <img className={styles.portrait} src={'https://assets.website-files.com/5e51c674258ffe10d286d30a/5e535652f5fa1ac5ecf7d744_peep-40.svg'} alt={alt} />

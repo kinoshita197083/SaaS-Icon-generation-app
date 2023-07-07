@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './landingPage.module.css';
+import styles from './landingPage.module.css'
 import Button from '~/component/button/button';
 import Poster from '~/component/poster/poster';
 import Card from '~/component/card/Card';
@@ -10,16 +10,17 @@ import { faProductHunt } from '@fortawesome/free-brands-svg-icons';
 const LandingPage = () => {
 
     return (
-        <div className={styles.page}>
-            <section className='pl-[8%] md:pl-[15%] lg:pl-[15%] animate-fadein'>
-                <h1 className={['text-5xl leading-[1.2] max-w-[60%] md:leading-[1.3] lg:text-7xl lg:leading-[1.2] font-semibold', styles.animateCharacter].join(' ')}>
-                    An Icon generator App that XXX XXX
+        <div className='px-[2%] md:px-[3%] lg:px-[8%]'>
+            <section className='pl-[5%] md:px-[15%] lg:pl-[15%] animate-fadein'>
+                <h1 className='text-5xl leading-[1.2] max-w-[80%] lg:max-w-[70%] md:text-6xl md:leading-[1.3] lg:text-7xl lg:leading-[1.2] font-semibold'>
+                    An <span className={styles.animateCharacter}>Icon generator</span> App that XXX XXX
                 </h1>
                 <br />
-                <div className='flex items-center gap-[3%] lg:gap-[1%]'>
+                <div role='button-group'>
                     <Link href={'/generate'}>
                         <Button boxShadow>Get started</Button>
                     </Link>
+                    <span className='mr-[1%]' />
                     <Button
                         bgColor={'transparent'}
                         borderColor='tomato'
@@ -35,7 +36,7 @@ const LandingPage = () => {
                 <Card mainHeading='XXX icons have been created so far!' subHeading='another text' bgImage='./brad.jpg'></Card>
             </section>
 
-            <section className='w-full lg:w-[78%] h-[20rem] bg-sky-800 rounded-[25px] mx-auto flex relative p-8 bg-gradient-to-r from-sky-500 to-indigo-500'>
+            <section className='lg:w-[78%] h-[20rem] bg-sky-800 rounded-[25px] mx-auto flex relative p-8 bg-gradient-to-r from-sky-500 to-indigo-500'>
                 <article className=''>
                     <h4 className='text-white'>Sign up to start brainstorming your own icon</h4>
                     <h3 className='text-[3rem] text-white'>Join xxx users</h3>

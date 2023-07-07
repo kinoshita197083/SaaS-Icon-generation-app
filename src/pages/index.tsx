@@ -1,6 +1,5 @@
 import { type NextPage } from "next";
 import Head from "next/head";
-import Link from "next/link";
 import { signIn, signOut, useSession } from "next-auth/react";
 
 import { api } from "~/utils/api";
@@ -9,13 +8,13 @@ import LandingPage from "~/component/page/landingPage/landingPage";
 import HomePage from "~/component/page/homePage/homePage";
 import Trackbar from "~/component/trackbar/Trackbar";
 
-const navItems = ['About', 'Contact', 'Generate'];
 const pages = [<LandingPage />, <HomePage />];
-const pagesIndex = [0, 1];
+const pagesIndex = pages.map((__, idx) => idx);
 
 const Home: NextPage = () => {
 
   const [slide, setSlide] = useState(0);
+
   const main = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -46,7 +45,7 @@ const Home: NextPage = () => {
     <>
       <Head>
       </Head>
-      <main ref={main} className='py-[8%] px-[4%] lg:py-[5%] lg:px-[8%] font-sans'>
+      <main ref={main} className='py-[8%] lg:py-[2%] font-sans'>
         {pages.map((page, index) => {
           return (
             <div key={index} className={'snap-center flex-screen'}>
