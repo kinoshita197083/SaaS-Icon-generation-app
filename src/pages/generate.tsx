@@ -1,17 +1,20 @@
 import { NextPage } from "next"
+import { useEffect } from "react";
 import Collection from "~/component/collection"
 
 const Generate: NextPage = () => {
 
     const inputStyle = {
-        // backgroundColor: 'rgba(255, 255, 255, 0.1)',
         backgroundColor: 'transparent',
         borderBottom: '1px solid white'
-        // backdropFilter: 'blur(53px)'
     }
 
     const labelCSS = 'text-gray-100 text-[1.3rem]';
     const inputCSS = 'mt-[1%] mb-[8%] h-[2.5rem] w-full text-gray-200 lg:text-[1.5rem] px-[2%] outline-gray-800';
+
+    useEffect(() => {
+        window.scrollTo(0, 300)
+    }, [])
 
     return (
         <div className="min-h-[120vh] py-[20%] px-[2%] lg:py-[7%] lg:px-[8%]">

@@ -1,6 +1,5 @@
 import React from 'react';
 import styles from './landingPage.module.css';
-import MainHeading from '~/component/mainHeading/mainHeading';
 import Button from '~/component/button/button';
 import Poster from '~/component/poster/poster';
 import Card from '~/component/card/Card';
@@ -12,8 +11,10 @@ const LandingPage = () => {
 
     return (
         <div className={styles.page}>
-            <section className='pl-[8%] md:pl-[15%] lg:pl-[15%]'>
-                <MainHeading heading={'An Icon generator App that XXX XXX'} />
+            <section className='pl-[8%] md:pl-[15%] lg:pl-[15%] animate-fadein'>
+                <h1 className={['text-5xl leading-[1.2] max-w-[60%] md:leading-[1.3] lg:text-7xl lg:leading-[1.2] font-semibold', styles.animateCharacter].join(' ')}>
+                    An Icon generator App that XXX XXX
+                </h1>
                 <br />
                 <div className='flex items-center gap-[3%] lg:gap-[1%]'>
                     <Link href={'/generate'}>

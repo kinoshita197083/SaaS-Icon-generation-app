@@ -11,12 +11,18 @@ const config = {
       },
       gridTemplateColumns: {
         'card': 'repeat(auto-fit, minmax(min(20rem, 100%), 1fr))',
-        'color': 'repeat(auto-fit, minmax(4rem, 1fr))',
+        'color': 'repeat(auto-fit, minmax(4rem, 1fr))'
       },
-      // animation: {
-      //   rapidSpin
-      // },
-    },
+      keyframes: {
+        fadein: {
+          '0%': { opacity: '0' },
+          '100%': { opacity: '1' }
+        }
+      },
+      animation: {
+        fadein: 'fadein 1s ease-in-out',
+      }
+    }
   },
   plugins: [],
 };
