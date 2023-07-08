@@ -67,15 +67,13 @@ const Navbar = (props: NavbarProps) => {
                                 <button
                                     key={index}
                                     className={item.type === 'auth' ? [styles.navBtn, styles.navItem].join(' ') : styles.navItem}
-                                    onClick={() => signIn().catch(console.error)}>
+                                    onClick={() => { void signIn().catch(console.error) }}>
                                     {item.text}
                                 </button>
-
                                 :
-
                                 <button
                                     className={[styles.navBtn, styles.navItem].join(' ')}
-                                    onClick={() => signOut().catch(console.error)}>
+                                    onClick={() => { void signOut().catch(console.error) }}>
                                     Sign out
                                 </button>
                         )

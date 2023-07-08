@@ -1,4 +1,3 @@
-import { useState } from "react";
 import Link from 'next/link';
 
 type BannerCardProps = {
@@ -12,10 +11,8 @@ const BannerCard = (props: BannerCardProps) => {
 
     const { mainHeading, subHeading, bgImage, link } = props;
 
-    const [clicked, setClicked] = useState(false);
-
     const bgStyle = {
-        backgroundImage: `url(${bgImage})`,
+        backgroundImage: bgImage ? `url(${bgImage})` : '',
         backgroundRepeat: 'no-repeat',
         backgroundSize: 'cover'
     }
@@ -24,7 +21,7 @@ const BannerCard = (props: BannerCardProps) => {
 
     return (
         <Link href={link || '/'}>
-            <div className={clicked ? '' : defaultStyle} style={bgStyle}>
+            <div className={defaultStyle} style={bgStyle}>
                 <div className="absolute rounded-bl-[inherit] rounded-br-[inherit] md:h-[1.9rem] lg:h-[4rem] w-full p-3 bottom-0 lg:bg-black opacity-[70%]">
                     <h4 className="text-[0]  lg:text-[0.8rem] text-gray-200">{subHeading}</h4>
                     <h3 className="text-[0]  lg:text-[1.2rem] text-white">{mainHeading}</h3>

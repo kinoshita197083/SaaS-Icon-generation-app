@@ -1,6 +1,6 @@
 import { type NextPage } from "next";
 import Head from "next/head";
-import { signIn, signOut, useSession } from "next-auth/react";
+// import { signIn, signOut, useSession } from "next-auth/react";
 
 import { api } from "~/utils/api";
 import { useRef, useState, useEffect } from "react";
@@ -8,8 +8,8 @@ import LandingPage from "~/component/page/landingPage/landingPage";
 import HomePage from "~/component/page/homePage/homePage";
 import Trackbar from "~/component/trackbar/Trackbar";
 
-const pages = [<LandingPage />, <HomePage />];
-const pagesIndex = pages.map((__, idx) => idx);
+const pages = [{ id: 1, page: <LandingPage /> }, { id: 2, page: <HomePage /> }];
+const pagesIndex = [...pages.keys()];
 
 const Home: NextPage = () => {
 
@@ -46,10 +46,10 @@ const Home: NextPage = () => {
       <Head>
       </Head>
       <main ref={main} className='py-[8%] lg:py-[2%] font-sans'>
-        {pages.map((page, index) => {
+        {pages.map((page) => {
           return (
-            <div key={index} className={'snap-center flex-screen'}>
-              {page}
+            <div key={page.id} className={'snap-center flex-screen'}>
+              {page.page}
             </div>
           )
         })}

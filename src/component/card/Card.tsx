@@ -2,15 +2,14 @@ type CardProps = {
     mainHeading?: string,
     subHeading?: string,
     bgImage?: string,
-    banner?: boolean
 }
 
 const Card = (props: CardProps) => {
 
-    const { mainHeading, subHeading, bgImage, banner } = props;
+    const { mainHeading, subHeading, bgImage } = props;
 
     const bgStyle = {
-        backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1)), url(${bgImage})`,
+        backgroundImage: bgImage ? `linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1)), url(${bgImage})` : '',
         backgroundPosition: 'center',
         backgroundRepeat: 'no-repeat',
         backgroundSize: 'cover'

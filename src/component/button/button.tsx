@@ -13,7 +13,7 @@ const Button = (props: ButtonProps) => {
 
     const btnStyle = {
         backgroundColor: bgColor,
-        border: `solid 1px ${borderColor}`,
+        border: borderColor ? `solid 1px ${borderColor}` : 'none',
         color: textColor,
         boxShadow: boxShadow ? 'box-shadow: 0px 5px 11px black' : '',
     }
