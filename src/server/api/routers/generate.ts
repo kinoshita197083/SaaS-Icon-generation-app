@@ -7,7 +7,16 @@ import {
     publicProcedure,
     protectedProcedure,
 } from "~/server/api/trpc";
+import { b64Image } from "~/data/b64Image";
+import AWS from 'aws-sdk';
 
+const s3 = new AWS.S3({
+    credentials: {
+        accessKeyId: env.ACCESS_KEY_ID,
+        secretAccessKey: env.SECRET_ACCESS_KEY,
+    },
+    region: "us-east-1",
+});
 
 //OpenAI config & client setup
 const configuration = new Configuration({
@@ -17,16 +26,17 @@ const configuration = new Configuration({
 const openai = new OpenAIApi(configuration);
 
 const generateIcon = async (prompt: string): Promise<string | undefined> => {
-    if (env.MOCK_DALLE) {
-        return '/jene.jpg'
+    if (env.MOCK_DALLE === "true") {
+        // '/jene.jpg'
+        return b64Image;
     } else {
         const response = await openai.createImage({
             prompt,
             n: 1,
-            size: "1024x1024"
+            size: "1024x1024",
+            response_format: "b64_json"
         });
-
-        const image_url = response.data.data[0]?.url;
+        const image_url = response.data.data[0]?.b64_json;
     }
 }
 
@@ -65,10 +75,20 @@ export const generateRouter = createTRPCRouter({
             // });
 
             // const image_url = response.data.data[0]?.url;
-            const image_url = await generateIcon(input.prompt);
+            const base64EncodedImage = await generateIcon(input.prompt);
+
+            // save image base 64 code to s3 bucket
+            await s3.putObject({
+                Bucket: "icon-generator-project-haha",
+                Body: Buffer.from(base64EncodedImage!, "base64"),
+                // TODO: generate a random id
+                Key: "my-image2",
+                ContentEncoding: "base64",
+                ContentType: "image/png",
+            }).promise();
 
             return {
-                image: image_url
+                image: base64EncodedImage
             }
         }),
 });

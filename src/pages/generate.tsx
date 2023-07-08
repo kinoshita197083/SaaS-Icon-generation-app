@@ -106,7 +106,8 @@ const Generate: NextPage = () => {
                     </form>
                     <div className="relative aspect-square lg:w-[45%] w-[50%] my-auto container-s bg-gray-700 rounded-[15px] overflow-hidden">
                         <Image
-                            src={imageURL || '/brad.jpg'}
+                            // src={imageURL || '/brad.jpg'}
+                            src={`data:image/png;base64, ${imageURL}`}
                             fill
                             alt='generated icon'
                             style={{ objectFit: "cover" }}
