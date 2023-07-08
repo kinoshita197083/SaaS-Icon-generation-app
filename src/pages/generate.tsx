@@ -1,8 +1,10 @@
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { NextPage } from "next"
+import Image from "next/image";
 import Link from "next/link";
-import { FormEvent, useEffect, useState } from "react";
+import { ChangeEvent, FormEvent, SetStateAction, useEffect, useState } from "react";
+import Button from "~/component/button/button";
 import { colors } from "~/material/color";
 import { styles } from "~/material/styles";
 import { api } from "~/utils/api";
@@ -13,13 +15,15 @@ const Generate: NextPage = () => {
         prompt: '',
     });
 
+    const [imageURL, setImageURL] = useState('');
+
     const generateInstance = api.generate.generateIcon.useMutation({
-        onSuccess(data) {
-            console.log(`Result: ${data}`)
-        },
-        onError(data) {
-            console.log(`Error: ${data}`)
-        }
+        // onSuccess(data) {
+        //     console.log(`Result: ${data}`)
+        // },
+        // onError(data) {
+        //     console.log(`Error: ${data}`)
+        // }
     });
 
     const inputStyle = {
@@ -30,11 +34,15 @@ const Generate: NextPage = () => {
     const labelCSS = 'text-gray-100 text-[1.3rem]';
     const inputCSS = 'mt-[1%] mb-[8%] h-[2.5rem] w-full text-gray-200 lg:text-[1.5rem] px-[2%] outline-gray-800';
 
-    const handleSubmit = (e: FormEvent) => {
+    const handleSubmit = async (e: FormEvent) => {
         e.preventDefault();
-        generateInstance.mutateAsync({
+        const response = await generateInstance.mutateAsync({
             prompt: formData.prompt
         });
+
+        if (response.image) {
+            setImageURL(response.image)
+        }
     }
 
     // useEffect(() => {
@@ -48,7 +56,13 @@ const Generate: NextPage = () => {
                     <form className="mt-[5%] lg:w-[55%]" onSubmit={handleSubmit}>
                         <div className="">
                             <label className={labelCSS}>Describe your icon</label>
-                            <input className={inputCSS} style={inputStyle} placeholder="anime cat"></input>
+                            <input
+                                className={inputCSS}
+                                style={inputStyle}
+                                value={formData.prompt}
+                                onChange={(e: ChangeEvent<HTMLInputElement>) => setFormData({ ...formData, prompt: e.target.value })}
+                                placeholder="anime cat"
+                            />
                         </div>
                         <div className="mb-[8%]">
                             <label className={labelCSS}>Pick a color</label>
@@ -75,11 +89,14 @@ const Generate: NextPage = () => {
                                 })}
                             </div>
                         </div>
+                        <Button>Submit</Button>
                     </form>
                     <div className="relative aspect-square lg:w-[45%] w-[50%] my-auto container-s bg-gray-700 rounded-[15px] overflow-hidden">
-                        <img
-                            src="/brad.jpg"
-                            className="absolute inset-0"
+                        <Image
+                            src={imageURL || '/brad.jpg'}
+                            fill
+                            alt='generated icon'
+                            style={{ objectFit: "cover" }}
                         />
                     </div>
 

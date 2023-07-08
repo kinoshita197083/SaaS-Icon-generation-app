@@ -1,11 +1,21 @@
 import { TRPCError } from "@trpc/server";
 import { z } from "zod";
-
+import { Configuration, OpenAIApi } from "openai";
+import { env } from "~/env.mjs";
 import {
     createTRPCRouter,
     publicProcedure,
     protectedProcedure,
 } from "~/server/api/trpc";
+
+
+//OpenAI config & client setup
+const configuration = new Configuration({
+    apiKey: env.DALLE_API_KEY
+});
+
+const openai = new OpenAIApi(configuration);
+
 
 export const generateRouter = createTRPCRouter({
     generateIcon: protectedProcedure
@@ -26,6 +36,7 @@ export const generateRouter = createTRPCRouter({
                 }
             });
 
+            //Handle not enough credits
             if (count <= 0) {
                 throw new TRPCError({
                     code: 'BAD_REQUEST',
@@ -33,8 +44,17 @@ export const generateRouter = createTRPCRouter({
                 })
             }
 
+            //https://platform.openai.com/docs/guides/images/usage
+            const response = await openai.createImage({
+                prompt: input.prompt,
+                n: 1,
+                size: "1024x1024"
+            });
+
+            const image_url = response.data.data[0]?.url;
+
             return {
-                message: ''
+                image: image_url
             }
         }),
 });
