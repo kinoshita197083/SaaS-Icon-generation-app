@@ -3,7 +3,7 @@ export const styles = [
         'flat': '/brad.jpg'
     },
     {
-        'mosaic': ''
+        'mosaic': '/chihuahua.png'
     },
     {
         'line-art': ''

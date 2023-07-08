@@ -15,11 +15,10 @@ const Button = (props: ButtonProps) => {
         backgroundColor: bgColor,
         border: borderColor ? `solid 1px ${borderColor}` : 'none',
         color: textColor,
-        // boxShadow: boxShadow ? '0px 5px 11px black' : '',
     }
 
     return (
-        <button {...rest} style={btnStyle} />
+        <button className='btn' {...rest} style={btnStyle} />
     )
 }
 

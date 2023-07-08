@@ -22,6 +22,30 @@
     grid-template-columns: repeat(auto-fit, minmax(min(20rem, 100%), 1fr));
 }
 
+.btn {
+    border-radius: 8px;
+    border: 1px solid transparent;
+    padding: 0.5em 1em;
+    font-size: 1em;
+    font-weight: 400;
+    font-family: inherit;
+    background-color: var(--btn-color);
+    color: var(--btn-font-color);
+    cursor: pointer;
+    transition: all 0.25s;
+}
+
+.btn:hover {
+    color: var(--font-color);
+    border-color: black;
+    background-color: transparent;
+}
+
+.btn:focus,
+.btn:focus-visible {
+    outline: 4px auto -webkit-focus-ring-color;
+}
+
 .blur-white {
     background-color: rgba(255, 255, 255, 0.3);
     backdrop-filter: blur(33px);
