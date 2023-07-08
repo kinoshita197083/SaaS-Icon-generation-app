@@ -72,6 +72,7 @@ const Navbar = (props: NavbarProps) => {
                                 </button>
                                 :
                                 <button
+                                    key={index}
                                     className={[styles.navBtn, styles.navItem].join(' ')}
                                     onClick={() => { void signOut().catch(console.error) }}>
                                     Sign out

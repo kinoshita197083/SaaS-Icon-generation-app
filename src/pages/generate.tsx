@@ -45,6 +45,15 @@ const Generate: NextPage = () => {
         }
     }
 
+    const updateForm = (key: string) => {
+        return (e: ChangeEvent<HTMLInputElement>) => {
+            setFormData(prev => ({
+                ...prev,
+                [key]: e.target.value
+            }))
+        }
+    }
+
     // useEffect(() => {
     //     setTimeout(() => window.scrollTo(0, 200), 1000)
     // }, [])
@@ -60,7 +69,7 @@ const Generate: NextPage = () => {
                                 className={inputCSS}
                                 style={inputStyle}
                                 value={formData.prompt}
-                                onChange={(e: ChangeEvent<HTMLInputElement>) => setFormData({ ...formData, prompt: e.target.value })}
+                                onChange={updateForm('prompt')}
                                 placeholder="anime cat"
                             />
                         </div>
@@ -69,7 +78,9 @@ const Generate: NextPage = () => {
                             <div className="flex gap-[1%] flex-wrap mt-[3%]">
                                 {colors.map((color, index) => {
                                     return (
-                                        <span key={index} className={[Object.keys(color).toString(), 'w-[2rem] h-[2rem] mt-[1.5%] rounded-full cursor-pointer'].join(' ')}></span>
+                                        <span key={index}
+                                            className={[Object.keys(color).toString(), 'w-[2rem] h-[2rem] mt-[1.5%] rounded-full cursor-pointer'].join(' ')}
+                                        />
                                     )
                                 })}
                             </div>
@@ -82,7 +93,9 @@ const Generate: NextPage = () => {
                                     const styleSample = Object.values(style).toString();
 
                                     return (
-                                        <div key={index} className="aspect-square lg:w-[6rem] w-[5rem] mt-[2.5%] border rounded cursor-pointer" style={{ background: `url(${styleSample}) no-repeat center`, backgroundSize: 'cover' }}>
+                                        <div key={index}
+                                            className="aspect-square lg:w-[6rem] w-[5rem] mt-[2.5%] border rounded cursor-pointer"
+                                            style={{ background: `url(${styleSample}) no-repeat center`, backgroundSize: 'cover' }}>
                                             {/* <label className='text-white w-[1rem] h-[1rem] rounded cursor-pointer'>{styleName}</label> */}
                                         </div>
                                     )
