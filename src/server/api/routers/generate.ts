@@ -16,6 +16,19 @@ const configuration = new Configuration({
 
 const openai = new OpenAIApi(configuration);
 
+const generateIcon = async (prompt: string): Promise<string | undefined> => {
+    if (env.MOCK_DALLE) {
+        return '/jene.jpg'
+    } else {
+        const response = await openai.createImage({
+            prompt,
+            n: 1,
+            size: "1024x1024"
+        });
+
+        const image_url = response.data.data[0]?.url;
+    }
+}
 
 export const generateRouter = createTRPCRouter({
     generateIcon: protectedProcedure
@@ -44,14 +57,15 @@ export const generateRouter = createTRPCRouter({
                 })
             }
 
-            //https://platform.openai.com/docs/guides/images/usage
-            const response = await openai.createImage({
-                prompt: input.prompt,
-                n: 1,
-                size: "1024x1024"
-            });
+            // //https://platform.openai.com/docs/guides/images/usage
+            // const response = await openai.createImage({
+            //     prompt: input.prompt,
+            //     n: 1,
+            //     size: "1024x1024"
+            // });
 
-            const image_url = response.data.data[0]?.url;
+            // const image_url = response.data.data[0]?.url;
+            const image_url = await generateIcon(input.prompt);
 
             return {
                 image: image_url
