@@ -105,7 +105,6 @@ const Generate: NextPage = () => {
                                             style={{ background: `url(${styleSample}) no-repeat center`, backgroundSize: 'cover', border: target ? '2px solid white' : '', transform: target ? 'scale(1.2)' : '' }}
                                             type='button'
                                             value={styleName}
-                                        // style={{ border: target ? '2px solid white' : '', transform: target ? 'scale(1.2)' : '' }}
                                         />
                                     )
                                 })}

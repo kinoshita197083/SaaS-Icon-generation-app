@@ -4,6 +4,7 @@ import styles from './navbar.module.css';
 import { useEffect, useState } from 'react';
 import { faGhost } from '@fortawesome/free-solid-svg-icons';
 import { signIn, signOut, useSession } from "next-auth/react";
+import { api } from "~/utils/api";
 
 type NavItem = {
     text: string,
@@ -25,6 +26,7 @@ const Navbar = (props: NavbarProps) => {
 
     const session = useSession();
     const isLoggedIn = !!session.data;
+    const user = api.user.getUser.useQuery();
 
     const handleClick = () => {
         setClick(!click);
@@ -61,6 +63,7 @@ const Navbar = (props: NavbarProps) => {
                     </div>
                 </Link>
                 <ul className={click ? styles.navMenu : [styles.navMenu, styles.closed].join(' ')}>
+
                     {navbarItems.map((item, index) => {
                         return (
                             !isLoggedIn ?
@@ -71,17 +74,20 @@ const Navbar = (props: NavbarProps) => {
                                     {item.text}
                                 </button>
                                 :
-                                <button
-                                    key={index}
-                                    className={[styles.navBtn, styles.navItem].join(' ')}
-                                    onClick={() => { void signOut().catch(console.error) }}>
-                                    Sign out
-                                </button>
+                                <>
+                                    <li className={styles.navItem}>Credits: {user.data?.credits}</li >
+                                    < button
+                                        key={index}
+                                        className={[styles.navBtn, styles.navItem].join(' ')}
+                                        onClick={() => { void signOut().catch(console.error) }}>
+                                        Sign out
+                                    </button>
+                                </>
                         )
                     })}
                 </ul>
             </nav>
-        </header>
+        </header >
     )
 }
 
