@@ -2,11 +2,25 @@ import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { NextPage } from "next"
 import Link from "next/link";
-import { useEffect } from "react";
+import { FormEvent, useEffect, useState } from "react";
 import { colors } from "~/material/color";
 import { styles } from "~/material/styles";
+import { api } from "~/utils/api";
 
 const Generate: NextPage = () => {
+
+    const [formData, setFormData] = useState({
+        prompt: '',
+    });
+
+    const generateInstance = api.generate.generateIcon.useMutation({
+        onSuccess(data) {
+            console.log(`Result: ${data}`)
+        },
+        onError(data) {
+            console.log(`Error: ${data}`)
+        }
+    });
 
     const inputStyle = {
         backgroundColor: 'transparent',
@@ -16,6 +30,13 @@ const Generate: NextPage = () => {
     const labelCSS = 'text-gray-100 text-[1.3rem]';
     const inputCSS = 'mt-[1%] mb-[8%] h-[2.5rem] w-full text-gray-200 lg:text-[1.5rem] px-[2%] outline-gray-800';
 
+    const handleSubmit = (e: FormEvent) => {
+        e.preventDefault();
+        generateInstance.mutateAsync({
+            prompt: formData.prompt
+        });
+    }
+
     // useEffect(() => {
     //     setTimeout(() => window.scrollTo(0, 200), 1000)
     // }, [])
@@ -24,7 +45,7 @@ const Generate: NextPage = () => {
         <div className="min-h-[120vh] py-[20%] px-[2%] lg:py-[7%] lg:px-[8%] relative page-transition">
             <section className="bg-[url(/ocean.jpg)] min-h-[inherit] bg-no-repeat bg-cover p-[3%] lg:p-[15%]">
                 <div className="container-s flex flex-col lg:flex-row gap-[5%] blur-dark lg:min-h-[40rem] overflow-scroll animate-fadein">
-                    <form className="mt-[5%] lg:w-[55%]">
+                    <form className="mt-[5%] lg:w-[55%]" onSubmit={handleSubmit}>
                         <div className="">
                             <label className={labelCSS}>Describe your icon</label>
                             <input className={inputCSS} style={inputStyle} placeholder="anime cat"></input>
