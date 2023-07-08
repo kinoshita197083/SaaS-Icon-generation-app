@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './landingPage.module.css'
-import Button from '~/component/button/button';
+import Button from '~/component/button';
 import Poster from '~/component/poster/poster';
 import Card from '~/component/card/Card';
 import Link from 'next/link';
@@ -18,7 +18,7 @@ const LandingPage = () => {
                 <br />
                 <div role='button-group'>
                     <Link href={'/generate'}>
-                        <Button boxShadow>Get started</Button>
+                        <Button>Get started</Button>
                     </Link>
                     <span className='mr-[1%]' />
                     <Button
@@ -44,7 +44,7 @@ const LandingPage = () => {
 
                 <div className='flex items-center justify-center gap-[5%] mb-[5%] absolute bottom-0 right-10'>
                     <Link href={'/generate'}>
-                        <Button boxShadow>Start imagining</Button>
+                        <Button>Start imagining</Button>
                     </Link>
                 </div>
             </section>

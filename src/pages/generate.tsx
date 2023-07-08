@@ -1,10 +1,9 @@
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { NextPage } from "next"
-import Image from "next/image";
 import Link from "next/link";
-import { ChangeEvent, FormEvent, SetStateAction, useEffect, useState } from "react";
-import Button from "~/component/button/button";
+import { FormEvent, useEffect, useState } from "react";
+import Button from "~/component/button";
 import { colors } from "~/material/color";
 import { styles } from "~/material/styles";
 import { api } from "~/utils/api";
@@ -13,18 +12,13 @@ const Generate: NextPage = () => {
 
     const [formData, setFormData] = useState({
         prompt: '',
+        color: '',
+        style: '',
     });
 
     const [imageURL, setImageURL] = useState('');
 
-    const generateInstance = api.generate.generateIcon.useMutation({
-        // onSuccess(data) {
-        //     console.log(`Result: ${data}`)
-        // },
-        // onError(data) {
-        //     console.log(`Error: ${data}`)
-        // }
-    });
+    const generateInstance = api.generate.generateIcon.useMutation({});
 
     const inputStyle = {
         backgroundColor: 'transparent',
@@ -43,16 +37,17 @@ const Generate: NextPage = () => {
         if (response.image) {
             setImageURL(response.image)
         }
+        setFormData({ prompt: '', color: '', style: '' })
     }
 
-    const updateForm = (key: string) => {
-        return (e: ChangeEvent<HTMLInputElement>) => {
-            setFormData(prev => ({
-                ...prev,
-                [key]: e.target.value
-            }))
-        }
+    const updateForm = (key: string, value: string) => {
+        setFormData(prev => ({
+            ...prev,
+            [key]: value
+        }))
     }
+
+    // console.log('re-rendered')
 
     // useEffect(() => {
     //     setTimeout(() => window.scrollTo(0, 200), 1000)
@@ -69,17 +64,25 @@ const Generate: NextPage = () => {
                                 className={inputCSS}
                                 style={inputStyle}
                                 value={formData.prompt}
-                                onChange={updateForm('prompt')}
-                                placeholder="anime cat"
+                                onChange={e => updateForm('prompt', e.target.value)}
+                                placeholder="a red anime cat"
                             />
                         </div>
                         <div className="mb-[8%]">
                             <label className={labelCSS}>Pick a color</label>
                             <div className="flex gap-[1%] flex-wrap mt-[3%]">
                                 {colors.map((color, index) => {
+
+                                    let target = formData.color === Object.values(color).toString();
+
                                     return (
-                                        <span key={index}
-                                            className={[Object.keys(color).toString(), 'w-[2rem] h-[2rem] mt-[1.5%] rounded-full cursor-pointer'].join(' ')}
+                                        <button
+                                            key={index}
+                                            className={[Object.keys(color).toString(), 'w-[2rem] h-[2rem] mt-[1.5%] rounded-full cursor-pointer hover:scale-[1.2] duration-100'].join(' ')}
+                                            onClick={e => updateForm('color', (e.target as HTMLButtonElement).value)}
+                                            type='button'
+                                            value={Object.values(color)}
+                                            style={{ border: target ? '2px solid white' : '', transform: target ? 'scale(1.2)' : '' }}
                                         />
                                     )
                                 })}
@@ -89,15 +92,21 @@ const Generate: NextPage = () => {
                             <label className={labelCSS}>Select a style</label><br />
                             <div className="flex gap-[3%] flex-wrap mt-[2%] mb-[8%]">
                                 {styles.map((style, index) => {
-                                    // const styleName = Object.keys(style).toString();
                                     const styleSample = Object.values(style).toString();
+                                    const styleName = Object.keys(style).toString();
+
+                                    let target = formData.style === styleName
 
                                     return (
-                                        <div key={index}
-                                            className="aspect-square lg:w-[6rem] w-[5rem] mt-[2.5%] border rounded cursor-pointer"
-                                            style={{ background: `url(${styleSample}) no-repeat center`, backgroundSize: 'cover' }}>
-                                            {/* <label className='text-white w-[1rem] h-[1rem] rounded cursor-pointer'>{styleName}</label> */}
-                                        </div>
+                                        <button
+                                            key={index}
+                                            className="aspect-square lg:w-[6rem] lg:h-[6rem] w-[5rem] h-[5rem] mt-[2.5%] border rounded cursor-pointer hover:scale-[1.2] duration-100"
+                                            onClick={e => updateForm('style', (e.target as HTMLButtonElement).value)}
+                                            style={{ background: `url(${styleSample}) no-repeat center`, backgroundSize: 'cover', border: target ? '2px solid white' : '', transform: target ? 'scale(1.2)' : '' }}
+                                            type='button'
+                                            value={styleName}
+                                        // style={{ border: target ? '2px solid white' : '', transform: target ? 'scale(1.2)' : '' }}
+                                        />
                                     )
                                 })}
                             </div>
@@ -105,11 +114,10 @@ const Generate: NextPage = () => {
                         <Button>Submit</Button>
                     </form>
                     <div className="relative aspect-square lg:w-[45%] w-[50%] my-auto container-s bg-gray-700 rounded-[15px] overflow-hidden">
-                        <Image
+                        <img
                             src={imageURL || '/brad.jpg'}
-                            fill
                             alt='generated icon'
-                            style={{ objectFit: "cover" }}
+                            className="absolute inset-0"
                         />
                     </div>
 
