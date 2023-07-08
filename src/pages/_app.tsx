@@ -17,7 +17,7 @@ const MyApp: AppType<{ session: Session | null }> = ({
 
   return (
     <SessionProvider session={session}>
-      <Navbar logo={'/logo.svg'} projectName='Imagin' navbarItems={[{ text: 'Sign up', type: 'button' }]} />
+      <Navbar logo={'/logo.svg'} projectName='Imagin' navbarItems={[{ text: 'Sign in', type: 'auth' }]} />
       <Component {...pageProps} />
       <Footer />
     </SessionProvider>

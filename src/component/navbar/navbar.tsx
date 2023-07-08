@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import styles from './navbar.module.css';
 import { useEffect, useState } from 'react';
 import { faGhost } from '@fortawesome/free-solid-svg-icons';
+import { signIn, signOut, useSession } from "next-auth/react";
 
 type NavItem = {
     text: string,
@@ -21,6 +22,9 @@ const Navbar = (props: NavbarProps) => {
 
     const [click, setClick] = useState(false);
     const [scroll, setScrolled] = useState(false);
+
+    const session = useSession();
+    const isLoggedIn = !!session.data;
 
     const handleClick = () => {
         setClick(!click);
@@ -58,7 +62,23 @@ const Navbar = (props: NavbarProps) => {
                 </Link>
                 <ul className={click ? styles.navMenu : [styles.navMenu, styles.closed].join(' ')}>
                     {navbarItems.map((item, index) => {
-                        return (<li key={index} className={item.type === 'button' ? [styles.navBtn, styles.navItem].join(' ') : styles.navItem}>{item.text}</li>)
+                        return (
+                            !isLoggedIn ?
+                                <button
+                                    key={index}
+                                    className={item.type === 'auth' ? [styles.navBtn, styles.navItem].join(' ') : styles.navItem}
+                                    onClick={() => signIn().catch(console.error)}>
+                                    {item.text}
+                                </button>
+
+                                :
+
+                                <button
+                                    className={[styles.navBtn, styles.navItem].join(' ')}
+                                    onClick={() => signOut().catch(console.error)}>
+                                    Sign out
+                                </button>
+                        )
                     })}
                 </ul>
             </nav>

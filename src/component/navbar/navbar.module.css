@@ -64,6 +64,7 @@
 .navBtn {
     @apply bg-gradient-to-r from-sky-500 to-indigo-500 transition-all;
     color: rgb(255, 255, 255);
+    border: 0;
 }
 
 .navBtn:hover {
@@ -73,7 +74,7 @@
 .navItem {
     text-decoration: none;
     padding: 3px 8px;
-    width: 5rem;
+    width: 5.5rem;
     text-align: center;
     border-radius: 15px;
     transition: all 0.2s ease-in-out;
