@@ -115,7 +115,7 @@ const Generate: NextPage = () => {
                     <div className="relative aspect-square lg:w-[45%] w-[50%] my-auto container-s bg-gray-700 rounded-[15px] overflow-hidden">
                         <img
                             // src={imageURL || '/brad.jpg'}
-                            src={`data:image/png;base64, ${imageURL}`}
+                            src={imageURL}
                             alt='generated icon'
                             className="absolute inset-0"
                         />

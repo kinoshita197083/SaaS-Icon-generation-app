@@ -15,8 +15,10 @@ const s3 = new AWS.S3({
         accessKeyId: env.ACCESS_KEY_ID,
         secretAccessKey: env.SECRET_ACCESS_KEY,
     },
-    region: "us-east-1",
+    region: "ap-southeast-2",
 });
+
+const BUCKET_NAME = "icon-generator-project-haha";
 
 //OpenAI config & client setup
 const configuration = new Configuration({
@@ -36,7 +38,6 @@ const generateIcon = async (prompt: string): Promise<string | undefined> => {
             size: "1024x1024",
             response_format: "b64_json"
         });
-
         return response.data.data[0]?.b64_json;
     }
 }
@@ -78,18 +79,26 @@ export const generateRouter = createTRPCRouter({
             // const image_url = response.data.data[0]?.url;
             const base64EncodedImage = await generateIcon(input.prompt);
 
+            // save icon prompt & user id to prisma database and generate a unique icon id to use as s3 bucket Key
+            const icon = await ctx.prisma.icon.create({
+                data: {
+                    prompt: input.prompt,
+                    userId: ctx.session.user.id,
+                },
+            })
+
             // save image base 64 code to s3 bucket
             await s3.putObject({
-                Bucket: "icon-generator-project-haha",
+                Bucket: BUCKET_NAME,
                 Body: Buffer.from(base64EncodedImage!, "base64"),
-                // TODO: generate a random id
-                Key: "my-image2",
+                Key: icon.id,
                 ContentEncoding: "base64",
                 ContentType: "image/png",
-            }).promise();
+            })
+                .promise();
 
             return {
-                image: base64EncodedImage
+                image: `https://${BUCKET_NAME}.s3.ap-southeast-2.amazonaws.com/${icon.id}`,
             }
         }),
 });
