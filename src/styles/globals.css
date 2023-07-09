@@ -46,6 +46,35 @@
     outline: 4px auto -webkit-focus-ring-color;
 }
 
+.animatedTitle {
+    font-weight: bold;
+    animation: color-animation 4s linear infinite;
+}
+
+.animatedText:nth-child(1) {
+    --color-1: #DF8453;
+    --color-2: #3D8DAE;
+    --color-3: #E4A9A8;
+}
+
+.animatedText:nth-child(2) {
+    --color-1: #DBAD4A;
+    --color-2: #ACCFCB;
+    --color-3: #17494D;
+}
+
+.animatedText:nth-child(3) {
+    --color-1: #ACCFCB;
+    --color-2: #E4A9A8;
+    --color-3: #ACCFCB;
+}
+
+.animatedText:nth-child(4) {
+    --color-1: #3D8DAE;
+    --color-2: #DF8453;
+    --color-3: #E4A9A8;
+}
+
 .blur-white {
     background-color: rgba(255, 255, 255, 0.3);
     backdrop-filter: blur(33px);
@@ -59,6 +88,36 @@
 
 .page-transition {
     animation: entry 1s;
+}
+
+@keyframes color-animation {
+    0% {
+        color: var(--color-1)
+    }
+
+    32% {
+        color: var(--color-1)
+    }
+
+    33% {
+        color: var(--color-2)
+    }
+
+    65% {
+        color: var(--color-2)
+    }
+
+    66% {
+        color: var(--color-3)
+    }
+
+    99% {
+        color: var(--color-3)
+    }
+
+    100% {
+        color: var(--color-1)
+    }
 }
 
 @keyframes entry {

@@ -74,15 +74,15 @@ const Navbar = (props: NavbarProps) => {
                                     {item.text}
                                 </button>
                                 :
-                                <>
+                                <div className="flex" key={index + 1}>
                                     <li className={styles.navItem}>Credits: {user.data?.credits}</li >
                                     < button
                                         key={index}
-                                        className={[styles.navBtn, styles.navItem].join(' ')}
+                                        className={[styles.navBtn, styles.navItem, 'ml-[1rem]'].join(' ')}
                                         onClick={() => { void signOut().catch(console.error) }}>
                                         Sign out
                                     </button>
-                                </>
+                                </div>
                         )
                     })}
                 </ul>

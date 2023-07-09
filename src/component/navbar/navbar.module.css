@@ -67,6 +67,7 @@
 .navBtn {
     @apply bg-gradient-to-r from-sky-500 to-indigo-500 transition-all;
     color: rgb(255, 255, 255);
+    min-width: 5rem;
     border: 0;
 }
 
