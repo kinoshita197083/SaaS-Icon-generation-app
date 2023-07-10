@@ -1,4 +1,4 @@
-import { faXmark } from "@fortawesome/free-solid-svg-icons";
+import { faSpinner, faXmark } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { NextPage } from "next"
 import Link from "next/link";
@@ -10,13 +10,16 @@ import { api } from "~/utils/api";
 
 const Generate: NextPage = () => {
 
+    const defaultImage = '/jene.jpg'
+
+
     const [formData, setFormData] = useState({
         prompt: '',
         color: '',
         style: '',
+        imageURL: defaultImage,
+        loading: false,
     });
-
-    const [imageURL, setImageURL] = useState('');
 
     const generateInstance = api.generate.generateIcon.useMutation({});
 
@@ -29,18 +32,21 @@ const Generate: NextPage = () => {
     const inputCSS = 'mt-[1%] mb-[8%] h-[2.5rem] w-full text-gray-200 lg:text-[1.5rem] px-[2%] outline-gray-800';
 
     const handleSubmit = async (e: FormEvent) => {
+        updateForm('loading', true)
+
         e.preventDefault();
         const response = await generateInstance.mutateAsync({
-            prompt: formData.prompt
+            prompt: formData.prompt,
+            color: formData.color,
         });
 
         if (response.image) {
-            setImageURL(response.image)
+            updateForm('imageURL', response.image)
         }
-        setFormData({ prompt: '', color: '', style: '' })
+        setFormData(prev => ({ ...prev, prompt: '', color: '', style: '', loading: false }))
     }
 
-    const updateForm = (key: string, value: string) => {
+    const updateForm = (key: string, value: string | boolean) => {
         setFormData(prev => ({
             ...prev,
             [key]: value
@@ -112,13 +118,28 @@ const Generate: NextPage = () => {
                         </div>
                         <Button>Submit</Button>
                     </form>
-                    <div className="relative aspect-square lg:w-[45%] w-[50%] my-auto container-s bg-gray-700 rounded-[15px] overflow-hidden">
+                    <div className="relative aspect-square lg:w-[45%] w-[50%] my-[5%] mx-auto lg:m-auto bg-gray-700 rounded-[15px] overflow-hidden">
                         <img
-                            // src={imageURL || '/brad.jpg'}
-                            src={imageURL}
+                            src={formData.imageURL}
                             alt='generated icon'
                             className="absolute inset-0"
                         />
+                        {formData.loading &&
+                            <FontAwesomeIcon
+                                icon={faSpinner}
+                                className="absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] text-white text-[5rem] loading"
+                            />
+                        }
+                        {formData.imageURL !== defaultImage &&
+                            <a href={formData.imageURL}
+                                target="_blank"
+                                download={'generated_icon'}>
+                                <button
+                                    type='button'
+                                    className='absolute btn bottom-[5%] right-[50%] translate-x-[50%]'>
+                                    download
+                                </button>
+                            </a>}
                     </div>
 
                     <Link href='/'>

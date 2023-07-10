@@ -44,7 +44,10 @@ const generateIcon = async (prompt: string): Promise<string | undefined> => {
 
 export const generateRouter = createTRPCRouter({
     generateIcon: protectedProcedure
-        .input(z.object({ prompt: z.string() }))
+        .input(z.object({
+            prompt: z.string(),
+            color: z.string(),
+        }))
         .mutation(async ({ ctx, input }) => {
             //verify user has enough credits
             const { count } = await ctx.prisma.user.updateMany({
@@ -82,7 +85,7 @@ export const generateRouter = createTRPCRouter({
             // save icon prompt & user id to prisma database and generate a unique icon id to use as s3 bucket Key
             const icon = await ctx.prisma.icon.create({
                 data: {
-                    prompt: input.prompt,
+                    prompt: `an image with a background color of ${input.color} and with elements including: ${input.prompt}`,
                     userId: ctx.session.user.id,
                 },
             })
