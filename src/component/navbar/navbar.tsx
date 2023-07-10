@@ -24,8 +24,8 @@ const Navbar = (props: NavbarProps) => {
     const [click, setClick] = useState(false);
     const [scroll, setScrolled] = useState(false);
 
-    const session = useSession();
-    const isLoggedIn = !!session.data;
+    const { data: session, status } = useSession()
+    const isLoggedIn = status === 'authenticated';
     const user = api.user.getUser.useQuery();
 
     const handleClick = () => {

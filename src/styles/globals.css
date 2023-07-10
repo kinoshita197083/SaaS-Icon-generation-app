@@ -90,6 +90,20 @@
     animation: entry 1s;
 }
 
+.loading {
+    animation: spin 2s infinite;
+}
+
+@keyframes spin {
+    from {
+        transform: translate(-50%, -50%) rotate(0deg);
+    }
+
+    to {
+        transform: translate(-50%, -50%) rotate(360deg);
+    }
+}
+
 @keyframes color-animation {
     0% {
         color: var(--color-1)
