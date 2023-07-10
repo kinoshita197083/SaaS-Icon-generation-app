@@ -1,15 +1,18 @@
 export const styles = [
     {
-        'flat': '/brad.jpg'
+        'modern': '/modern.png'
     },
     {
-        'mosaic': '/chihuahua.png'
+        'anime manga miyazaki anime movie': '/water_paint.png'
+    },
+    {
+        'mosaic': ''
     },
     {
         'line-art': ''
     },
     {
-        'pixelated': ''
+        'pixelated': '/pixelated.png'
     },
     {
         'minimalistic': ''
@@ -18,6 +21,12 @@ export const styles = [
         '3d': ''
     },
     {
-        'isometric': ''
+        'anime manga miyazaki shojo manga': '/anime.png'
+    },
+    {
+        'cartoon': '/paint.png'
+    },
+    {
+        'default': ''
     }
 ];
