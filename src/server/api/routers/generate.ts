@@ -47,6 +47,7 @@ export const generateRouter = createTRPCRouter({
         .input(z.object({
             prompt: z.string(),
             color: z.string(),
+            style: z.string(),
         }))
         .mutation(async ({ ctx, input }) => {
             //verify user has enough credits
@@ -80,12 +81,14 @@ export const generateRouter = createTRPCRouter({
             // });
 
             // const image_url = response.data.data[0]?.url;
-            const base64EncodedImage = await generateIcon(input.prompt);
+            const summary = `${input.prompt},masterpiece, hyper detailed, high-resolution, elegant, perfect face, full body, color theme-${input.color}, ${input.style} style`
+
+            const base64EncodedImage = await generateIcon(summary);
 
             // save icon prompt & user id to prisma database and generate a unique icon id to use as s3 bucket Key
             const icon = await ctx.prisma.icon.create({
                 data: {
-                    prompt: `an image with a background color of ${input.color} and with elements including: ${input.prompt}`,
+                    prompt: input.prompt,
                     userId: ctx.session.user.id,
                 },
             })

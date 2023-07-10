@@ -1,4 +1,4 @@
-import { faSpinner, faXmark } from "@fortawesome/free-solid-svg-icons";
+import { faDownload, faSpinner, faXmark } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { NextPage } from "next"
 import Link from "next/link";
@@ -10,13 +10,16 @@ import { api } from "~/utils/api";
 
 const Generate: NextPage = () => {
 
-    const defaultImage = '/jene.jpg'
+    const defaultImage = '/jene.jpg';
+    const defaultStyle = 'modern';
+    const defaultColor = 'sky blue';
+    const defaultText = 'Abyssinian cat';
 
 
     const [formData, setFormData] = useState({
         prompt: '',
-        color: '',
-        style: '',
+        color: defaultColor,
+        style: defaultStyle,
         imageURL: defaultImage,
         loading: false,
     });
@@ -38,12 +41,13 @@ const Generate: NextPage = () => {
         const response = await generateInstance.mutateAsync({
             prompt: formData.prompt,
             color: formData.color,
+            style: formData.style,
         });
 
         if (response.image) {
             updateForm('imageURL', response.image)
         }
-        setFormData(prev => ({ ...prev, prompt: '', color: '', style: '', loading: false }))
+        setFormData(prev => ({ ...prev, prompt: '', color: defaultColor, style: defaultStyle, loading: false }))
     }
 
     const updateForm = (key: string, value: string | boolean) => {
@@ -71,11 +75,11 @@ const Generate: NextPage = () => {
                                 style={inputStyle}
                                 value={formData.prompt}
                                 onChange={e => updateForm('prompt', e.target.value)}
-                                placeholder="a red anime cat"
+                                placeholder={defaultText}
                             />
                         </div>
                         <div className="mb-[8%]">
-                            <label className={labelCSS}>Pick a color</label>
+                            <label className={labelCSS}>Theme color</label>
                             <div className="flex gap-[1%] flex-wrap mt-[3%]">
                                 {colors.map((color, index) => {
 
@@ -116,7 +120,8 @@ const Generate: NextPage = () => {
                                 })}
                             </div>
                         </div>
-                        <Button>Submit</Button>
+                        <Button disabled={formData.prompt.length > 1 ? false : true}>Generate</Button>
+
                     </form>
                     <div className="relative aspect-square lg:w-[45%] w-[50%] my-[5%] mx-auto lg:m-auto bg-gray-700 rounded-[15px] overflow-hidden">
                         <img
@@ -132,12 +137,13 @@ const Generate: NextPage = () => {
                         }
                         {formData.imageURL !== defaultImage &&
                             <a href={formData.imageURL}
-                                target="_blank"
-                                download={'generated_icon'}>
+                                target='_blank'
+                                download>
                                 <button
                                     type='button'
-                                    className='absolute btn bottom-[5%] right-[50%] translate-x-[50%]'>
-                                    download
+                                    className='absolute btn bottom-[5%] right-[50%] translate-x-[50%] w-[9rem]'>
+                                    <FontAwesomeIcon className='mr-[5%]' icon={faDownload} />
+                                    Download
                                 </button>
                             </a>}
                     </div>

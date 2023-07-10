@@ -46,6 +46,16 @@
     outline: 4px auto -webkit-focus-ring-color;
 }
 
+.btn:disabled {
+    background-color: gray;
+    cursor: auto;
+}
+
+.btn:disabled:hover {
+    background-color: gray;
+    color: white
+}
+
 .animatedTitle {
     font-weight: bold;
     animation: color-animation 4s linear infinite;
