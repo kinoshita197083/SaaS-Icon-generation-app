@@ -19,6 +19,7 @@ const s3 = new AWS.S3({
 });
 
 const BUCKET_NAME = "icon-generator-project-haha";
+const preSignedUrlExpireSeconds = 60 * 5;
 
 //OpenAI config & client setup
 const configuration = new Configuration({
@@ -100,8 +101,16 @@ export const generateRouter = createTRPCRouter({
             })
                 .promise();
 
+            const preSignedUrl = s3.getSignedUrl('getObject', {
+                Bucket: BUCKET_NAME,
+                Key: icon.id,
+                Expires: preSignedUrlExpireSeconds,
+                ResponseContentDisposition: `attachment; filename="${input.prompt}"`,
+            })
+
             return {
-                image: `https://${BUCKET_NAME}.s3.ap-southeast-2.amazonaws.com/${icon.id}`,
+                image: preSignedUrl
+                // image: `https://${BUCKET_NAME}.s3.ap-southeast-2.amazonaws.com/${icon.id}`,
             }
         }),
 });
