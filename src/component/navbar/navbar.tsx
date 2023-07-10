@@ -5,6 +5,8 @@ import { useEffect, useState } from 'react';
 import { faGhost } from '@fortawesome/free-solid-svg-icons';
 import { signIn, signOut, useSession } from "next-auth/react";
 import { api } from "~/utils/api";
+import { useBuyCredits } from "~/hooks/useBuyCredits";
+{/* <script src="stripe.js"></script> */ }
 
 type NavItem = {
     text: string,
@@ -18,6 +20,16 @@ type NavbarProps = {
 }
 
 const Navbar = (props: NavbarProps) => {
+
+    const { buyCredits } = useBuyCredits();
+
+    const handleBuyCredits = () => {
+        try {
+            buyCredits();
+        } catch (err) {
+            console.log(err);
+        }
+    }
 
     const { projectName, navbarItems } = props;
 
@@ -82,6 +94,12 @@ const Navbar = (props: NavbarProps) => {
                                         onClick={() => { void signOut().catch(console.error) }}>
                                         Sign out
                                     </button>
+
+                                    <button onClick={handleBuyCredits}
+                                        className="btn">
+                                        Buy Credits
+                                    </button>
+
                                 </div>
                         )
                     })}
