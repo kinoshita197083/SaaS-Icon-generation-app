@@ -4,7 +4,6 @@ import { Configuration, OpenAIApi } from "openai";
 import { env } from "~/env.mjs";
 import {
     createTRPCRouter,
-    publicProcedure,
     protectedProcedure,
 } from "~/server/api/trpc";
 import { b64Image } from "~/data/b64Image";
@@ -28,18 +27,19 @@ const configuration = new Configuration({
 
 const openai = new OpenAIApi(configuration);
 
-const generateIcon = async (prompt: string, number: number): Promise<string | undefined> => {
+const generateIcon = async (prompt: string, numberOfPic: number): Promise<(string | undefined)[]> => {
     if (env.MOCK_DALLE === "true") {
         // '/jene.jpg'
-        return b64Image;
+        return [b64Image];
     } else {
         const response = await openai.createImage({
             prompt,
-            n: number,
+            n: numberOfPic,
             size: "1024x1024",
             response_format: "b64_json"
         });
-        return response.data.data[0]?.b64_json;
+
+        return response.data.data.map(res => res.b64_json)
     }
 }
 
@@ -57,12 +57,12 @@ export const generateRouter = createTRPCRouter({
                 where: {
                     id: ctx.session.user.id,
                     credits: {
-                        gte: 1,
+                        gte: input.n,
                     },
                 },
                 data: {
                     credits: {
-                        decrement: 1
+                        decrement: input.n
                     }
                 }
             });
@@ -75,45 +75,53 @@ export const generateRouter = createTRPCRouter({
                 })
             }
 
-            // //https://platform.openai.com/docs/guides/images/usage
-            // const response = await openai.createImage({
-            //     prompt: input.prompt,
-            //     n: 1,
-            //     size: "1024x1024"
-            // });
-
-            // const image_url = response.data.data[0]?.url;
             const summary = `${input.prompt}, masterpiece, hyper detailed, high-resolution, elegant, perfect face, upper body, color theme-${input.color}, ${input.style} style`
 
-            const base64EncodedImage = await generateIcon(summary, input.n);
+            const base64EncodedImageList = await generateIcon(summary, input.n);
+
+            // prepare for batch upload to prisma
+            const iconsData = base64EncodedImageList.map(__ => ({
+                prompt: input.prompt,
+                userId: ctx.session.user.id,
+            }));
 
             // save icon prompt & user id to prisma database and generate a unique icon id to use as s3 bucket Key
-            const icon = await ctx.prisma.icon.create({
-                data: {
-                    prompt: input.prompt,
-                    userId: ctx.session.user.id,
-                },
-            })
+            const createdIcons = await Promise.all(
+                iconsData.map(async iconData => await ctx.prisma.icon.create({ data: iconData }))
+            );
 
-            // save image base 64 code to s3 bucket
-            await s3.putObject({
-                Bucket: BUCKET_NAME,
-                Body: Buffer.from(base64EncodedImage!, "base64"),
-                Key: icon.id,
-                ContentEncoding: "base64",
-                ContentType: "image/png",
-            })
-                .promise();
+            // batch saving b64 encoded images to s3 bucket
+            const putEvents = [];
+            for (let i = 0; i < base64EncodedImageList.length; i++) {
+                const putEvent =
+                    s3.putObject({
+                        Bucket: BUCKET_NAME,
+                        Body: Buffer.from(base64EncodedImageList[i]!, "base64"),
+                        Key: createdIcons[i]!.id,
+                        ContentEncoding: "base64",
+                        ContentType: "image/png",
+                    })
+                        .promise();
+                putEvents.push(putEvent)
+            }
 
-            const preSignedUrl = s3.getSignedUrl('getObject', {
-                Bucket: BUCKET_NAME,
-                Key: icon.id,
-                Expires: preSignedUrlExpireSeconds,
-                ResponseContentDisposition: `attachment; filename="${input.prompt}"`,
-            })
+            await Promise.all(putEvents);
+
+            // generate presigned url so that the link will expire in a given time
+            const preSignedUrls = await Promise.all(createdIcons.map(icon => {
+                return (s3.getSignedUrl('getObject', {
+                    Bucket: BUCKET_NAME,
+                    Key: icon.id,
+                    Expires: preSignedUrlExpireSeconds,
+                    ResponseContentDisposition: `attachment; filename="${input.prompt}"`,
+                }))
+            }
+            ));
+
+
 
             return {
-                image: preSignedUrl
+                image: preSignedUrls
                 // image: `https://${BUCKET_NAME}.s3.ap-southeast-2.amazonaws.com/${icon.id}`,
             }
         }),

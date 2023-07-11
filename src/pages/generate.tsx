@@ -1,4 +1,4 @@
-import { faDownload, faSpinner, faXmark } from "@fortawesome/free-solid-svg-icons";
+import { faSpinner, faXmark } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { NextPage } from "next"
 import Link from "next/link";
@@ -45,16 +45,16 @@ const Generate: NextPage = () => {
             prompt: formData.prompt,
             color: formData.color,
             style: formData.style,
-            n: formData.n,
+            n: +formData.n,
         });
 
         if (response.image) {
-            updateForm('imageURL', response.image)
+            updateForm('imageURLs', response.image)
         }
         setFormData(prev => ({ ...prev, prompt: '', color: defaultColor, style: defaultStyle, loading: false }))
     }
 
-    const updateForm = (key: string, value: string | boolean) => {
+    const updateForm = (key: string, value: string | boolean | number | string[]) => {
         setFormData(prev => ({
             ...prev,
             [key]: value
@@ -76,13 +76,6 @@ const Generate: NextPage = () => {
                                 placeholder={defaultText}
                             />
                         </div>
-
-                        {/* <div>
-                            <label>Additional Info</label>
-                            <input type="radio" />
-                            <input type="radio" />
-                            <input type="radio" />
-                        </div> */}
 
                         <div className="mb-[8%]">
                             <label className={labelCSS}>Theme color</label>
@@ -134,24 +127,14 @@ const Generate: NextPage = () => {
                                 className="w-full lg:h-[2rem] p-[2%] mb-[5%] rounded bg-gray-700 text-white focus:outline-[transparent]"
                                 onChange={e => updateForm('n', e.target.value)}
                                 type="number"
-                                min="1"
-                                defaultValue="1" />
+                                min={1}
+                                defaultValue={1} />
                         </div>
 
                         <Button disabled={formData.prompt.length > 1 ? false : true}>Generate</Button>
 
                     </form>
                     <div className="relative flex aspect-square lg:w-[45%] w-[50%] my-[5%] mx-auto lg:m-auto bg-gray-700 rounded-[15px]">
-                        {/* {formData.imageURLs.map((imageSrc, index) => {
-                            return (
-                                <img
-                                    key={index}
-                                    src={imageSrc}
-                                    alt='generated icon'
-                                    className="rounded-[inherit]"
-                                />
-                            )
-                        })} */}
                         <Carousel
                             images={formData.imageURLs}
                             downloadable
@@ -163,17 +146,6 @@ const Generate: NextPage = () => {
                                 className="absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] text-white text-[5rem] loading"
                             />
                         }
-                        {/* {formData.imageURL !== defaultImage &&
-                            <a href={formData.imageURL}
-                                target='_blank'
-                                download>
-                                <button
-                                    type='button'
-                                    className='absolute btn bottom-[5%] right-[50%] translate-x-[50%] w-[9rem]'>
-                                    <FontAwesomeIcon className='mr-[5%]' icon={faDownload} />
-                                    Download
-                                </button>
-                            </a>} */}
                     </div>
 
                     <Link href='/'>
