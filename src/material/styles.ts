@@ -9,22 +9,22 @@ export const styles = [
         'mosaic': ''
     },
     {
-        'line-art': ''
+        'charcoal sketch, black and white': '/charcoal_sketch.png'
     },
     {
         'pixelated': '/pixelated.png'
     },
     {
-        'minimalistic': ''
+        'painting by Alphonse Mucha': '/Alphonse_Mucha.png'
     },
     {
-        '3d': ''
+        'Pixar style 3D render, 4k, trending in artstation, unreal engine': '/brad.jpg'
     },
     {
-        'anime manga miyazaki shojo manga': '/anime.png'
+        'Anime key visuals, fate stay night order, 2020s anime, HD, illustrated by Takeuchi Takashi': '/anime.png'
     },
     {
-        'cartoon': '/paint.png'
+        'A series of anime stickers on a white background': '/paint.png'
     },
     {
         'default': ''

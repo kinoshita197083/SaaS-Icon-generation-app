@@ -27,14 +27,14 @@ const configuration = new Configuration({
 
 const openai = new OpenAIApi(configuration);
 
-const generateIcon = async (prompt: string): Promise<string | undefined> => {
+const generateIcon = async (prompt: string, number: number): Promise<string | undefined> => {
     if (env.MOCK_DALLE === "true") {
         // '/jene.jpg'
         return b64Image;
     } else {
         const response = await openai.createImage({
             prompt,
-            n: 1,
+            n: number,
             size: "1024x1024",
             response_format: "b64_json"
         });
@@ -48,6 +48,7 @@ export const generateRouter = createTRPCRouter({
             prompt: z.string(),
             color: z.string(),
             style: z.string(),
+            n: z.number(),
         }))
         .mutation(async ({ ctx, input }) => {
             //verify user has enough credits
@@ -81,9 +82,9 @@ export const generateRouter = createTRPCRouter({
             // });
 
             // const image_url = response.data.data[0]?.url;
-            const summary = `${input.prompt},masterpiece, hyper detailed, high-resolution, elegant, perfect face, full body, color theme-${input.color}, ${input.style} style`
+            const summary = `${input.prompt}, masterpiece, hyper detailed, high-resolution, elegant, perfect face, upper body, color theme-${input.color}, ${input.style} style`
 
-            const base64EncodedImage = await generateIcon(summary);
+            const base64EncodedImage = await generateIcon(summary, input.n);
 
             // save icon prompt & user id to prisma database and generate a unique icon id to use as s3 bucket Key
             const icon = await ctx.prisma.icon.create({
