@@ -11,7 +11,7 @@ import { api } from "~/utils/api";
 
 const Generate: NextPage = () => {
 
-    const defaultImage = ['/jene.jpg', '/brad.jpg'];
+    const defaultImage = ['/jene.jpg', '/brad.jpg', '/ape.jpg'];
     const defaultStyle = '';
     const defaultColor = 'sky blue';
     const defaultText = 'Abyssinian cat';
@@ -141,7 +141,7 @@ const Generate: NextPage = () => {
                         <Button disabled={formData.prompt.length > 1 ? false : true}>Generate</Button>
 
                     </form>
-                    <div className="relative flex aspect-square lg:w-[45%] w-[50%] my-[5%] mx-auto lg:m-auto bg-gray-700 rounded-[15px] overflow-hidden">
+                    <div className="relative flex aspect-square lg:w-[45%] w-[50%] my-[5%] mx-auto lg:m-auto bg-gray-700 rounded-[15px]">
                         {/* {formData.imageURLs.map((imageSrc, index) => {
                             return (
                                 <img
