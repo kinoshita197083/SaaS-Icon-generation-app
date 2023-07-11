@@ -31,5 +31,11 @@ export const styles = [
     },
     {
         'In the style of 90s, color contrast': '/90s-style.png'
+    },
+    // {
+    //     'In the style of retrofuturism, smooth lines': '/retrofuturism.png'
+    // },
+    {
+        'harmony, post modern': '/post-modern.png'
     }
 ];
