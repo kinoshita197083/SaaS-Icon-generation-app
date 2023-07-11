@@ -28,5 +28,8 @@ export const styles = [
     },
     {
         'default': ''
+    },
+    {
+        'In the style of 90s, color contrast': '/90s-style.png'
     }
 ];
