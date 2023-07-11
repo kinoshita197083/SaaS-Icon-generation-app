@@ -29,7 +29,6 @@ const openai = new OpenAIApi(configuration);
 
 const generateIcon = async (prompt: string, numberOfPic: number): Promise<(string | undefined)[]> => {
     if (env.MOCK_DALLE === "true") {
-        // '/jene.jpg'
         return [b64Image];
     } else {
         const response = await openai.createImage({
@@ -113,7 +112,7 @@ export const generateRouter = createTRPCRouter({
                     Bucket: BUCKET_NAME,
                     Key: icon.id,
                     Expires: preSignedUrlExpireSeconds,
-                    ResponseContentDisposition: `attachment; filename="${input.prompt}"`,
+                    ResponseContentDisposition: `attachment; filename="${input.prompt}.png"`,
                 }))
             }
             ));
