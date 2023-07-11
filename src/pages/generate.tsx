@@ -1,6 +1,7 @@
 import { faSpinner, faXmark } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { NextPage } from "next"
+import { signIn, useSession } from "next-auth/react";
 import Link from "next/link";
 import { FormEvent, useState } from "react";
 import Button from "~/component/button";
@@ -11,7 +12,7 @@ import { api } from "~/utils/api";
 
 const Generate: NextPage = () => {
 
-    const defaultImage = ['/jene.jpg', '/brad.jpg', '/ape.jpg'];
+    const defaultImage = ['/jene.jpg'];
     const defaultStyle = '';
     const defaultColor = 'sky blue';
     const defaultText = 'Abyssinian cat';
@@ -27,6 +28,8 @@ const Generate: NextPage = () => {
         loading: false,
     });
 
+    const { status } = useSession()
+    const isLoggedIn = status === 'authenticated';
     const generateInstance = api.generate.generateIcon.useMutation({});
 
     const inputStyle = {
@@ -41,16 +44,23 @@ const Generate: NextPage = () => {
         updateForm('loading', true)
 
         e.preventDefault();
-        const response = await generateInstance.mutateAsync({
-            prompt: formData.prompt,
-            color: formData.color,
-            style: formData.style,
-            n: +formData.n,
-        });
 
-        if (response.image) {
-            updateForm('imageURLs', response.image)
+        try {
+            const response = await generateInstance.mutateAsync({
+                prompt: formData.prompt,
+                color: formData.color,
+                style: formData.style,
+                n: +formData.n,
+            });
+
+            if (response.image) {
+                updateForm('imageURLs', response.image)
+            }
         }
+        catch (err) {
+            console.log(err)
+        }
+
         setFormData(prev => ({ ...prev, prompt: '', color: defaultColor, style: defaultStyle, loading: false }))
     }
 
@@ -131,10 +141,23 @@ const Generate: NextPage = () => {
                                 defaultValue={1} />
                         </div>
 
-                        <Button disabled={formData.prompt.length > 1 ? false : true}>Generate</Button>
+                        {isLoggedIn ?
+                            <Button
+                                disabled={formData.prompt.length > 1 ? false : true}>
+                                Generate
+                            </Button>
+                            :
+                            <Button
+                                type="button"
+                                onClick={() => { void signIn().catch(console.error) }}
+                                className="bg-gradient-to-r from-sky-500 to-indigo-500 text-gray-100 p-[2%] px-[3%] rounded">
+                                Sign in to start generating
+                            </Button>}
+
+
 
                     </form>
-                    <div className="relative flex aspect-square lg:w-[45%] w-[50%] my-[5%] mx-auto lg:m-auto bg-gray-700 rounded-[15px]">
+                    <div className="relative flex aspect-square lg:w-[45%] h-[auto] w-[100%] my-[8%] mx-auto lg:m-auto bg-gray-700 rounded-[15px]">
                         <Carousel
                             images={formData.imageURLs}
                             downloadable

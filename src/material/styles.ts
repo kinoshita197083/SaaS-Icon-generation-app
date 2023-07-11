@@ -28,5 +28,5 @@ export const styles = [
     },
     {
         'default': ''
-    }
+    },
 ];
