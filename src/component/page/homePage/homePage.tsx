@@ -1,6 +1,6 @@
 import React from 'react';
 import BannerCard from '~/component/bannerCard';
-import Card from '~/component/card/Card';
+import Card from '~/component/Card';
 
 const HomePage = () => {
     return (

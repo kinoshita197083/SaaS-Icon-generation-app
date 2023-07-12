@@ -1,6 +1,7 @@
 import { type AppType } from "next/app";
 import { type Session } from "next-auth";
 import { SessionProvider } from "next-auth/react";
+import NextTopLoader from 'nextjs-toploader';
 
 import { api } from "~/utils/api";
 
@@ -17,6 +18,7 @@ const MyApp: AppType<{ session: Session | null }> = ({
 
   return (
     <SessionProvider session={session}>
+      <NextTopLoader />
       <Navbar logo={'/logo.svg'} projectName='Imagin' navbarItems={[{ text: 'Sign in', type: 'auth' }]} />
       <Component {...pageProps} />
       <Footer />

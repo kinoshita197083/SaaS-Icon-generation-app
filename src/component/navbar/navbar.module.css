@@ -13,8 +13,7 @@
 
 .navbar {
     width: 95%;
-    display: grid;
-    grid-template-columns: 4fr 1.5fr;
+    display: flex;
     align-items: center;
 }
 
@@ -32,7 +31,7 @@
 
 .navLogo {
     font-size: 2rem;
-    margin-right: 1%;
+    margin-right: 0.5rem;
 }
 
 .menuIcon {
@@ -54,14 +53,53 @@
 }
 
 .navMenu {
-    color: gray;
-    justify-self: end;
-    margin-right: 20%;
-    width: 100%;
+    width: 15%;
     display: flex;
     align-items: center;
-    justify-content: end;
-    gap: 25%
+    margin-left: auto;
+    gap: 5%;
+    overflow: hidden
+}
+
+.subNavMenu {
+    position: absolute;
+    display: grid;
+    grid-template-columns: auto;
+    top: 4rem;
+    right: 1rem;
+    width: 12rem;
+    border-radius: 8px;
+    overflow: hidden;
+    visibility: visible;
+    opacity: 1;
+    transition: 0.2s ease-in-out;
+    transform: translateY(0);
+}
+
+.subNavMenu.closed {
+    visibility: hidden;
+    opacity: 0;
+    transform: translateY(-20px);
+}
+
+.navItem {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.9rem;
+    width: 100%;
+    min-height: 2.5rem;
+    border-bottom: 1px solid rgb(86, 85, 85);
+    padding: 8% 2%;
+    color: rgb(217, 216, 216);
+    background-color: rgb(48, 48, 48);
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+}
+
+.navItem:hover {
+    background-color: rgb(82, 82, 82);
+    color: white;
 }
 
 .navBtn {
@@ -73,21 +111,6 @@
 
 .navBtn:hover {
     @apply bg-gradient-to-r from-sky-400 to-indigo-400;
-}
-
-.navItem {
-    text-decoration: none;
-    padding: 3px 8px;
-    /* width: 5.5rem; */
-    text-align: center;
-    border-radius: 15px;
-    transition: all 0.2s ease-in-out;
-    cursor: pointer;
-}
-
-.navItem:hover {
-    background-color: var(--btn-color);
-    color: white;
 }
 
 @media (max-width: 850px) {
@@ -123,13 +146,16 @@
         visibility: hidden;
     }
 
-    .navItem {
-        /* background-color: rgba(231, 231, 231, 0.8); */
-        background-color: rgb(255 255 255 / 0.3);
-        backdrop-filter: blur(10px);
-        font-size: 1.2rem;
+    .subNavMenu {
+        position: static;
         width: 100%;
-        height: 200%;
+        border-radius: 0;
+    }
+
+    .navItem {
+        background-color: rgba(0, 0, 0, 0.7);
+        backdrop-filter: blur(33px);
+        width: 100%;
         border-radius: 0;
         padding: 0;
         display: flex;
