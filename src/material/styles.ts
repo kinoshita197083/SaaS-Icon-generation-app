@@ -37,5 +37,5 @@ export const styles = [
     // },
     {
         'harmony, post modern': '/post-modern.png'
-    }
+    },
 ];
