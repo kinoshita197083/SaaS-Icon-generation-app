@@ -26,7 +26,7 @@ const Carousel = (props: CarouselProps) => {
                 clearInterval(interval)
             }
         }
-    }, [autoplay])
+    }, [autoplay, currentIndex])
 
     const nextImage = () => {
         setCurrentIndex(currentIndex === images.length - 1 ? 0 : currentIndex + 1)

@@ -88,22 +88,28 @@ const Navbar = (props: NavbarProps) => {
     return (
         <header ref={navbarRef} className={scroll ? [styles.navContainer, styles.scrolled].join(' ') : styles.navContainer}>
             <nav className={styles.navbar}>
-                <div className={styles.menuIcon} onClick={handleClick}>
+
+                {/* Menu Icon for mobile */}
+                <div role="Menu icon for menu display on mobile" className={styles.menuIcon} onClick={handleClick}>
                     <span className={click ? [styles.bar, styles.active].join(' ') : styles.bar} />
                     <span className={click ? [styles.bar, styles.active].join(' ') : styles.bar} />
                     <span className={click ? [styles.bar, styles.active].join(' ') : styles.bar} />
                 </div>
+
+                {/* Logo Group */}
                 <Link href={'/'}>
                     <div className={[styles.logoGroup, 'font-semibold'].join(' ')}>
                         <FontAwesomeIcon icon={faGhost} size='2x' className={styles.navLogo} />
                         <h2 className='text-[1.6rem]'>{projectName}</h2>
                     </div>
                 </Link>
+
+                {/* Nav items */}
                 <ul className={click ? styles.navMenu : [styles.navMenu, styles.closed].join(' ')}>
 
+                    {/* If not loggedin, show sign in button, otherwise the nav items */}
                     {!isLoggedIn ?
-                        <button
-                            className={[styles.navBtn].join(' ')}
+                        <button className={[styles.navBtn].join(' ')}
                             onClick={() => { void signIn().catch(console.error) }}>
                             Sign in
                         </button>
