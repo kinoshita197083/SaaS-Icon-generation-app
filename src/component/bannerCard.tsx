@@ -4,17 +4,19 @@ type BannerCardProps = {
     mainHeading?: string,
     subHeading?: string,
     bgImage?: string,
-    link?: string
+    link?: string,
+    disabled?: boolean,
 }
 
 const BannerCard = (props: BannerCardProps) => {
 
-    const { mainHeading, subHeading, bgImage, link } = props;
+    const { mainHeading, subHeading, bgImage, link, disabled } = props;
 
     const bgStyle = {
         backgroundImage: bgImage ? `url(${bgImage})` : '',
         backgroundRepeat: 'no-repeat',
-        backgroundSize: 'cover'
+        backgroundSize: 'cover',
+        filter: disabled ? 'grayscale(1)' : ''
     }
 
     const defaultStyle = "relative rounded-[25px] lg:h-[14rem] lg:w-[14rem] md:w-[45%] h-[auto] w-[70%] aspect-square cursor-pointer mx-auto hover:scale-[1.02] transition-all";

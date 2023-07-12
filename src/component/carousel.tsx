@@ -1,35 +1,39 @@
 import { faBars, faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react';
+import styles from '../styles/carousel.module.css';
 
 type CarouselProps = {
     images: string[],
     downloadable?: boolean,
+    autoplay?: boolean,
 }
 
 const Carousel = (props: CarouselProps) => {
 
-    const { images, downloadable } = props;
+    const { images, downloadable, autoplay } = props;
 
     const [clicked, setClicked] = useState(false);
     const [currentIndex, setCurrentIndex] = useState(0);
 
     const currentImage = images[currentIndex];
 
-    const nextImage = () => {
-        if (currentIndex === images.length - 1) {
-            setCurrentIndex(0)
-        } else {
-            setCurrentIndex(prev => prev + 1)
+    useEffect(() => {
+        if (autoplay) {
+            const interval = setInterval(() => nextImage(), 5000)
+
+            return () => {
+                clearInterval(interval)
+            }
         }
+    }, [autoplay])
+
+    const nextImage = () => {
+        setCurrentIndex(currentIndex === images.length - 1 ? 0 : currentIndex + 1)
     }
 
     const previousImage = () => {
-        if (currentIndex === 0) {
-            setCurrentIndex(images.length - 1)
-        } else {
-            setCurrentIndex(prev => prev - 1)
-        }
+        setCurrentIndex(currentIndex === 0 ? images.length - 1 : currentIndex - 1)
     }
 
     const selectImage = (index: number) => {
@@ -37,8 +41,9 @@ const Carousel = (props: CarouselProps) => {
     }
 
     return (
-        <div className='relative flex w-full h-full overflow-hidden rounded-[inherit]'>
+        <div className='relative w-full h-full overflow-auto rounded-[inherit]'>
 
+            {/* Download dropdown */}
             {downloadable &&
                 <>
                     <button
@@ -58,34 +63,38 @@ const Carousel = (props: CarouselProps) => {
                     </div>
                 </>}
 
+            {/* Previous & Next button only show up when more than 1 image is provided */}
             {images.length > 1 && <>
                 <button
                     onClick={previousImage}
-                    className='absolute h-[3rem] w-[3rem] backdrop-blur rounded-full top-[50%] translate-y-[-50%]'
+                    className='absolute z-[1] h-[3rem] w-[3rem] backdrop-blur rounded-full top-[50%] translate-y-[-50%]'
                 >
                     <FontAwesomeIcon icon={faChevronLeft} />
                 </button>
 
                 <button
                     onClick={nextImage}
-                    className='absolute h-[3rem] w-[3rem] backdrop-blur rounded-full top-[50%] right-0 translate-y-[-50%]'
+                    className='absolute z-[1] h-[3rem] w-[3rem] backdrop-blur rounded-full top-[50%] right-0 translate-y-[-50%]'
                 >
                     <FontAwesomeIcon icon={faChevronRight} />
                 </button>
             </>}
 
+            {/* Carousel */}
             {images.map((image, index) => {
-
                 return (
-                    <img
-                        key={index + 5}
-                        src={image}
-                        alt='generated icon'
-                        className={['flex-screen object-cover', currentIndex === index ? 'block' : 'hidden'].join(' ')}
-                    />
+                    <div className={currentIndex === index ? [styles.slide, styles.active].join(' ') : [styles.slide].join(' ')}>
+                        <img
+                            key={index + 5}
+                            src={image}
+                            alt='carousel image'
+                            className={styles.carouselImage}
+                        />
+                    </div>
                 )
             })}
 
+            {/* Little dot shape pagination */}
             <span className='absolute w-[5rem] h-[1rem] bottom-[5%] left-[50%] translate-x-[-50%] flex items-center justify-center'>
                 {images.map((__, index) => {
                     return (

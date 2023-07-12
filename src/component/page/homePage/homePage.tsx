@@ -1,6 +1,7 @@
 import React from 'react';
 import BannerCard from '~/component/bannerCard';
 import Card from '~/component/Card';
+import Carousel from '~/component/carousel';
 
 const HomePage = () => {
     return (
@@ -18,10 +19,11 @@ const HomePage = () => {
                         />
 
                         <BannerCard
-                            mainHeading='Remove Background'
-                            subHeading='FEATURED'
+                            mainHeading='Edit your image'
+                            subHeading='COMMING SOON'
                             bgImage='/chihuahua.png'
-                            link='removebackground'
+                            // link='removebackground'
+                            disabled
                         />
                     </div>
                 </div>
@@ -44,7 +46,10 @@ const HomePage = () => {
             </div>
 
             <section className='bg-gray-400 h-[25rem] my-[5%] lg:my-0 lg:w-full lg:h-[35rem] rounded-[25px]'>
-                hi
+                <Carousel
+                    images={['/brad.jpg', '/ape.jpg', 'chihuahua.png']}
+                    autoplay
+                />
             </section>
 
         </div>
