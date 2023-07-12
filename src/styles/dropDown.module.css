@@ -1,0 +1,25 @@
+.dropDown {
+    position: absolute;
+    top: 2.5rem;
+    right: -2.5rem;
+    width: 10rem;
+    min-height: 5rem;
+    background-color: rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(10px);
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.visible {
+    height: visible;
+    opacity: 1;
+    transform: all 0.2s ease-in-out;
+}
+
+.hidden {
+    visibility: hidden;
+    opacity: 0;
+    transform: all 0.2 ease-in-out;
+}
