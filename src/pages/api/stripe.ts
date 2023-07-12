@@ -4,6 +4,9 @@ import { env } from '~/env.mjs';
 import { buffer } from 'micro';
 import { prisma } from "~/server/db";
 
+
+// Note: npm run stripe:listen to connect webhook to localhost
+
 const stripe = new Stripe(env.STRIPE_SECRET_KEY, {
     apiVersion: "2022-11-15"
 });
