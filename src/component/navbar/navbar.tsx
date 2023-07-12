@@ -24,19 +24,6 @@ type NavbarProps = {
 
 const Navbar = (props: NavbarProps) => {
 
-    const { buyCredits } = useBuyCredits();
-    const router = useRouter();
-
-    // const dropDownLinkStyle = "w-full min-h-[3rem] bg-gray-600 text-gray-200 flex items-center grow justify-center cursor-pointer hover:bg-gray-500 transition-all";
-
-    const handleBuyCredits = () => {
-        try {
-            buyCredits();
-        } catch (err) {
-            console.log(err);
-        }
-    }
-
     const { projectName } = props;
 
     const [click, setClick] = useState(false);
@@ -45,10 +32,22 @@ const Navbar = (props: NavbarProps) => {
 
     const triggerDropDownRef = useRef<HTMLImageElement>(null);
     const dropDownRef = useRef<HTMLUListElement>(null);
+    const navbarRef = useRef<HTMLHeadElement>(null);
 
     const { data: session, status } = useSession()
     const isLoggedIn = status === 'authenticated';
     const user = api.user.getUser.useQuery();
+
+    const { buyCredits } = useBuyCredits();
+    const router = useRouter();
+
+    const handleBuyCredits = () => {
+        try {
+            buyCredits();
+        } catch (err) {
+            console.log(err);
+        }
+    }
 
     const handleClick = () => {
         setClick(!click);
@@ -68,18 +67,26 @@ const Navbar = (props: NavbarProps) => {
         }
     }
 
+    const closeMobileNavMenu = (e: MouseEvent) => {
+        if (navbarRef.current) {
+            !navbarRef.current.contains(e.target as Node) ? setClick(false) : null;
+        }
+    }
+
     useEffect(() => {
         window.addEventListener('scroll', handleScrolled);
         document.addEventListener('click', closeDropDown);
+        document.addEventListener('click', closeMobileNavMenu)
 
         return () => {
             window.removeEventListener('scroll', handleScrolled);
             document.removeEventListener('click', closeDropDown)
+            document.removeEventListener('click', closeMobileNavMenu)
         }
     }, [])
 
     return (
-        <header className={scroll ? [styles.navContainer, styles.scrolled].join(' ') : styles.navContainer}>
+        <header ref={navbarRef} className={scroll ? [styles.navContainer, styles.scrolled].join(' ') : styles.navContainer}>
             <nav className={styles.navbar}>
                 <div className={styles.menuIcon} onClick={handleClick}>
                     <span className={click ? [styles.bar, styles.active].join(' ') : styles.bar} />
@@ -96,7 +103,7 @@ const Navbar = (props: NavbarProps) => {
 
                     {!isLoggedIn ?
                         <button
-                            className={[styles.navBtn, styles.navItem].join(' ')}
+                            className={[styles.navBtn].join(' ')}
                             onClick={() => { void signIn().catch(console.error) }}>
                             Sign in
                         </button>
