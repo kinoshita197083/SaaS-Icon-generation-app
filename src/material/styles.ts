@@ -38,4 +38,10 @@ export const styles = [
     {
         'harmony, post modern': '/post-modern.png'
     },
+    // {
+    //     'fantasy art style, realistic fantasy illustration, anime fantasy illustration,artwork in the style of guweiz': '/stare.jpg'
+    // },
+    // {
+    //     'epic cinematic 8k wallpaper, octane render': '/stare.jpg'
+    // }
 ];

@@ -73,8 +73,8 @@ export const generateRouter = createTRPCRouter({
                     message: 'Not enough credits'
                 })
             }
-
-            const summary = `${input.prompt}, masterpiece, hyper detailed, high-resolution, elegant, perfect face, upper body, color theme-${input.color}, ${input.style} style`
+            // masterpiece, hyper detailed, high-resolution, elegant, perfect face, upper body, 
+            const summary = `${input.prompt},masterpiece, hyper detailed, high-resolution, elegant, perfect face, upper body,  color theme-${input.color}, ${input.style} style`
 
             const base64EncodedImageList = await generateIcon(summary, input.n);
 
