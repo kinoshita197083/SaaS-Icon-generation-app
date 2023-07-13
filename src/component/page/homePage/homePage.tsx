@@ -47,7 +47,7 @@ const HomePage = () => {
 
             <section className='bg-gray-400 h-[25rem] my-[5%] lg:my-0 lg:w-full lg:h-[35rem] rounded-[25px]'>
                 <Carousel
-                    images={['/brad.jpg', '/ape.jpg', 'chihuahua.png']}
+                    images={['/Icon_recipe_1.png', '/ape.jpg', 'chihuahua.png']}
                     autoplay
                 />
             </section>

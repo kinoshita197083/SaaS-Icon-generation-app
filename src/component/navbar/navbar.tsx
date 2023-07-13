@@ -119,7 +119,7 @@ const Navbar = (props: NavbarProps) => {
                                 Credits: {user.data?.credits}
                             </li>
 
-                            <Image src={session?.user.image || ''}
+                            <Image src={session?.user.image || '/ape.jpg'}
                                 ref={triggerDropDownRef}
                                 alt='profile picture'
                                 width='35'
@@ -140,7 +140,7 @@ const Navbar = (props: NavbarProps) => {
                                 </li>
 
                                 <li className={styles.navItem}
-                                    onClick={() => { void signOut().catch(console.error) }}>
+                                    onClick={() => { void signOut().catch(console.error); router.push('/') }}>
                                     Sign out
                                 </li>
                             </ul>

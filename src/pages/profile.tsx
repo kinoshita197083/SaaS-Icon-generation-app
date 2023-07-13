@@ -24,27 +24,36 @@ const Profile: NextPage = () => {
             </Head>
 
             <PageTemplate>
-                <main className='w-full flex gap-0'>
+                <main className='w-full flex flex-col lg:flex-row md:flex-row gap-0'>
                     <section
                         role='profile-tab'
-                        className='w-[30%] p-[5%]'
+                        className='lg:w-[30%] md:w-[30%] w-[full] p-[5%] bg-black rounded-bl-[25px] rounded-tl-[25px]'
                     >
                         <Image
-                            src={session?.user.image || ''}
+                            src={session?.user.image || '/ape.jpg'}
                             alt='user profile picture'
                             width='100'
                             height='100'
                             className='rounded-full mx-auto my-[5%]'
                         />
-                        <h1
-                            className='text-white mx-auto text-center'
-                        >
-                            {session?.user.name}
-                        </h1>
 
-                        <hr className='my-[5%]' />
+                        <div role='profile info'
+                            className='flex flex-col'
+                        >
+                            <h1 className='text-white mx-auto mb-[5%] text-center'>
+                                {session?.user.name || 'Imaginor'}
+                            </h1>
+
+                            <h2 className='text-white text-[1rem] md:text-[0.7rem] lg:text-[0.7rem] w-full mx-auto text-center'>
+                                UserID: {session?.user.id}
+                            </h2>
+                        </div>
+
+
+                        <hr className='my-[8%]' />
                     </section>
 
+                    {/* All generated icons display section */}
                     <section
                         role='icons-display'
                         className='w-[70%]'
