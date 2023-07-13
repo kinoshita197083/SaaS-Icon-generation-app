@@ -11,6 +11,7 @@ import { api } from '~/utils/api'
 import { requireAuth } from '~/utils/requireAuth'
 import styles from '../styles/profile.module.css'
 import ReadMore from '~/component/readMore'
+import IconWrapper from '~/component/iconWrapper'
 
 const Profile: NextPage = () => {
 
@@ -60,33 +61,14 @@ const Profile: NextPage = () => {
                         role='icons-display'
                         className='lg:w-[70%] md:w-[70%] w-full'
                     >
-                        {/* <ul className='grid grid-cols-2 gap-4 md:grid-cols-4 lg:grid-cols-2 p-[5%] overflow-scroll'> */}
                         <ul className={styles.iconsContainer}>
                             {icons.data?.icons.map(icon => {
                                 return (
-                                    <li
-                                        key={icon.id}
-                                        className='relative bg-gray-600 p-[5%] rounded-[15px] w-[15rem] mx-auto'
-                                    >
-                                        <Image
-                                            src={`https://icon-generator-project-haha.s3.ap-southeast-2.amazonaws.com/${icon.id}`}
-                                            className='w-full rounded'
-                                            width='100'
-                                            height='100'
-                                            alt='previously generated icon'
-                                        />
-                                        <h3
-                                            className='text-gray-100 text-center mb-[5%]'
-                                        >
-                                            {icon.prompt}
-                                        </h3>
-                                        <ReadMore
-                                            cutoff={20}
-                                        >
-                                            hey hey hey hey asd sad a sd asd a da sd as da s as d asd a sd asd a d as da
-                                        </ReadMore>
-
-                                    </li>
+                                    <IconWrapper
+                                        src={`https://icon-generator-project-haha.s3.ap-southeast-2.amazonaws.com/${icon.id}`}
+                                        heading={icon.prompt || 'Heading mising'}
+                                        content='hey hey hey hey asd sad a sd asd a da sd as da s as d asd a sd asd a d as da'
+                                    />
                                 )
                             })}
 
