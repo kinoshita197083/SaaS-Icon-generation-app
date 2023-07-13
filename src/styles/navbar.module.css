@@ -35,6 +35,10 @@
 }
 
 .menuIcon {
+    display: none;
+}
+
+/* .menuIcon {
     position: absolute;
     top: 50%;
     right: 2%;
@@ -50,7 +54,7 @@
     display: block;
     margin-bottom: 20%;
     transition: all 0.2s ease-in-out;
-}
+} */
 
 .navMenu {
     width: 15%;
@@ -122,6 +126,10 @@
 
     .menuIcon {
         display: block;
+        position: absolute;
+        top: 50%;
+        right: 2%;
+        transform: translate(-50%, -45%);
     }
 
     .navMenu {
@@ -169,7 +177,7 @@
         background-color: #393a45;
     }
 
-    .menuIcon .bar.active:nth-child(1) {
+    /* .menuIcon .bar.active:nth-child(1) {
         transform: translateY(8px) rotate(45deg);
     }
 
@@ -179,5 +187,5 @@
 
     .menuIcon .bar.active:nth-child(3) {
         transform: translateY(-8px) rotate(-45deg);
-    }
+    } */
 }

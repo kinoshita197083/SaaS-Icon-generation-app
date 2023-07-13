@@ -1,0 +1,7 @@
+.cutoffText {
+    --lineBreak: 3;
+    display: -webkit-box;
+    -webkit-line-clamp: var(--lineBreak);
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}

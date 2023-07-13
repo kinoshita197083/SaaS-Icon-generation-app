@@ -1,14 +1,15 @@
 import Link from "next/link";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import styles from './navbar.module.css';
+import styles from '../styles/navbar.module.css'
 import { useEffect, useRef, useState } from 'react';
 import { faGhost } from '@fortawesome/free-solid-svg-icons';
 import { signIn, signOut, useSession } from "next-auth/react";
 import { api } from "~/utils/api";
 import { useBuyCredits } from "~/hooks/useBuyCredits";
 import Image from "next/image";
-import Dropdown from "../dropDown";
+// import Dropdown from "./dropDown";
 import { useRouter } from "next/router";
+import MenuIcon from "./menuIcon";
 {/* <script src="stripe.js"></script> */ }
 
 type NavItem = {
@@ -49,9 +50,9 @@ const Navbar = (props: NavbarProps) => {
         }
     }
 
-    const handleClick = () => {
-        setClick(!click);
-    }
+    // const handleClick = () => {
+    //     setClick(!click);
+    // }
 
     const handleScrolled = () => {
         if (window.scrollY >= 10) {
@@ -90,10 +91,11 @@ const Navbar = (props: NavbarProps) => {
             <nav className={styles.navbar}>
 
                 {/* Menu Icon for mobile */}
-                <div role="Menu icon for menu display on mobile" className={styles.menuIcon} onClick={handleClick}>
-                    <span className={click ? [styles.bar, styles.active].join(' ') : styles.bar} />
-                    <span className={click ? [styles.bar, styles.active].join(' ') : styles.bar} />
-                    <span className={click ? [styles.bar, styles.active].join(' ') : styles.bar} />
+                <div className={styles.menuIcon}>
+                    <MenuIcon
+                        clicked={click}
+                        setClicked={setClick}
+                    />
                 </div>
 
                 {/* Logo Group */}

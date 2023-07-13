@@ -6,7 +6,7 @@ import { api } from "~/utils/api";
 import { useRef, useState, useEffect } from "react";
 import LandingPage from "~/component/page/landingPage/landingPage";
 import HomePage from "~/component/page/homePage/homePage";
-import Trackbar from "~/component/trackbar/Trackbar";
+import Trackbar from "~/component/Trackbar";
 
 const pages = [{ id: 1, page: <LandingPage /> }, { id: 2, page: <HomePage /> }];
 const pagesIndex = [...pages.keys()];

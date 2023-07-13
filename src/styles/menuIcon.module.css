@@ -1,0 +1,24 @@
+.menuIcon {
+    cursor: pointer;
+}
+
+.menuIcon .bar {
+    width: 25px;
+    height: 3px;
+    background-color: black;
+    display: block;
+    margin-bottom: 20%;
+    transition: all 0.2s ease-in-out;
+}
+
+.menuIcon .bar.active:nth-child(1) {
+    transform: translateY(8px) rotate(45deg);
+}
+
+.menuIcon .bar.active:nth-child(2) {
+    opacity: 0;
+}
+
+.menuIcon .bar.active:nth-child(3) {
+    transform: translateY(-8px) rotate(-45deg);
+}

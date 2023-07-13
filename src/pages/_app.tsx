@@ -8,7 +8,7 @@ import { api } from "~/utils/api";
 import "~/styles/globals.css";
 import "~/styles/designToken.css";
 import "~/styles/utility.css";
-import Navbar from "~/component/navbar/navbar";
+import Navbar from "~/component/navbar";
 import Footer from "~/component/footer";
 
 const MyApp: AppType<{ session: Session | null }> = ({

@@ -2,6 +2,7 @@ import { faBars, faChevronLeft, faChevronRight } from '@fortawesome/free-solid-s
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useEffect, useState } from 'react';
 import styles from '../styles/carousel.module.css';
+import Download from './download';
 
 type CarouselProps = {
     images: string[],
@@ -46,21 +47,9 @@ const Carousel = (props: CarouselProps) => {
             {/* Download dropdown */}
             {downloadable &&
                 <>
-                    <button
-                        type='button'
-                        className='absolute btn top-[5%] right-[10%] translate-x-[50%]'
-                        onClick={() => setClicked(!clicked)}
-                    >
-                        <FontAwesomeIcon className='mr-[5%]' icon={faBars} />
-                    </button>
-
-                    <div className={[clicked ? 'visible opacity-[1] transition-all ease-in-out' : 'invisible opacity-0 transition-all', 'absolute top-[18%] right-[5%] lg:w-[10rem] p-[2%] bg-gray-700 rounded'].join(' ')}>
-                        <a href={currentImage}
-                            target='_blank'
-                            download>
-                            <button className='w-full mb-[2%] bg-gray-600 text-[white] rounded-[5px] transition-all'>Download</button>
-                        </a>
-                    </div>
+                    <Download
+                        src={currentImage || '/jene.jpg'}
+                    />
                 </>}
 
             {/* Previous & Next button only show up when more than 1 image is provided */}

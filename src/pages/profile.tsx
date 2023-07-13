@@ -9,6 +9,8 @@ import React from 'react'
 import PageTemplate from '~/component/page/pageTemplate'
 import { api } from '~/utils/api'
 import { requireAuth } from '~/utils/requireAuth'
+import styles from '../styles/profile.module.css'
+import ReadMore from '~/component/readMore'
 
 const Profile: NextPage = () => {
 
@@ -63,20 +65,26 @@ const Profile: NextPage = () => {
                                 return (
                                     <li
                                         key={icon.id}
-                                        className='bg-gray-600 p-[5%] rounded min-w-[10rem]'
+                                        className='relative bg-gray-600 p-[10%] rounded-[15px] min-w-[15rem]'
                                     >
                                         <Image
                                             src={`https://icon-generator-project-haha.s3.ap-southeast-2.amazonaws.com/${icon.id}`}
-                                            className='w-full'
+                                            className='w-full rounded'
                                             width='100'
                                             height='100'
                                             alt='previously generated icon'
                                         />
                                         <h3
-                                            className='text-gray-100 text-center'
+                                            className='text-gray-100 text-center mb-[5%]'
                                         >
                                             {icon.prompt}
                                         </h3>
+                                        <ReadMore
+                                            cutoff={20}
+                                        >
+                                            hey hey hey hey asd sad a sd asd a da sd as da s as d asd a sd asd a d as da
+                                        </ReadMore>
+
                                     </li>
                                 )
                             })}

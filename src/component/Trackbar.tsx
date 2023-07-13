@@ -1,4 +1,4 @@
-import styles from './trackbar.module.css'
+import styles from '../styles/trackbar.module.css'
 
 type TrackbarProps = {
     items: any[],

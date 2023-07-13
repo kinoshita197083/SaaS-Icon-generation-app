@@ -1,6 +1,6 @@
 import React from 'react';
 import BannerCard from '~/component/bannerCard';
-import Card from '~/component/Card';
+import Card from '~/component/card';
 import Carousel from '~/component/carousel';
 
 const HomePage = () => {
