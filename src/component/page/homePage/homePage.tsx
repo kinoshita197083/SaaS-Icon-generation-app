@@ -30,8 +30,8 @@ const HomePage = () => {
             </section>
 
             <div className='flex flex-col lg:flex-row lg:my-[3%]'>
-                <div className='my-[5%] lg:p-[3%] lg:w-[45%] lg:max-w-[60%]'>
-                    <h2 className='text-gray-700 text-[2.5rem] pl-[5%] md:text-[3.5rem] lg:text-[3.5rem]'>
+                <div className='my-[5%] lg:p-[3%] lg:w-[45%] lg:max-w-[60%] overflow-hidden'>
+                    <h2 className='text-gray-700 text-[3.3rem] lg:text-[4vw] pl-[5%] '>
                         <span className='animatedTitle animatedText'>Check </span>
                         <span className='animatedTitle animatedText '>out </span>
                         <span className='animatedTitle animatedText '>the </span>

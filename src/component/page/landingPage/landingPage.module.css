@@ -1,6 +1,6 @@
 .cardContainer {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(min(22rem, 100%), 1fr));
+    display: flex;
+    justify-content: center;
     padding: 0 9% 3% 9%;
     width: 100%;
     gap: 2%;
@@ -34,5 +34,6 @@
 @media (max-width: 800px) {
     .cardContainer {
         padding: 0 0 8% 0;
+        flex-direction: column;
     }
 }

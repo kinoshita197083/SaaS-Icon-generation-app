@@ -36,8 +36,8 @@ const LandingPage = () => {
             <Poster />
 
             <section className={styles.cardContainer}>
-                <Card mainHeading='Just a bunch of text' subHeading='another text' bgImage='./matrix.jpg' margin='auto'></Card>
-                <Card mainHeading={`${icons} icons have been created so far!`} subHeading='another text' bgImage='./brad.jpg' margin='auto'></Card>
+                <Card mainHeading='Just a bunch of text' subHeading='another text' bgImage='./matrix.jpg'></Card>
+                <Card mainHeading={`${icons} icons have been created so far!`} subHeading='another text' bgImage='./brad.jpg'></Card>
             </section>
 
             <section className='lg:w-[78%] h-[20rem] bg-sky-800 rounded-[25px] mx-auto flex relative p-8 bg-gradient-to-r from-sky-500 to-indigo-500'>
