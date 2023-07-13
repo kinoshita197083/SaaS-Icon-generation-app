@@ -5,3 +5,11 @@
     -webkit-box-orient: vertical;
     overflow: hidden;
 }
+
+.iconsContainer {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+    gap: 2%;
+    padding: 5%;
+    border-radius: 15px;
+}

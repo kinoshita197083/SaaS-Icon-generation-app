@@ -45,7 +45,7 @@ const HomePage = () => {
                 />
             </div>
 
-            <section className='bg-gray-400 h-[25rem] my-[5%] lg:my-0 lg:w-full lg:h-[35rem] rounded-[25px]'>
+            <section className='bg-gray-400 h-[25rem] my-[5%] lg:my-0 lg:w-full lg:h-[35rem] rounded-[25px] overflow-hidden'>
                 <Carousel
                     images={['/Icon_recipe_1.png', '/ape.jpg', 'chihuahua.png']}
                     autoplay

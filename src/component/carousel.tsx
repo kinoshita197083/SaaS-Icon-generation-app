@@ -42,7 +42,7 @@ const Carousel = (props: CarouselProps) => {
     }
 
     return (
-        <div className='relative w-full h-full overflow-auto rounded-[inherit]'>
+        <div className='relative w-full h-full overflow-hidden rounded-[inherit]'>
 
             {/* Download dropdown */}
             {downloadable &&

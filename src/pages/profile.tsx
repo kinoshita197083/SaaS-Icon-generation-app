@@ -58,14 +58,15 @@ const Profile: NextPage = () => {
                     {/* All generated icons display section */}
                     <section
                         role='icons-display'
-                        className='w-[70%]'
+                        className='lg:w-[70%] md:w-[70%] w-full'
                     >
-                        <ul className='grid grid-cols-2 gap-4 md:grid-cols-4 lg:grid-cols-5 p-[5%] overflow-scroll'>
+                        {/* <ul className='grid grid-cols-2 gap-4 md:grid-cols-4 lg:grid-cols-2 p-[5%] overflow-scroll'> */}
+                        <ul className={styles.iconsContainer}>
                             {icons.data?.icons.map(icon => {
                                 return (
                                     <li
                                         key={icon.id}
-                                        className='relative bg-gray-600 p-[10%] rounded-[15px] min-w-[15rem]'
+                                        className='relative bg-gray-600 p-[5%] rounded-[15px] w-[15rem] mx-auto'
                                     >
                                         <Image
                                             src={`https://icon-generator-project-haha.s3.ap-southeast-2.amazonaws.com/${icon.id}`}
