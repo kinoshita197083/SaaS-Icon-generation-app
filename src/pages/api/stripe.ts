@@ -3,13 +3,32 @@ import Stripe from 'stripe';
 import { env } from '~/env.mjs';
 import { buffer } from 'micro';
 import { prisma } from "~/server/db";
+import { TRPCError } from "@trpc/server";
 
 
-// Note: npm run stripe:listen to connect webhook to localhost
+// Note: `npm run stripe:listen` to connect webhook to localhost
 
 const stripe = new Stripe(env.STRIPE_SECRET_KEY, {
     apiVersion: "2022-11-15"
 });
+
+
+// calculate product price and corresponded increment credits
+var incrementCredit: number;
+var pricePaid: number;
+
+const handleCredits = () => {
+    if (pricePaid === 700) {
+        incrementCredit = 55
+    }
+    if (pricePaid === 1300) {
+        incrementCredit = 120
+    }
+    if (pricePaid === 2700) {
+        incrementCredit = 250
+    }
+}
+
 
 export const config = {
     api: {
@@ -39,25 +58,38 @@ const webhook = async (req: NextApiRequest, res: NextApiResponse) => {
         // Handle the checkout complete event
         // stripe webhook checkout session complete docs code: https://dashboard.stripe.com/test/webhooks/create?events=checkout.session.completed
         switch (event.type) {
+
             case 'checkout.session.completed':
+
                 const completedEvent = event.data.object as {
                     id: string,
                     metadata: {
                         userId: string
                     };
+                    amount_total: number;
                 }
 
+                pricePaid = completedEvent.amount_total;
+                handleCredits();
+
                 // increment credits to user once payment is successful completed
-                await prisma.user.update({
-                    where: {
-                        id: completedEvent.metadata.userId,
-                    },
-                    data: {
-                        credits: {
-                            increment: 100,
+                try {
+                    await prisma.user.update({
+                        where: {
+                            id: completedEvent.metadata.userId,
+                        },
+                        data: {
+                            credits: {
+                                increment: incrementCredit,
+                            }
                         }
-                    }
-                })
+                    })
+                } catch (err) {
+                    throw new TRPCError({
+                        code: 'BAD_REQUEST',
+                        message: 'Payment Unsuccessful'
+                    })
+                }
 
                 break;
             // ... handle other event types
