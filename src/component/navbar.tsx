@@ -41,9 +41,9 @@ const Navbar = (props: NavbarProps) => {
     const { buyCredits } = useBuyCredits();
     const router = useRouter();
 
-    const handleBuyCredits = () => {
+    const handleBuyCredits = (priceId: number) => {
         try {
-            buyCredits();
+            buyCredits(priceId);
         } catch (err) {
             console.log(err);
         }
@@ -151,9 +151,19 @@ const Navbar = (props: NavbarProps) => {
                                     Profile
                                 </li>
 
-                                <li onClick={handleBuyCredits}
+                                <li onClick={() => handleBuyCredits(1)}
                                     className={styles.navItem}>
-                                    Buy Credits
+                                    Buy Credits - 1
+                                </li>
+
+                                <li onClick={() => handleBuyCredits(2)}
+                                    className={styles.navItem}>
+                                    Buy Credits - 2
+                                </li>
+
+                                <li onClick={() => handleBuyCredits(3)}
+                                    className={styles.navItem}>
+                                    Buy Credits - 3
                                 </li>
 
                                 <li className={styles.navItem}
