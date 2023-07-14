@@ -15,3 +15,9 @@
     height: 100%;
     overflow: auto;
 }
+
+@media (max-width: 800px) {
+    .iconsContainer {
+        grid-template-columns: repeat(auto-fit, minmax(6rem, 1fr));
+    }
+}

@@ -7,6 +7,7 @@ import Link from 'next/link';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faProductHunt } from '@fortawesome/free-brands-svg-icons';
 import { api } from '~/utils/api';
+import AdBanner from '../adBanner';
 
 const LandingPage = () => {
 
@@ -43,18 +44,19 @@ const LandingPage = () => {
                 <Card mainHeading={`Celebrating ${icons} Creative Creations!`} subHeading='Iconic Milestone' bgImage='./brad.jpg'></Card>
             </section>
 
-            <section className='lg:w-[78%] h-[20rem] bg-sky-800 rounded-[25px] mx-auto flex relative p-8 bg-gradient-to-r from-sky-500 to-indigo-500'>
-                <article className=''>
+            <AdBanner
+                src='/ape.jpg'>
+                <p className='text-gray-100 hidden lg:block'>Embrace Iconic Possibilities</p>
+                <article className='mt-0 lg:mt-[22%] lg:pl-0 pl-[12%]'>
                     <h4 className='text-white'>Join Now and Dive into Icon Brainstorming</h4>
                     <h3 className='text-[3rem] text-white'>Join {users || 'xxx'} users</h3>
                 </article>
-
                 <div className='flex items-center justify-center gap-[5%] mb-[5%] absolute bottom-0 right-10'>
                     <Link href={'/generate'}>
                         <Button>Start imagining</Button>
                     </Link>
                 </div>
-            </section>
+            </AdBanner>
 
         </div>
     )
