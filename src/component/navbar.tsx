@@ -7,7 +7,6 @@ import { signIn, signOut, useSession } from "next-auth/react";
 import { api } from "~/utils/api";
 import { useBuyCredits } from "~/hooks/useBuyCredits";
 import Image from "next/image";
-// import Dropdown from "./dropDown";
 import { useRouter } from "next/router";
 import MenuIcon from "./menuIcon";
 {/* <script src="stripe.js"></script> */ }
@@ -31,7 +30,7 @@ const Navbar = (props: NavbarProps) => {
     const [subMenuClicked, setSubMenuClicked] = useState(false);
     const [scroll, setScrolled] = useState(false);
 
-    const triggerDropDownRef = useRef<HTMLImageElement>(null);
+    const triggerDropDownRef = useRef<HTMLLIElement>(null);
     const dropDownRef = useRef<HTMLUListElement>(null);
     const navbarRef = useRef<HTMLHeadElement>(null);
 
@@ -49,10 +48,6 @@ const Navbar = (props: NavbarProps) => {
             console.log(err);
         }
     }
-
-    // const handleClick = () => {
-    //     setClick(!click);
-    // }
 
     const handleScrolled = () => {
         if (window.scrollY >= 10) {
@@ -106,10 +101,23 @@ const Navbar = (props: NavbarProps) => {
                     </div>
                 </Link>
 
+
                 {/* Nav items */}
                 <ul className={click ? styles.navMenu : [styles.navMenu, styles.closed].join(' ')}>
 
-                    {/* If not loggedin, show sign in button, otherwise the nav items */}
+                    {/* Nav items front portion */}
+                    <ul className={styles.navFrontPortion}>
+                        <Link href='/community' className="p-0">
+                            <li className={styles.navFrontPortionItem}>Community</li>
+                        </Link>
+
+                        <Link href={'/generate'}>
+                            <li className={styles.navFrontPortionItem}>Generate</li>
+                        </Link>
+                    </ul>
+
+                    {/* Nav items back portion */}
+                    {/* Protected: if not loggedin, show sign in button, otherwise the nav items */}
                     {!isLoggedIn ?
                         <button className={[styles.navBtn].join(' ')}
                             onClick={() => { void signIn().catch(console.error) }}>
@@ -117,20 +125,25 @@ const Navbar = (props: NavbarProps) => {
                         </button>
                         :
                         <>
-                            <li className='w-full min-h-[3rem] flex items-center justify-center lg:w-[6rem] text-gray-400 lg:text-center'>
+                            <li className='w-full min-h-[3rem] flex items-center justify-center border-b border-gray-400 md:border-0 lg:border-0 lg:w-[6rem] text-gray-100 md:text-gray-100 lg:text-gray-400 lg:text-center'>
                                 Credits: {user.data?.credits}
                             </li>
 
-                            <Image src={session?.user.image || '/ape.jpg'}
+                            <li className={styles.profilePicWrapper}
                                 ref={triggerDropDownRef}
-                                alt='profile picture'
-                                width='35'
-                                height='35'
-                                className="rounded-full cursor-pointer block md:block lg:block"
                                 onClick={() => setSubMenuClicked(!subMenuClicked)}
-                            />
+                            >
+                                <Image src={session?.user.image || '/ape.jpg'}
 
-                            <ul ref={dropDownRef} className={subMenuClicked ? styles.subNavMenu : [styles.subNavMenu, styles.closed].join(' ')}>
+                                    alt='profile picture'
+                                    width='35'
+                                    height='35'
+                                    className="rounded-full cursor-pointer block md:block lg:block lg:my-0 md:my-0 my-[1%]"
+                                // onClick={() => { setSubMenuClicked(!subMenuClicked); console.log('clicked') }}
+                                />
+                            </li>
+
+                            <ul ref={dropDownRef} className={subMenuClicked ? styles.subNavMenu : [styles.subNavMenu, styles.hidden].join(' ')}>
                                 <li onClick={() => router.push('/profile')}
                                     className={styles.navItem}>
                                     Profile

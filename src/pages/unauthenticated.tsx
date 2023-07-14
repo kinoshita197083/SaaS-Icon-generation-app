@@ -1,7 +1,7 @@
 import { NextPage } from 'next'
 import { signIn, useSession } from 'next-auth/react'
 import { useRouter } from 'next/router'
-import React from 'react'
+import React, { useEffect } from 'react'
 
 const Unauthenticated: NextPage = () => {
 
@@ -9,6 +9,12 @@ const Unauthenticated: NextPage = () => {
     const isLoggedIn = status === 'authenticated';
 
     const router = useRouter();
+
+    useEffect(() => {
+        if (status === 'authenticated') {
+            router.push('/')
+        }
+    }, [status])
 
     return (
         <main className='min-h-[100vh] bg-gray-600 flex items-center justify-center'>

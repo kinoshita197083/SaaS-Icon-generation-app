@@ -27,7 +27,7 @@ const Profile: NextPage = () => {
             </Head>
 
             <PageTemplate>
-                <main className='w-full flex flex-col lg:flex-row md:flex-row gap-0'>
+                <main className='w-full max-h-[30rem] flex flex-col lg:flex-row md:flex-row gap-0'>
                     <section
                         role='profile-tab'
                         className='lg:w-[30%] md:w-[30%] w-[full] p-[5%] bg-black rounded-bl-[25px] rounded-tl-[25px]'

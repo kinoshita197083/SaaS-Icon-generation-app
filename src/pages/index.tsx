@@ -4,8 +4,8 @@ import Head from "next/head";
 
 import { api } from "~/utils/api";
 import { useRef, useState, useEffect } from "react";
-import LandingPage from "~/component/page/landingPage/landingPage";
-import HomePage from "~/component/page/homePage/homePage";
+import LandingPage from "~/component/page/landingPage";
+import HomePage from "~/component/page/homePage";
 import Trackbar from "~/component/Trackbar";
 
 const pages = [{ id: 1, page: <LandingPage /> }, { id: 2, page: <HomePage /> }];

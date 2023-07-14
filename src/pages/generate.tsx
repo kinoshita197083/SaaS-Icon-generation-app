@@ -7,6 +7,7 @@ import Link from "next/link";
 import { FormEvent, useState } from "react";
 import Button from "~/component/button";
 import Carousel from "~/component/carousel";
+import CloseButton from "~/component/closeButton";
 import PageTemplate from "~/component/page/pageTemplate";
 import { colors } from "~/material/color";
 import { styles } from "~/material/styles";
@@ -30,9 +31,22 @@ const Generate: NextPage = () => {
         loading: false,
     });
 
+    const [error, setError] = useState(false);
+    const [errorMsg, setErrorMsg] = useState('');
+
     const { status } = useSession()
     const isLoggedIn = status === 'authenticated';
-    const generateInstance = api.generate.generateIcon.useMutation({});
+    const generateInstance = api.generate.generateIcon.useMutation({
+        onError(error) {
+            if (error.data?.code === 'BAD_REQUEST') {
+                setError(true);
+                setErrorMsg('Not enough credit');
+                setTimeout(() => setError(false), 3000);
+            } else {
+                setErrorMsg('Hey there')
+            }
+        }
+    });
 
     const inputStyle = {
         backgroundColor: 'transparent',
@@ -44,7 +58,6 @@ const Generate: NextPage = () => {
 
     const handleSubmit = async (e: FormEvent) => {
         updateForm('loading', true)
-
         e.preventDefault();
 
         try {
@@ -59,9 +72,7 @@ const Generate: NextPage = () => {
                 updateForm('imageURLs', response.image)
             }
         }
-        catch (err) {
-            console.log(err)
-        }
+        catch (err: any) { }
 
         setFormData(prev => ({ ...prev, prompt: '', color: defaultColor, style: defaultStyle, loading: false }))
     }
@@ -161,8 +172,10 @@ const Generate: NextPage = () => {
                             Sign in to start generating
                         </Button>}
 
-
-
+                    {error &&
+                        <div className="absolute w-[30%] h-[3rem] flex items-center justify-center rounded bg-red-500 bottom-[1rem] left-[50%] translate-x-[-50%]">
+                            <h3 className="text-gray-100">{errorMsg}</h3>
+                        </div>}
                 </form>
                 <section className="relative flex aspect-square lg:w-[45%] h-[auto] w-[100%] my-[8%] mx-auto lg:m-auto bg-gray-700 rounded-[15px]">
                     <Carousel
@@ -178,9 +191,9 @@ const Generate: NextPage = () => {
                     }
                 </section>
 
-                <Link href='/'>
-                    <span className="absolute aspect-square bg-red-500 w-[1.5rem] rounded-full text-transparent hover:text-gray-700 flex justify-center items-center cursor-pointer top-[1%] right-[3%] lg:top-[3%]"><FontAwesomeIcon icon={faXmark} /></span>
-                </Link>
+                <CloseButton />
+
+
             </PageTemplate>
         </>
     )

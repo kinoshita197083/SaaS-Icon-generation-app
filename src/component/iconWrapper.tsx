@@ -4,8 +4,8 @@ import ReadMore from './readMore';
 
 type IconWrapper = {
     src: string,
-    heading: string,
-    content: string,
+    heading?: string,
+    content?: string,
 }
 
 const IconWrapper = (props: IconWrapper) => {
@@ -13,7 +13,7 @@ const IconWrapper = (props: IconWrapper) => {
     const { src, heading, content } = props;
 
     return (
-        <div className='relative bg-gray-600 p-[5%] rounded-[15px] w-[15rem] h-[max-content] mx-auto'>
+        <div className='relative blur-dark p-[5%] rounded-[15px] w-[15rem] h-[max-content] mx-auto'>
             <Image
                 src={src}
                 className='w-full rounded'
@@ -25,9 +25,12 @@ const IconWrapper = (props: IconWrapper) => {
             <h3 className='text-gray-100 text-center mb-[5%] overflow-scroll whitespace-nowrap'>
                 {heading}
             </h3>
-            <ReadMore cutoff={0}>
-                {content}
-            </ReadMore>
+
+            {content &&
+                <ReadMore cutoff={0}>
+                    {content}
+                </ReadMore>}
+
         </div>
     )
 }
