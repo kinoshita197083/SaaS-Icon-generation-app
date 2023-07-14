@@ -16,7 +16,7 @@ const LandingPage = () => {
     return (
         <div className='px-[2%] md:px-[3%] lg:px-[8%]'>
             <section className='pl-[5%] md:px-[15%] lg:pl-[15%] animate-fadein'>
-                <h1 className='text-6xl leading-[1.2] max-w-[80%] lg:max-w-[70%] md:text-6xl md:leading-[1.3] lg:text-7xl lg:leading-[1.2] font-semibold'>
+                <h1 className='text-6xl leading-[1.2] max-w-[80%] lg:mt-[5%] lg:max-w-[70%] md:text-6xl md:leading-[1.3] lg:text-7xl lg:leading-[1.2] font-semibold'>
                     <span className={styles.animateCharacter}>Icon Generator</span>
                     <span className='text-5xl lg:text-6xl'>Unleash Visual Brilliance</span>
                 </h1>

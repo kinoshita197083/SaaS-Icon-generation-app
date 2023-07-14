@@ -22,7 +22,7 @@ export const checkoutRouter = createTRPCRouter({
                 userId: ctx.session.user.id,
             },
             line_items: [
-                { price: env.PRICE_ID, quantity: 1 },
+                { price: env.PRICE_ID_1, quantity: 1 },
             ],
             mode: 'payment',
             success_url: `${env.HOST_NAME}`,
