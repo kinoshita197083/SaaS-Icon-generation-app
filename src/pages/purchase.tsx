@@ -8,10 +8,6 @@ import { useBuyCredits } from '~/hooks/useBuyCredits'
 
 const Purchase: NextPage = () => {
 
-    useEffect(() => {
-        window.scrollTo(50, 50)
-    }, [])
-
     const { handleBuyCredits } = useBuyCredits();
 
     return (

@@ -21,7 +21,6 @@ const LandingPage = () => {
                     <span className={styles.animateCharacter}>Icon Generator</span>
                     <span className='text-5xl lg:text-6xl'>Unleash Visual Brilliance</span>
                 </h1>
-                {/* <h3 className='leading-[2]'>Where Imagination Finds its Inspiration</h3> */}
                 <h3 className='leading-[1.5] mt-[3%]'>Effortlessly Create Eye-Catching Icons</h3>
                 <br />
                 <div role='button-group'>

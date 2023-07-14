@@ -72,7 +72,7 @@ const Carousel = (props: CarouselProps) => {
             {/* Carousel */}
             {images.map((image, index) => {
                 return (
-                    <div className={currentIndex === index ? [styles.slide, styles.active].join(' ') : [styles.slide].join(' ')}>
+                    <div key={index} className={currentIndex === index ? [styles.slide, styles.active].join(' ') : [styles.slide].join(' ')}>
                         <img
                             key={index + 5}
                             src={image}
