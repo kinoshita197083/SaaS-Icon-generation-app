@@ -58,13 +58,17 @@ model User {
     accounts      Account[]
     sessions      Session[]
     icons         Icon[]
+    createdAt     DateTime  @default(now())
+    updatedAt     DateTime  @default(now()) @updatedAt
 }
 
 model Icon {
-    id     String  @id @default(cuid())
-    prompt String?
-    User   User?   @relation(fields: [userId], references: [id])
-    userId String?
+    id        String   @id @default(cuid())
+    prompt    String?
+    User      User?    @relation(fields: [userId], references: [id])
+    userId    String?
+    createdAt DateTime @default(now())
+    updatedAt DateTime @default(now()) @updatedAt
 }
 
 model VerificationToken {
