@@ -1,21 +1,57 @@
-import { faXmark } from '@fortawesome/free-solid-svg-icons'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { NextPage } from 'next'
 import { useSession } from 'next-auth/react'
 import Head from 'next/head'
 import Image from 'next/image'
-import Link from 'next/link'
-import React from 'react'
+import React, { useEffect, useRef } from 'react'
 import PageTemplate from '~/component/page/pageTemplate'
 import { api } from '~/utils/api'
 import { requireAuth } from '~/utils/requireAuth'
 import styles from '../styles/profile.module.css'
-import ReadMore from '~/component/readMore'
 import IconWrapper from '~/component/iconWrapper'
+import CloseButton from '~/component/closeButton'
 
 const Profile: NextPage = () => {
 
-    const icons = api.icons.getIcons.useQuery();
+    const limit = 30;
+    const scrollContainerRef = useRef(null);
+
+    const { data, fetchNextPage, hasNextPage, isFetching } = api.icons.getIcons.useInfiniteQuery(
+        {
+            limit: limit,
+            // categoryId: category?.id, // this is optional - remember
+        },
+        {
+            getNextPageParam: (lastPage) => lastPage.nextCursor,
+        }
+    );
+
+    useEffect(() => {
+        const options = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 1.0,
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            const target = entries[0];
+            if (target!.isIntersecting && hasNextPage && !isFetching) {
+                fetchNextPage();
+            }
+        }, options);
+
+        if (scrollContainerRef.current) {
+            observer.observe(scrollContainerRef.current);
+        }
+
+        return () => {
+            if (scrollContainerRef.current) {
+                observer.unobserve(scrollContainerRef.current);
+            }
+        };
+    }, [fetchNextPage, hasNextPage, isFetching]);
+
+    const icons = data?.pages.flatMap((page) => page.icons) || [];
+
     const { data: session } = useSession()
 
     return (
@@ -59,15 +95,16 @@ const Profile: NextPage = () => {
                     {/* All generated icons display section */}
                     <section
                         role='icons-display'
-                        className='lg:w-[70%] md:w-[70%] w-full'
+                        className='lg:w-[70%] md:w-[70%] w-full overflow-auto'
+                        ref={scrollContainerRef}
                     >
                         <ul className={styles.iconsContainer}>
-                            {icons.data?.icons.map(icon => {
+                            {icons.map(icon => {
                                 return (
                                     <IconWrapper
                                         src={`https://icon-generator-project-haha.s3.ap-southeast-2.amazonaws.com/${icon.id}`}
                                         heading={icon.prompt || 'Heading mising'}
-                                        content='hey hey hey hey asd sad a sd asd a da sd as da s as d asd a sd asd a d as da'
+                                        content=''
                                     />
                                 )
                             })}
@@ -76,9 +113,7 @@ const Profile: NextPage = () => {
                     </section>
                 </main>
 
-                <Link href='/'>
-                    <span className="absolute aspect-square bg-red-500 w-[1.5rem] rounded-full text-transparent hover:text-gray-700 flex justify-center items-center cursor-pointer top-[1%] right-[3%] lg:top-[3%]"><FontAwesomeIcon icon={faXmark} /></span>
-                </Link>
+                <CloseButton />
             </PageTemplate>
         </>
     )

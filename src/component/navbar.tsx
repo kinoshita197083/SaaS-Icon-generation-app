@@ -125,9 +125,11 @@ const Navbar = (props: NavbarProps) => {
                         </button>
                         :
                         <>
-                            <li className='w-full min-h-[3rem] flex items-center justify-center border-b border-gray-400 md:border-0 lg:border-0 lg:w-[6rem] text-gray-100 md:text-gray-100 lg:text-gray-400 lg:text-center'>
-                                Credits: {user.data?.credits}
-                            </li>
+                            <Link href='/purchase' className='w-full lg:w-[6rem]'>
+                                <li className='w-full min-h-[3rem] flex items-center justify-center border-b border-gray-400 md:border-0 lg:border-0 lg:w-[6rem] text-gray-100 md:text-gray-100 lg:text-gray-400 lg:text-center'>
+                                    Credits: {user.data?.credits}
+                                </li>
+                            </Link>
 
                             <li className={styles.profilePicWrapper}
                                 ref={triggerDropDownRef}

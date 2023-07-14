@@ -19,7 +19,7 @@ const HomePage = () => {
                         />
 
                         <BannerCard
-                            mainHeading='Edit your image'
+                            mainHeading='Top Secret'
                             subHeading='COMMING SOON'
                             bgImage='/chihuahua.png'
                             // link='removebackground'

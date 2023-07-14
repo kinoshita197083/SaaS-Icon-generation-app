@@ -1,53 +1,77 @@
 import { NextPage } from 'next'
 import Head from 'next/head'
-import React, { useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import IconWrapper from '~/component/iconWrapper'
 import { api } from '~/utils/api'
 import styles from '../styles/community.module.css'
 
+type Icon = {
+    id: string;
+    prompt: string | null;
+    userId: string | null;
+    createdAt: Date;
+    updatedAt: Date;
+}
+
 const Community: NextPage = () => {
 
-    const [page, setPage] = useState(0);
+    const limit = 50;
+    const scrollContainerRef = useRef(null);
 
-    const { data, fetchNextPage } = api.icons.getAllUsersIcons.useInfiniteQuery(
+    const { data, fetchNextPage, hasNextPage, isFetching } = api.icons.getAllUsersIcons.useInfiniteQuery(
         {
-            limit: 4,
-            //   categoryId: category?.id, // this is optional - remember
+            limit: limit,
+            // categoryId: category?.id, // this is optional - remember
         },
         {
             getNextPageParam: (lastPage) => lastPage.nextCursor,
         }
     );
 
-    const handleFetchNextPage = () => {
-        fetchNextPage();
-        setPage((prev) => prev + 1);
-    };
+    useEffect(() => {
+        const options = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 1.0,
+        };
 
-    const handleFetchPreviousPage = () => {
-        setPage((prev) => prev - 1);
-    };
+        const observer = new IntersectionObserver((entries) => {
+            const target = entries[0];
+            if (target!.isIntersecting && hasNextPage && !isFetching) {
+                fetchNextPage();
+            }
+        }, options);
+
+        if (scrollContainerRef.current) {
+            observer.observe(scrollContainerRef.current);
+        }
+
+        return () => {
+            if (scrollContainerRef.current) {
+                observer.unobserve(scrollContainerRef.current);
+            }
+        };
+    }, [fetchNextPage, hasNextPage, isFetching]);
 
     // data will be split in pages
-    const allIcons = data?.pages[page]?.iconIds;
+    const allIcons = data?.pages.flatMap((page) => page.iconIds) || [];
 
-    console.log(allIcons)
 
     return (
-        <>
+        <div>
             <Head>
 
             </Head>
             <main className='p-[8%] bg-gray-100 flex flex-col'>
                 <section className='w-full lg:my-0 md:my-0 my-[8%]'>
                     <h1 className='text-gray-800 text-[3.5rem] w-full'>Trending on the community</h1>
-                    <h4 className='text-gray-400 text-[1.5rem] my-[5%]'>Results Found: {allIcons?.length}</h4>
+                    <h4 className='text-gray-400 text-[1.5rem] my-[5%]'>Icons: {allIcons?.length}</h4>
                 </section>
 
-                <section className={styles.iconsContainer}>
+                <section className={styles.iconsContainer} ref={scrollContainerRef}>
                     {allIcons?.map(icon => {
                         return (
-                            <div className='lg:my-[0] md:my-[0] my-[2%]'>
+                            <div key={icon.id} className='lg:my-[0] md:my-[0] my-[2%]'>
                                 <IconWrapper
                                     src={`https://icon-generator-project-haha.s3.ap-southeast-2.amazonaws.com/${icon.id}`}
                                     heading={icon.prompt || ''}
@@ -57,10 +81,9 @@ const Community: NextPage = () => {
                     })}
                 </section>
 
-                <button className='btn mx-auto mt-[8%]' onClick={handleFetchNextPage}>Load more</button>
-
+                {isFetching && <div>Loading more icons...</div>}
             </main>
-        </>
+        </div>
 
     )
 }
