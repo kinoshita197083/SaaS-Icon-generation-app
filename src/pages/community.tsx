@@ -4,6 +4,8 @@ import React, { useEffect, useRef, useState } from 'react'
 import IconWrapper from '~/component/iconWrapper'
 import { api } from '~/utils/api'
 import styles from '../styles/community.module.css'
+import PageTemplate from '~/component/page/pageTemplate'
+import CloseButton from '~/component/closeButton'
 
 type Icon = {
     id: string;
@@ -58,32 +60,35 @@ const Community: NextPage = () => {
 
 
     return (
-        <div>
+        <>
             <Head>
 
             </Head>
-            <main className='p-[8%] bg-gray-100 flex flex-col'>
-                <section className='w-full lg:my-0 md:my-0 my-[8%]'>
-                    <h1 className='text-gray-800 text-[3.5rem] w-full'>Trending on the community</h1>
-                    <h4 className='text-gray-400 text-[1.5rem] my-[5%]'>Icons: {allIcons?.length}</h4>
-                </section>
+            <PageTemplate>
+                <main className='flex flex-col w-full'>
+                    <section className='w-full lg:my-0 md:my-0 my-[8%]'>
+                        <h1 className='text-gray-200 text-[3.5rem] w-full'>Trending on the community</h1>
+                        <h4 className='text-gray-300 text-[1.5rem] my-[5%]'>Results: {allIcons?.length}</h4>
+                    </section>
 
-                <section className={styles.iconsContainer} ref={scrollContainerRef}>
-                    {allIcons?.map(icon => {
-                        return (
-                            <div key={icon.id} className='lg:my-[0] md:my-[0] my-[2%]'>
-                                <IconWrapper
-                                    src={`https://icon-generator-project-haha.s3.ap-southeast-2.amazonaws.com/${icon.id}`}
-                                    heading={icon.prompt || ''}
-                                />
-                            </div>
-                        )
-                    })}
-                </section>
+                    <section className={styles.iconsContainer} ref={scrollContainerRef}>
+                        {allIcons?.map(icon => {
+                            return (
+                                <div key={icon.id} className='lg:my-[0] md:my-[0] my-[2%]'>
+                                    <IconWrapper
+                                        src={`https://icon-generator-project-haha.s3.ap-southeast-2.amazonaws.com/${icon.id}`}
+                                        heading={icon.prompt || ''}
+                                    />
+                                </div>
+                            )
+                        })}
+                    </section>
 
-                {isFetching && <div>Loading more icons...</div>}
-            </main>
-        </div>
+                    {isFetching && <div>Loading more icons...</div>}
+                </main>
+                <CloseButton />
+            </PageTemplate>
+        </>
 
     )
 }
