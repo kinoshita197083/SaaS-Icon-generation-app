@@ -4,12 +4,15 @@ import React, { useEffect } from 'react'
 import PricingBox from '~/component/pricingBox'
 import styles from '../styles/purchase.module.css'
 import PageTemplate from '~/component/page/pageTemplate'
+import { useBuyCredits } from '~/hooks/useBuyCredits'
 
 const Purchase: NextPage = () => {
 
     useEffect(() => {
         window.scrollTo(50, 50)
     }, [])
+
+    const { handleBuyCredits } = useBuyCredits();
 
     return (
         <>
@@ -34,16 +37,19 @@ const Purchase: NextPage = () => {
                             plan={'Give it a Try'}
                             price={'AUD $7'}
                             eachCost='$0.14'
+                            handleClick={() => handleBuyCredits(1)}
                         />
                         <PricingBox
                             plan={'I have ideas'}
                             price={'AUD $13'}
                             popular
                             promotion={'Fresh Beginnings Sale'}
+                            handleClick={() => handleBuyCredits(2)}
                         />
                         <PricingBox
                             plan={'Make something grand'}
                             price={'AUD $27'}
+                            handleClick={() => handleBuyCredits(3)}
                         />
                     </section>
                 </main>

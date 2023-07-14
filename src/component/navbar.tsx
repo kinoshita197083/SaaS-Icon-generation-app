@@ -5,7 +5,6 @@ import { useEffect, useRef, useState } from 'react';
 import { faGhost } from '@fortawesome/free-solid-svg-icons';
 import { signIn, signOut, useSession } from "next-auth/react";
 import { api } from "~/utils/api";
-import { useBuyCredits } from "~/hooks/useBuyCredits";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import MenuIcon from "./menuIcon";
@@ -38,16 +37,7 @@ const Navbar = (props: NavbarProps) => {
     const isLoggedIn = status === 'authenticated';
     const user = api.user.getUser.useQuery();
 
-    const { buyCredits } = useBuyCredits();
     const router = useRouter();
-
-    const handleBuyCredits = (priceId: number) => {
-        try {
-            buyCredits(priceId);
-        } catch (err) {
-            console.log(err);
-        }
-    }
 
     const handleScrolled = () => {
         if (window.scrollY >= 10) {
@@ -149,21 +139,6 @@ const Navbar = (props: NavbarProps) => {
                                 <li onClick={() => router.push('/profile')}
                                     className={styles.navItem}>
                                     Profile
-                                </li>
-
-                                <li onClick={() => handleBuyCredits(1)}
-                                    className={styles.navItem}>
-                                    Buy Credits - 1
-                                </li>
-
-                                <li onClick={() => handleBuyCredits(2)}
-                                    className={styles.navItem}>
-                                    Buy Credits - 2
-                                </li>
-
-                                <li onClick={() => handleBuyCredits(3)}
-                                    className={styles.navItem}>
-                                    Buy Credits - 3
                                 </li>
 
                                 <li className={styles.navItem}

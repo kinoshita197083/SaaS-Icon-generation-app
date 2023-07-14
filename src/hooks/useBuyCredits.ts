@@ -8,15 +8,33 @@ export function useBuyCredits() {
 
     const checkout = api.checkout.createCheckout.useMutation();
 
+    const buyCredits = async (priceId: number) => {
+        const response = await checkout.mutateAsync({
+            priceId: priceId,
+        });
+        const stripe = await stripePromise;
+        await stripe?.redirectToCheckout({
+            sessionId: response.id,
+        })
+    }
+
     return {
-        buyCredits: async (priceId: number) => {
-            const response = await checkout.mutateAsync({
-                priceId: priceId,
-            });
-            const stripe = await stripePromise;
-            await stripe?.redirectToCheckout({
-                sessionId: response.id,
-            })
+        // buyCredits: async (priceId: number) => {
+        //     const response = await checkout.mutateAsync({
+        //         priceId: priceId,
+        //     });
+        //     const stripe = await stripePromise;
+        //     await stripe?.redirectToCheckout({
+        //         sessionId: response.id,
+        //     })
+        // },
+
+        handleBuyCredits: (priceId: number) => {
+            try {
+                buyCredits(priceId);
+            } catch (err) {
+                console.log(err);
+            }
         }
     }
 }

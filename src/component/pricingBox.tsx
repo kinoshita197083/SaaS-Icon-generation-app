@@ -3,12 +3,13 @@ type PricingBoxProps = {
     price: string,
     popular?: boolean,
     promotion?: string,
-    eachCost?: string
+    eachCost?: string,
+    handleClick?: () => void
 }
 
 const PricingBox = (props: PricingBoxProps) => {
 
-    const { plan, price, popular, promotion, eachCost } = props;
+    const { plan, price, popular, promotion, eachCost, handleClick } = props;
 
     return (
         <div className='relative w-[20rem] h-[28rem] m-auto'>
@@ -33,7 +34,11 @@ const PricingBox = (props: PricingBoxProps) => {
                     <p className='text-gray-200 bg-gray-900 w-[12rem] text-center rounded border-[0.5px] border-gray-400 mt-[5%]'>
                         {promotion}
                     </p>
-                    <button className='btn absolute bottom-[10%] left-[50%] translate-x-[-50%]' style={{ background: 'rgb(38, 132, 247)' }}>
+
+
+                    <button className='btn absolute bottom-[10%] left-[50%] translate-x-[-50%]'
+                        style={{ background: 'rgb(38, 132, 247)' }}
+                        onClick={handleClick}>
                         Get Started
                     </button>
                 </article>
