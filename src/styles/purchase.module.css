@@ -3,3 +3,9 @@
     grid-template-columns: repeat(auto-fit, minmax(21rem, 1fr));
     row-gap: 2%;
 }
+
+@media (max-width: 800px) {
+    .pricingContainer {
+        margin-top: 8%;
+    }
+}

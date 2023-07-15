@@ -17,13 +17,13 @@ const Purchase: NextPage = () => {
             </Head>
 
             <PageTemplate>
-                <main className='flex flex-col w-full h-full'>
+                <div className='flex flex-col w-full h-full mt-[5%] lg:mt-0 md:mt-0'>
                     <section role='heading'
                         className='mb-[6%]'>
-                        <h1 className='text-6xl text-gray-200'>
+                        <h1 className='lg:text-6xl md:text-6xl text-3xl text-gray-200'>
                             Pricing
                         </h1>
-                        <p className='mt-[3%] text-2xl text-gray-300'>
+                        <p className='mt-[3%] lg:text-2xl md:text-2xl text-1xl text-gray-300'>
                             Flexible plan to fit your needs
                         </p>
                     </section>
@@ -48,7 +48,7 @@ const Purchase: NextPage = () => {
                             handleClick={() => handleBuyCredits(3)}
                         />
                     </section>
-                </main>
+                </div>
             </PageTemplate>
 
         </>

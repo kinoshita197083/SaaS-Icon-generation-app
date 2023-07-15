@@ -42,7 +42,8 @@ const Community: NextPage = () => {
                         <h4 className='text-gray-300 text-[1.5rem] my-[5%]'>Results: {allIcons?.length}</h4>
                     </section>
 
-                    <section className={styles.iconsContainer} ref={scrollContainerRef}>
+                    <section className={styles.iconsContainer}
+                        ref={scrollContainerRef}>
                         {allIcons?.map(icon => {
 
                             const iconSrc = `${env.NEXT_PUBLIC_BUCKET}${icon.id}`;
