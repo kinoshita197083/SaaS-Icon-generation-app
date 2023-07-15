@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from '../../styles/landingPage.module.css'
 import Button from '~/component/button';
-import Poster from '~/component/poster/poster';
+import Poster from '~/component/poster';
 import Card from '~/component/card';
 import Link from 'next/link';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -39,7 +39,7 @@ const LandingPage = () => {
             <Poster />
 
             <section className={styles.cardContainer}>
-                <Card mainHeading='Just a bunch of text' subHeading='another text' bgImage='./matrix.jpg'></Card>
+                <Card mainHeading='Fresh Beginning Sales' subHeading="It's happening !" bgImage='./matrix.jpg'></Card>
                 <Card mainHeading={`Celebrating ${icons} Creative Creations!`} subHeading='Iconic Milestone' bgImage='./brad.jpg'></Card>
             </section>
 

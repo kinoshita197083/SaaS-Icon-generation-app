@@ -8,6 +8,7 @@ import { FormEvent, useState } from "react";
 import Button from "~/component/button";
 import Carousel from "~/component/carousel";
 import CloseButton from "~/component/closeButton";
+import FormLabel from "~/component/formLabel";
 import PageTemplate from "~/component/page/pageTemplate";
 import { colors } from "~/material/color";
 import { styles } from "~/material/styles";
@@ -48,13 +49,7 @@ const Generate: NextPage = () => {
         }
     });
 
-    const inputStyle = {
-        backgroundColor: 'transparent',
-        borderBottom: '1px solid white'
-    }
-
-    const labelCSS = 'text-gray-100 text-[1.3rem]';
-    const inputCSS = 'mt-[1%] mb-[8%] h-[2.5rem] w-full text-gray-200 lg:text-[1.5rem] px-[2%] outline-gray-800';
+    const inputCSS = 'mt-[1%] mb-[8%] h-[2.5rem] w-full text-gray-200 lg:text-[1.5rem] px-[2%] outline-gray-800 bg-transparent border-b border-white';
 
     const handleSubmit = async (e: FormEvent) => {
         updateForm('loading', true)
@@ -95,10 +90,11 @@ const Generate: NextPage = () => {
             <PageTemplate>
                 <form className="mt-[5%] lg:w-[55%]" onSubmit={handleSubmit}>
                     <section className="">
-                        <label className={labelCSS}>Describe your icon</label>
+                        <FormLabel
+                            label="Descibe your icon"
+                        />
                         <input
                             className={inputCSS}
-                            style={inputStyle}
                             value={formData.prompt}
                             onChange={e => updateForm('prompt', e.target.value)}
                             placeholder={defaultText}
@@ -106,7 +102,9 @@ const Generate: NextPage = () => {
                     </section>
 
                     <section className="mb-[8%]">
-                        <label className={labelCSS}>Theme color</label>
+                        <FormLabel
+                            label="Theme color"
+                        />
                         <div className="flex gap-[1%] flex-wrap mt-[3%]">
                             {colors.map((color, index) => {
 
@@ -126,7 +124,9 @@ const Generate: NextPage = () => {
                         </div>
                     </section>
                     <section className="">
-                        <label className={labelCSS}>Select a style</label><br />
+                        <FormLabel
+                            label="Select a style"
+                        />
                         <div className="flex gap-[3%] flex-wrap mt-[2%] mb-[8%]">
                             {styles.map((style, index) => {
                                 const styleSample = Object.values(style).toString();
@@ -149,7 +149,9 @@ const Generate: NextPage = () => {
                     </section>
 
                     <section className="">
-                        <label className={["block", labelCSS].join(' ')}>Number of images</label>
+                        <FormLabel
+                            label="Number of images"
+                        />
                         <label className="block text-[1rem] text-gray-400 mb-[1%]">1 credit per image</label>
                         <input
                             className="w-full lg:h-[2rem] p-[2%] mb-[5%] rounded bg-gray-700 text-white focus:outline-[transparent]"

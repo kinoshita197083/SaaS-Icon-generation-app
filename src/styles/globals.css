@@ -85,15 +85,13 @@
     --color-3: #E4A9A8;
 }
 
-.blur-white {
-    background-color: rgba(255, 255, 255, 0.3);
-    /* backdrop-filter: blur(33px); */
+.blur-light {
+    background-color: rgba(163, 162, 162, 0.4);
 }
 
 .blur-dark {
     background-color: rgba(0, 0, 0, 0.4);
     backdrop-filter: blur(33px);
-    /* border-radius: 25px; */
 }
 
 .page-transition {
