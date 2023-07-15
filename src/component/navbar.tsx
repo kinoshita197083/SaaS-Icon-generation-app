@@ -8,7 +8,6 @@ import { api } from "~/utils/api";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import MenuIcon from "./menuIcon";
-{/* <script src="stripe.js"></script> */ }
 
 type NavItem = {
     text: string,
@@ -31,7 +30,7 @@ const Navbar = (props: NavbarProps) => {
 
     const triggerDropDownRef = useRef<HTMLLIElement>(null);
     const dropDownRef = useRef<HTMLUListElement>(null);
-    const navbarRef = useRef<HTMLHeadElement>(null);
+    const navbarRef = useRef<HTMLDivElement>(null);
 
     const { data: session, status } = useSession()
     const isLoggedIn = status === 'authenticated';
@@ -54,8 +53,9 @@ const Navbar = (props: NavbarProps) => {
     }
 
     const closeMobileNavMenu = (e: MouseEvent) => {
-        if (navbarRef.current) {
-            !navbarRef.current.contains(e.target as Node) ? setClick(false) : null;
+        if (navbarRef.current && triggerDropDownRef.current) {
+            !navbarRef.current.contains(e.target as Node) && !triggerDropDownRef.current.contains(e.target as Node) ?
+                setClick(false) : null;
         }
     }
 
@@ -72,11 +72,11 @@ const Navbar = (props: NavbarProps) => {
     }, [])
 
     return (
-        <header ref={navbarRef} className={scroll ? [styles.navContainer, styles.scrolled].join(' ') : styles.navContainer}>
+        <header className={scroll ? [styles.navContainer, styles.scrolled].join(' ') : styles.navContainer}>
             <nav className={styles.navbar}>
 
                 {/* Menu Icon for mobile */}
-                <div className={styles.menuIcon}>
+                <div className={styles.menuIcon} ref={navbarRef}>
                     <MenuIcon
                         clicked={click}
                         setClicked={setClick}

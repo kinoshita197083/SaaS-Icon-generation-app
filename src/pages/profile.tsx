@@ -44,7 +44,7 @@ const Profile: NextPage = () => {
             </Head>
 
             <PageTemplate>
-                <main className='w-full max-h-[30rem] flex flex-col lg:flex-row md:flex-row gap-0'>
+                <div className='w-full lg:h-[35rem] md:h-[35rem] h-[45rem] flex flex-col lg:flex-row md:flex-row gap-0 lg:mt-0 md:mt-0 mt-[8%]'>
                     <section
                         role='profile-tab'
                         className='lg:w-[30%] md:w-[30%] w-[full] p-[5%] bg-black rounded-bl-[25px] rounded-tl-[25px]'
@@ -76,7 +76,7 @@ const Profile: NextPage = () => {
                     {/* All generated icons display section */}
                     <section
                         role='icons-display'
-                        className='lg:w-[70%] md:w-[70%] w-full overflow-auto'
+                        className='lg:w-[70%] md:w-[70%] w-full h-full overflow-auto'
                         ref={scrollContainerRef}
                     >
                         <ul className={styles.iconsContainer}>
@@ -102,7 +102,7 @@ const Profile: NextPage = () => {
 
                         </ul>
                     </section>
-                </main>
+                </div>
 
                 <CloseButton />
             </PageTemplate>

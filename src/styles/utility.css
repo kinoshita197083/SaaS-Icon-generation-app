@@ -4,7 +4,7 @@ html {
 
 main {
     display: flex;
-    min-height: 100vh;
+    /* min-height: 100vh; */
     /* background-color: var(--bg-color); */
     overflow-x: scroll;
     scroll-snap-type: x mandatory;
@@ -34,7 +34,7 @@ main::-webkit-scrollbar {
 
 @media (max-width: 800px) {
     main {
-        margin-top: 4.5rem;
+        /* margin-top: 4.5rem; */
     }
 
     .container {

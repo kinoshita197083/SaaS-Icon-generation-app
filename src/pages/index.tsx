@@ -43,7 +43,7 @@ const Home: NextPage = () => {
     <>
       <Head>
       </Head>
-      <main ref={main} className='py-[8%] lg:py-[2%] font-sans'>
+      <main ref={main} className='frame py-[8%] lg:py-[2%] font-sans'>
         {pages.map((page) => {
           return (
             <div key={page.id} className={'snap-center flex-screen overflow-hidden'}>

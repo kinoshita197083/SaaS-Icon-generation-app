@@ -29,7 +29,7 @@ const Poster = () => {
                         </span>
                     </h2>
 
-                    <div className='absolute w-full shadow-[0px_-40px_27px_rgba(0,0,0,0.3)] bottom-[50%] lg:bottom-0 h-[10rem] bg-[rgba(0,0,0,0.3)] p-[3%] pt-[0] pl-[5%]'>
+                    <div className='absolute w-full shadow-[0px_-40px_27px_rgba(0,0,0,0.3)] bottom-[50%] md:bottom-0 lg:bottom-0 h-[10rem] bg-[rgba(0,0,0,0.3)] p-[3%] pt-[0] pl-[5%]'>
                         <h2 className='text-gray-100 text-[1.3rem] md:text-4xl lg:text-4xl'>
                             Customize AI Icon Generation
                         </h2>

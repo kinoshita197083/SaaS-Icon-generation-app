@@ -4,7 +4,7 @@ import Carousel from '~/component/carousel';
 const HomePage = () => {
     return (
         // Outer White background
-        <main className='min-h-full px-[2%] pt-[0] lg:px-[8%] lg:py-[5%] lg:pt-[0]'>
+        <div className='min-h-full px-[2%] lg:px-[8%] lg:py-[5%] lg:pt-[0]'>
 
             {/* Gradient Background */}
             <div className='bg-[url(/90s-style.png)] lg:rounded-[45px] md:rounded-[35px] rounded-[15px] bg-no-repeat bg-cover w-full h-full'>
@@ -68,7 +68,7 @@ const HomePage = () => {
                 </div>
             </div>
 
-        </main>
+        </div>
     )
 }
 

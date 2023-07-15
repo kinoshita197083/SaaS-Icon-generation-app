@@ -36,9 +36,9 @@ const Community: NextPage = () => {
 
             </Head>
             <PageTemplate>
-                <main className='flex flex-col w-full'>
-                    <section className='w-full lg:my-0 md:my-0 my-[8%]'>
-                        <h1 className='text-gray-200 text-[3.5rem] w-full'>Trending on the community</h1>
+                <div className='flex flex-col w-full'>
+                    <section className='w-full lg:mt-[0%] mt-[5%]'>
+                        <h1 className='text-gray-200 lg:text-[3.5rem] md:text-[3rem] text-[2rem] w-full'>Trending on the community</h1>
                         <h4 className='text-gray-300 text-[1.5rem] my-[5%]'>Results: {allIcons?.length}</h4>
                     </section>
 
@@ -59,7 +59,7 @@ const Community: NextPage = () => {
                     </section>
 
                     {isFetching && <div>Loading more icons...</div>}
-                </main>
+                </div>
                 <CloseButton />
             </PageTemplate>
         </>
