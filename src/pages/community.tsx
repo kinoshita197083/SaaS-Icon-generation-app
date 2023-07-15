@@ -6,14 +6,8 @@ import { api } from '~/utils/api'
 import styles from '../styles/community.module.css'
 import PageTemplate from '~/component/page/pageTemplate'
 import CloseButton from '~/component/closeButton'
-
-type Icon = {
-    id: string;
-    prompt: string | null;
-    userId: string | null;
-    createdAt: Date;
-    updatedAt: Date;
-}
+import { useInfiniteScroll } from '~/hooks/useInfiniteScroll'
+import { env } from '~/env.mjs'
 
 const Community: NextPage = () => {
 
@@ -30,30 +24,7 @@ const Community: NextPage = () => {
         }
     );
 
-    useEffect(() => {
-        const options = {
-            root: null,
-            rootMargin: '0px',
-            threshold: 1.0,
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            const target = entries[0];
-            if (target!.isIntersecting && hasNextPage && !isFetching) {
-                fetchNextPage();
-            }
-        }, options);
-
-        if (scrollContainerRef.current) {
-            observer.observe(scrollContainerRef.current);
-        }
-
-        return () => {
-            if (scrollContainerRef.current) {
-                observer.unobserve(scrollContainerRef.current);
-            }
-        };
-    }, [fetchNextPage, hasNextPage, isFetching]);
+    useInfiniteScroll(scrollContainerRef, hasNextPage, isFetching, fetchNextPage)
 
     // data will be split in pages
     const allIcons = data?.pages.flatMap((page) => page.iconIds) || [];
@@ -73,10 +44,13 @@ const Community: NextPage = () => {
 
                     <section className={styles.iconsContainer} ref={scrollContainerRef}>
                         {allIcons?.map(icon => {
+
+                            const iconSrc = `${env.NEXT_PUBLIC_BUCKET}${icon.id}`;
+
                             return (
                                 <div key={icon.id} className='lg:my-[0] md:my-[0] my-[2%]'>
                                     <IconWrapper
-                                        src={`https://icon-generator-project-haha.s3.ap-southeast-2.amazonaws.com/${icon.id}`}
+                                        src={iconSrc}
                                         heading={icon.prompt || ''}
                                     />
                                 </div>

@@ -2,17 +2,21 @@ import { NextPage } from 'next'
 import { useSession } from 'next-auth/react'
 import Head from 'next/head'
 import Image from 'next/image'
-import React, { useEffect, useRef } from 'react'
+import React, { useRef } from 'react'
 import PageTemplate from '~/component/page/pageTemplate'
 import { api } from '~/utils/api'
 import { requireAuth } from '~/utils/requireAuth'
 import styles from '../styles/profile.module.css'
 import IconWrapper from '~/component/iconWrapper'
 import CloseButton from '~/component/closeButton'
+import { useInfiniteScroll } from '~/hooks/useInfiniteScroll'
+import Download from '~/component/download'
+import { env } from '~/env.mjs'
 
 const Profile: NextPage = () => {
 
     const limit = 30;
+
     const scrollContainerRef = useRef(null);
 
     const { data, fetchNextPage, hasNextPage, isFetching } = api.icons.getIcons.useInfiniteQuery(
@@ -25,30 +29,7 @@ const Profile: NextPage = () => {
         }
     );
 
-    useEffect(() => {
-        const options = {
-            root: null,
-            rootMargin: '0px',
-            threshold: 1.0,
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            const target = entries[0];
-            if (target!.isIntersecting && hasNextPage && !isFetching) {
-                fetchNextPage();
-            }
-        }, options);
-
-        if (scrollContainerRef.current) {
-            observer.observe(scrollContainerRef.current);
-        }
-
-        return () => {
-            if (scrollContainerRef.current) {
-                observer.unobserve(scrollContainerRef.current);
-            }
-        };
-    }, [fetchNextPage, hasNextPage, isFetching]);
+    useInfiniteScroll(scrollContainerRef, hasNextPage, isFetching, fetchNextPage)
 
     const icons = data?.pages.flatMap((page) => page.icons) || [];
 
@@ -99,13 +80,23 @@ const Profile: NextPage = () => {
                         ref={scrollContainerRef}
                     >
                         <ul className={styles.iconsContainer}>
-                            {icons.map(icon => {
+                            {icons.map((icon, index) => {
+
+                                const iconSrc = `${env.NEXT_PUBLIC_BUCKET}${icon.id}`
+                                console.log(env.NEXT_PUBLIC_BUCKET)
+
                                 return (
-                                    <IconWrapper
-                                        src={`https://icon-generator-project-haha.s3.ap-southeast-2.amazonaws.com/${icon.id}`}
-                                        heading={icon.prompt || 'Heading mising'}
-                                        content=''
-                                    />
+                                    <div className='relative' key={index}>
+                                        <IconWrapper
+                                            src={iconSrc}
+                                            heading={icon.prompt || 'Heading mising'}
+                                            content=''
+                                        />
+                                        <Download
+                                            src={iconSrc}
+                                        />
+                                    </div>
+
                                 )
                             })}
 

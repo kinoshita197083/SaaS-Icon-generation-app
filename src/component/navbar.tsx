@@ -116,7 +116,7 @@ const Navbar = (props: NavbarProps) => {
                         :
                         <>
                             <Link href='/purchase' className='w-full lg:w-[6rem]'>
-                                <li className='w-full min-h-[3rem] flex items-center justify-center border-b border-gray-400 md:border-0 lg:border-0 lg:w-[6rem] text-gray-100 md:text-gray-100 lg:text-gray-400 lg:text-center'>
+                                <li className='w-full lg:min-h-max flex items-center justify-center border-b border-gray-400 md:border-0 lg:border-0 lg:w-[6rem] md:w-[6rem] md:mx-auto text-gray-100 lg:text-gray-400 md:text-gray-400 lg:text-center hover:bg-gray-800 hover:text-gray-100 transition-all lg:rounded-[15px] md:rounded-[15px] min-h-[3rem]'>
                                     Credits: {user.data?.credits}
                                 </li>
                             </Link>

@@ -45,6 +45,7 @@ const server = z.object({
 const client = z.object({
   // NEXT_PUBLIC_CLIENTVAR: z.string().min(1),
   NEXT_PUBLIC_STRIPE_KEY: z.string(),
+  NEXT_PUBLIC_BUCKET: z.string(),
 });
 
 /**
@@ -76,6 +77,7 @@ const processEnv = {
   EMAIL_SERVER_HOST: process.env.EMAIL_SERVER_HOST,
   EMAIL_SERVER_PORT: process.env.EMAIL_SERVER_PORT,
   EMAIL_FROM: process.env.EMAIL_FROM,
+  NEXT_PUBLIC_BUCKET: process.env.NEXT_PUBLIC_BUCKET,
   // NEXT_PUBLIC_CLIENTVAR: process.env.NEXT_PUBLIC_CLIENTVAR,
 };
 
