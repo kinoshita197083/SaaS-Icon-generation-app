@@ -18,7 +18,8 @@ const Generate: NextPage = () => {
     //Default Config for initial page load
     const defaultImage = ['/jene.jpg'];
     const defaultStyle = '';
-    const defaultColor = 'sky blue';
+    // const defaultColor = 'sky blue';
+    const defaultColor = '';
     const defaultText = 'Abyssinian cat';
     const defaultNumberOfImages = 1;
 
