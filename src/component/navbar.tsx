@@ -53,9 +53,18 @@ const Navbar = (props: NavbarProps) => {
     }
 
     const closeMobileNavMenu = (e: MouseEvent) => {
-        if (navbarRef.current && triggerDropDownRef.current) {
-            !navbarRef.current.contains(e.target as Node) && !triggerDropDownRef.current.contains(e.target as Node) ?
-                setClick(false) : null;
+
+        //TriggerDropDown (profile pic) will only appeared when user logged in
+        if (isLoggedIn) {
+            if (navbarRef.current && triggerDropDownRef.current) {
+                navbarRef.current.contains(e.target as Node) && !triggerDropDownRef.current.contains(e.target as Node) ?
+                    setClick(false) : null;
+            }
+        }
+        else {
+            if (navbarRef.current) {
+                !navbarRef.current.contains(e.target as Node) ? setClick(false) : null;
+            }
         }
     }
 

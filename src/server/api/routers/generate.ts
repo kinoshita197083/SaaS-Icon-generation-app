@@ -8,6 +8,7 @@ import {
 } from "~/server/api/trpc";
 import { b64Image } from "~/data/b64Image";
 import AWS from 'aws-sdk';
+import { randomUUID } from "crypto";
 
 const s3 = new AWS.S3({
     credentials: {
@@ -61,7 +62,16 @@ export const generateRouter = createTRPCRouter({
                 },
             });
 
-            if (!user || user.credits < input.n) {
+            if (!user) {
+                throw new TRPCError({
+                    code: 'BAD_REQUEST',
+                    message: 'User not found',
+                });
+            }
+
+            const { credits } = user;
+
+            if (credits < input.n) {
                 throw new TRPCError({
                     code: 'BAD_REQUEST',
                     message: 'Not enough credits',
@@ -78,12 +88,14 @@ export const generateRouter = createTRPCRouter({
                 const iconsData = base64EncodedImageList.map(__ => ({
                     prompt: input.prompt,
                     userId: ctx.session.user.id,
+                    id: randomUUID(),
                 }));
 
                 // save icon prompt & user id to prisma database and generate a unique icon id to use as s3 bucket Key
-                const createdIcons = await Promise.all(
-                    iconsData.map(async iconData => await ctx.prisma.icon.create({ data: iconData }))
-                );
+                const createdIcons = await ctx.prisma.icon.createMany({
+                    data: iconsData,
+                    skipDuplicates: true,
+                });
 
                 // batch saving b64 encoded images to s3 bucket
                 const putEvents = [];
@@ -92,7 +104,7 @@ export const generateRouter = createTRPCRouter({
                         .putObject({
                             Bucket: BUCKET_NAME,
                             Body: Buffer.from(base64EncodedImageList[i]!, "base64"),
-                            Key: createdIcons[i]!.id,
+                            Key: iconsData[i]!.id,
                             ContentEncoding: "base64",
                             ContentType: "image/png",
                         })
@@ -104,7 +116,7 @@ export const generateRouter = createTRPCRouter({
 
                 // generate presigned URL so that the link will expire in a given time
                 const preSignedUrls = await Promise.all(
-                    createdIcons.map(icon => {
+                    iconsData.map(icon => {
                         return s3.getSignedUrl("getObject", {
                             Bucket: BUCKET_NAME,
                             Key: icon.id,
@@ -128,7 +140,6 @@ export const generateRouter = createTRPCRouter({
 
                 return {
                     image: preSignedUrls,
-                    // image: `https://${BUCKET_NAME}.s3.ap-southeast-2.amazonaws.com/${icon.id}`,
                 };
 
             } catch (error) {
