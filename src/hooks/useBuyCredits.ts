@@ -29,9 +29,9 @@ export function useBuyCredits() {
         //     })
         // },
 
-        handleBuyCredits: (priceId: number) => {
+        handleBuyCredits: async (priceId: number) => {
             try {
-                buyCredits(priceId);
+                await buyCredits(priceId);
             } catch (err) {
                 console.log(err);
             }

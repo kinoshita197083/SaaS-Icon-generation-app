@@ -1,7 +1,4 @@
-import styles from './button.module.css';
-
 export interface ButtonProps extends React.ComponentPropsWithoutRef<"button"> {
-    boxShadow?: boolean,
     bgColor?: string,
     borderColor?: string,
     textColor?: string
@@ -9,7 +6,7 @@ export interface ButtonProps extends React.ComponentPropsWithoutRef<"button"> {
 
 const Button = (props: ButtonProps) => {
 
-    const { boxShadow, bgColor, borderColor, textColor, ...rest } = props;
+    const { bgColor, borderColor, textColor, ...rest } = props;
 
     const btnStyle = {
         backgroundColor: bgColor,

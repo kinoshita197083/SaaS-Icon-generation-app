@@ -12,6 +12,7 @@ import CloseButton from '~/component/closeButton'
 import { useInfiniteScroll } from '~/hooks/useInfiniteScroll'
 import Download from '~/component/download'
 import { env } from '~/env.mjs'
+import { GetServerSidePropsContext } from 'next';
 
 const Profile: NextPage = () => {
 
@@ -29,7 +30,7 @@ const Profile: NextPage = () => {
         }
     );
 
-    useInfiniteScroll(scrollContainerRef, hasNextPage, isFetching, fetchNextPage)
+    useInfiniteScroll(scrollContainerRef, hasNextPage, isFetching, void fetchNextPage)
 
     const icons = data?.pages.flatMap((page) => page.icons) || [];
 
@@ -110,8 +111,8 @@ const Profile: NextPage = () => {
     )
 }
 
-export async function getServerSideProps(context: any) {
-    return requireAuth(context, ({ session }: any) => {
+export async function getServerSideProps(context: GetServerSidePropsContext) {
+    return requireAuth(context, ({ session }) => {
         return {
             props: { session }
         }

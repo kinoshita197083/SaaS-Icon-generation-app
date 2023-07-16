@@ -14,8 +14,8 @@ const stripe = new Stripe(env.STRIPE_SECRET_KEY, {
 
 
 // calculate product price and corresponded increment credits
-var incrementCredit: number;
-var pricePaid: number;
+let incrementCredit: number;
+let pricePaid: number;
 
 const handleCredits = () => {
     if (pricePaid === 700) {

@@ -1,5 +1,6 @@
-import { faSpinner, faXmark } from "@fortawesome/free-solid-svg-icons";
+import { faSpinner } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+// import { TRPCError } from "@trpc/server";
 import { NextPage } from "next"
 import { signIn, useSession } from "next-auth/react";
 import Head from "next/head";
@@ -12,6 +13,7 @@ import PageTemplate from "~/component/page/pageTemplate";
 import { colors } from "~/material/color";
 import { styles } from "~/material/styles";
 import { api } from "~/utils/api";
+
 
 const Generate: NextPage = () => {
 
@@ -40,15 +42,15 @@ const Generate: NextPage = () => {
     const { status } = useSession()
     const isLoggedIn = status === 'authenticated';
     const generateInstance = api.generate.generateIcon.useMutation({
-        onError(error) {
-            setError(true);
-            if (error.data?.code === 'BAD_REQUEST') {
-                setErrorMsg('Not enough credit');
-            } else {
-                setErrorMsg('Error: Transaction Cancelled')
-            }
-            setTimeout(() => setError(false), 3000);
-        }
+        // onError(error: TRPCError) {
+        //     setError(true);
+        //     if (error.data?.code === 'BAD_REQUEST') {
+        //         setErrorMsg('Not enough credit');
+        //     } else {
+        //         setErrorMsg('Error: Transaction Cancelled')
+        //     }
+        //     setTimeout(() => setError(false), 3000);
+        // }
     });
 
     const inputCSS = 'mt-[1%] mb-[8%] h-[2.5rem] w-full text-gray-200 lg:text-[1.5rem] px-[2%] outline-gray-800 bg-transparent border-b border-white';
@@ -90,7 +92,7 @@ const Generate: NextPage = () => {
             </Head>
 
             <PageTemplate>
-                <form className="mt-[5%] lg:w-[55%]" onSubmit={handleSubmit}>
+                <form className="mt-[5%] lg:w-[55%]" onSubmit={void handleSubmit}>
                     <section className="">
                         <FormLabel
                             label="Descibe your icon"
@@ -110,7 +112,7 @@ const Generate: NextPage = () => {
                         <div className="flex gap-[1%] flex-wrap mt-[3%]">
                             {colors.map((color, index) => {
 
-                                let target = formData.color === Object.values(color).toString();
+                                const target = formData.color === Object.values(color).toString();
 
                                 return (
                                     <button
@@ -134,7 +136,7 @@ const Generate: NextPage = () => {
                                 const styleSample = Object.values(style).toString();
                                 const styleName = Object.keys(style).toString();
 
-                                let target = formData.style === styleName
+                                const target = formData.style === styleName
 
                                 return (
                                     <button

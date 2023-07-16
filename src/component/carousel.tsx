@@ -1,4 +1,4 @@
-import { faBars, faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons';
+import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useEffect, useState } from 'react';
 import styles from '../styles/carousel.module.css';
@@ -14,7 +14,6 @@ const Carousel = (props: CarouselProps) => {
 
     const { images, downloadable, autoplay } = props;
 
-    const [clicked, setClicked] = useState(false);
     const [currentIndex, setCurrentIndex] = useState(0);
 
     const currentImage = images[currentIndex];

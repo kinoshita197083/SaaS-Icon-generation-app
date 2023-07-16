@@ -145,13 +145,13 @@ const Navbar = (props: NavbarProps) => {
                             </li>
 
                             <ul ref={dropDownRef} className={subMenuClicked ? styles.subNavMenu : [styles.subNavMenu, styles.hidden].join(' ')}>
-                                <li onClick={() => router.push('/profile')}
+                                <li onClick={() => { void router.push('/profile').catch(console.error) }}
                                     className={styles.navItem}>
                                     Profile
                                 </li>
 
                                 <li className={styles.navItem}
-                                    onClick={() => { void signOut().catch(console.error); router.push('/') }}>
+                                    onClick={() => { void signOut().catch(console.error); void router.push('/').catch(console.error) }}>
                                     Sign out
                                 </li>
                             </ul>

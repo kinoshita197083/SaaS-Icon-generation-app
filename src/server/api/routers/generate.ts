@@ -98,7 +98,7 @@ export const generateRouter = createTRPCRouter({
                 });
 
                 // batch saving b64 encoded images to s3 bucket
-                const putEvents = [];
+                const putEvents: any[] = [];
                 for (let i = 0; i < base64EncodedImageList.length; i++) {
                     const putEvent = s3
                         .putObject({

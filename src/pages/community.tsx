@@ -1,6 +1,6 @@
 import { NextPage } from 'next'
 import Head from 'next/head'
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useRef } from 'react'
 import IconWrapper from '~/component/iconWrapper'
 import { api } from '~/utils/api'
 import styles from '../styles/community.module.css'

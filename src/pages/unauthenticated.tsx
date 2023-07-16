@@ -11,8 +11,12 @@ const Unauthenticated: NextPage = () => {
     const router = useRouter();
 
     useEffect(() => {
-        if (status === 'authenticated') {
-            router.push('/')
+        if (isLoggedIn) {
+            try {
+                void router.push('/')
+            } catch (err) {
+                console.log(err)
+            }
         }
     }, [status])
 
@@ -21,14 +25,14 @@ const Unauthenticated: NextPage = () => {
             {
                 isLoggedIn ? <button
                     className='btn'
-                    onClick={() => router.push('/')}
+                    onClick={() => { void router.push('/').catch(console.error) }}
                     type='button'>
                     Back to home
                 </button> :
 
                     <button
                         className='btn'
-                        onClick={() => signIn().catch(err => console.log(err))}
+                        onClick={() => { void signIn().catch(err => console.log(err)) }}
                         type='button'>
                         Sign in
                     </button>

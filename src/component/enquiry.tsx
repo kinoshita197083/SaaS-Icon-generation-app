@@ -12,14 +12,14 @@ const EnquiryForm = () => {
         message: '',
     });
 
-    const [loading, setLoading] = useState(false);
+    // const [loading, setLoading] = useState(false);
 
-    const updateRequest = (key: string, value: string | boolean | number | string[]) => {
-        setRequest(prev => ({
-            ...prev,
-            [key]: value
-        }))
-    }
+    // const updateRequest = (key: string, value: string | boolean | number | string[]) => {
+    //     setRequest(prev => ({
+    //         ...prev,
+    //         [key]: value
+    //     }))
+    // }
 
     const handleSubmit = async () => {
         // setLoading(true);
@@ -36,14 +36,14 @@ const EnquiryForm = () => {
     }
 
     return (
-        <form onSubmit={handleSubmit}>
+        <form>
             <FormLabel
                 label="Name"
             />
             <input
                 className={inputCSS}
                 value={request.name}
-                onChange={e => updateRequest('name', e.target.value)}
+            // onChange={e => updateRequest('name', e.target.value)}
             />
         </form>
     )

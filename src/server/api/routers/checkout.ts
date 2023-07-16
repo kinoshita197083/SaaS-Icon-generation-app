@@ -18,7 +18,7 @@ export const checkoutRouter = createTRPCRouter({
             priceId: z.number(),
         }))
         .mutation(async ({ ctx, input }) => {
-            var tempPrice
+            let tempPrice
             if (input.priceId === 1) {
                 tempPrice = env.PRICE_ID_1
             }

@@ -1,10 +1,10 @@
 import { RefObject, useEffect } from "react";
 
 export function useInfiniteScroll(
-    ref: RefObject<any>,
+    ref: RefObject<Element>,
     hasNextPage: boolean | undefined,
     isFetching: boolean,
-    fetchNextPage: any
+    fetchNextPage: () => void,
 ) {
 
     useEffect(() => {
@@ -16,7 +16,7 @@ export function useInfiniteScroll(
 
         const observer = new IntersectionObserver((entries) => {
             const target = entries[0];
-            if (target!.isIntersecting && hasNextPage && !isFetching) {
+            if (target.isIntersecting && hasNextPage && !isFetching) {
                 fetchNextPage();
             }
         }, options);

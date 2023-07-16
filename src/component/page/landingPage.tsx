@@ -11,8 +11,8 @@ import AdBanner from '../adBanner';
 
 const LandingPage = () => {
 
-    const users: number | undefined = api.statistic.getStatistic.useQuery().data?.[0];
-    const icons: number | undefined = api.statistic.getStatistic.useQuery().data?.[1];
+    const users: number | undefined = api.statistic.getStatistic.useQuery().data?.[0] || 0;
+    const icons: number | undefined = api.statistic.getStatistic.useQuery().data?.[1] || 0;
 
     return (
         <div className='px-[2%] md:px-[3%] lg:px-[8%]'>
