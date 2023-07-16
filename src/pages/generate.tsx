@@ -3,7 +3,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { NextPage } from "next"
 import { signIn, useSession } from "next-auth/react";
 import Head from "next/head";
-import Link from "next/link";
 import { FormEvent, useState } from "react";
 import Button from "~/component/button";
 import Carousel from "~/component/carousel";
@@ -16,13 +15,14 @@ import { api } from "~/utils/api";
 
 const Generate: NextPage = () => {
 
+    //Default Config for initial page load
     const defaultImage = ['/jene.jpg'];
     const defaultStyle = '';
     const defaultColor = 'sky blue';
     const defaultText = 'Abyssinian cat';
     const defaultNumberOfImages = 1;
 
-
+    //Form State
     const [formData, setFormData] = useState({
         prompt: '',
         color: defaultColor,
@@ -32,9 +32,11 @@ const Generate: NextPage = () => {
         loading: false,
     });
 
+    //Error Message state
     const [error, setError] = useState(false);
     const [errorMsg, setErrorMsg] = useState('');
 
+    //Auth verification
     const { status } = useSession()
     const isLoggedIn = status === 'authenticated';
     const generateInstance = api.generate.generateIcon.useMutation({

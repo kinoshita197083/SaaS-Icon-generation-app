@@ -8,6 +8,7 @@ import PageTemplate from '~/component/page/pageTemplate'
 import CloseButton from '~/component/closeButton'
 import { useInfiniteScroll } from '~/hooks/useInfiniteScroll'
 import { env } from '~/env.mjs'
+import Spinner from '~/component/spinner'
 
 const Community: NextPage = () => {
 
@@ -59,7 +60,9 @@ const Community: NextPage = () => {
                         })}
                     </section>
 
-                    {isFetching && <div>Loading more icons...</div>}
+                    <Spinner
+                        isLoading={isFetching}
+                    />
                 </div>
                 <CloseButton />
             </PageTemplate>
