@@ -1,5 +1,6 @@
 import { faSpinner } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { getHTTPStatusCodeFromError } from "@trpc/server/http";
 import { NextPage } from "next"
 import { signIn, useSession } from "next-auth/react";
 import Head from "next/head";
@@ -71,7 +72,12 @@ const Generate: NextPage = () => {
                 updateForm('imageURLs', response.image)
             }
         }
-        catch (err: any) { }
+        catch (error) {
+            setError(true)
+            const httpCode = getHTTPStatusCodeFromError(error);
+            setErrorMsg(`${httpCode}: transaction cancelled`)
+            setTimeout(() => setError(false), 3000);
+        }
 
         setFormData(prev => ({ ...prev, prompt: '', color: defaultColor, style: defaultStyle, loading: false }))
     }
@@ -92,7 +98,7 @@ const Generate: NextPage = () => {
             </Head>
 
             <PageTemplate>
-                <form className="mt-[5%] lg:w-[55%]" onSubmit={void handleSubmit}>
+                <form className="mt-[5%] lg:w-[55%]" onSubmit={handleSubmit}>
                     <section className="">
                         <FormLabel
                             label="Descibe your icon"
