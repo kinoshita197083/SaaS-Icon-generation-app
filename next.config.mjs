@@ -15,6 +15,7 @@ const config = {
       'oaidalleapiprodscus.blob.core.windows.net',
       'icon-generator-project-haha.s3.ap-southeast-2.amazonaws.com',
       'lh3.googleusercontent.com',
+      'd24zvlhubf9n6d.cloudfront.net'
     ],
 
   },
