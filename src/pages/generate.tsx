@@ -41,13 +41,13 @@ const Generate: NextPage = () => {
     const isLoggedIn = status === 'authenticated';
     const generateInstance = api.generate.generateIcon.useMutation({
         onError(error) {
+            setError(true);
             if (error.data?.code === 'BAD_REQUEST') {
-                setError(true);
                 setErrorMsg('Not enough credit');
-                setTimeout(() => setError(false), 3000);
             } else {
-                setErrorMsg('Hey there')
+                setErrorMsg('Error: Transaction Cancelled')
             }
+            setTimeout(() => setError(false), 3000);
         }
     });
 

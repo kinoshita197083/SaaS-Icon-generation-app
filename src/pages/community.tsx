@@ -37,7 +37,7 @@ const Community: NextPage = () => {
 
             </Head>
             <PageTemplate>
-                <div className='flex flex-col w-full'>
+                <div className='flex flex-col w-full lg:h-[40rem] md:h-[40rem] h-[72vh]'>
                     <section className='w-full lg:mt-[0%] mt-[5%]'>
                         <h1 className='text-gray-200 lg:text-[3.5rem] md:text-[3rem] text-[2rem] w-full'>Trending on the community</h1>
                         <h4 className='text-gray-300 text-[1.5rem] my-[5%]'>Results: {allIcons?.length}</h4>
@@ -50,7 +50,7 @@ const Community: NextPage = () => {
                             const iconSrc = `${env.NEXT_PUBLIC_BUCKET}${icon.id}`;
 
                             return (
-                                <div key={icon.id} className='lg:my-[0] md:my-[0] my-[2%]'>
+                                <div key={icon.id} className='lg:my-[10%] md:my-[0] my-[5%]'>
                                     <IconWrapper
                                         src={iconSrc}
                                         heading={icon.prompt || ''}
