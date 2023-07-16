@@ -1,6 +1,5 @@
 import { faSpinner } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-// import { TRPCError } from "@trpc/server";
 import { NextPage } from "next"
 import { signIn, useSession } from "next-auth/react";
 import Head from "next/head";
@@ -43,7 +42,7 @@ const Generate: NextPage = () => {
     const { status } = useSession()
     const isLoggedIn = status === 'authenticated';
     const generateInstance = api.generate.generateIcon.useMutation({
-        // onError(error: TRPCError) {
+        // onError(error) {
         //     setError(true);
         //     if (error.data?.code === 'BAD_REQUEST') {
         //         setErrorMsg('Not enough credit');
