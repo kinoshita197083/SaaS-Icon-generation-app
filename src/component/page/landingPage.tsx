@@ -2,7 +2,7 @@ import React from 'react';
 import styles from '../../styles/landingPage.module.css'
 import Button from '~/component/button';
 import Poster from '~/component/poster';
-import Card from '~/component/card';
+import Card from '~/component/Card';
 import Link from 'next/link';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faProductHunt } from '@fortawesome/free-brands-svg-icons';
