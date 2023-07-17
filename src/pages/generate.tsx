@@ -68,8 +68,10 @@ const Generate: NextPage = () => {
                 n: +formData.n,
             });
 
-            if (response.image) {
-                updateForm('imageURLs', response.image)
+            if (response.images) {
+                updateForm('imageURLs', response.images)
+            } else {
+                console.log(response)
             }
         }
         catch (error) {
@@ -179,7 +181,7 @@ const Generate: NextPage = () => {
                         :
                         <Button
                             type="button"
-                            onClick={() => { void signIn().catch(console.error) }}
+                            onClick={() => { signIn().catch(console.error) }}
                             className="bg-gradient-to-r from-sky-500 to-indigo-500 text-gray-100 p-[2%] px-[3%] rounded">
                             Sign in to start generating
                         </Button>}

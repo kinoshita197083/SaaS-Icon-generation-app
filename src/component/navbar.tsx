@@ -71,14 +71,21 @@ const Navbar = (props: NavbarProps) => {
     useEffect(() => {
         window.addEventListener('scroll', handleScrolled);
         document.addEventListener('click', closeDropDown);
-        document.addEventListener('click', closeMobileNavMenu)
 
         return () => {
             window.removeEventListener('scroll', handleScrolled);
             document.removeEventListener('click', closeDropDown)
-            document.removeEventListener('click', closeMobileNavMenu)
+
         }
     }, [])
+
+    useEffect(() => {
+        document.addEventListener('click', closeMobileNavMenu)
+
+        return () => {
+            document.removeEventListener('click', closeMobileNavMenu)
+        }
+    }, [isLoggedIn])
 
     return (
         <header className={scroll ? [styles.navContainer, styles.scrolled].join(' ') : styles.navContainer}>
@@ -145,13 +152,13 @@ const Navbar = (props: NavbarProps) => {
                             </li>
 
                             <ul ref={dropDownRef} className={subMenuClicked ? styles.subNavMenu : [styles.subNavMenu, styles.hidden].join(' ')}>
-                                <li onClick={() => { void router.push('/profile').catch(console.error) }}
+                                <li onClick={() => { router.push('/profile').catch(console.error) }}
                                     className={styles.navItem}>
                                     Profile
                                 </li>
 
                                 <li className={styles.navItem}
-                                    onClick={() => { void signOut().catch(console.error); void router.push('/').catch(console.error) }}>
+                                    onClick={() => { signOut().catch(console.error); router.push('/').catch(console.error) }}>
                                     Sign out
                                 </li>
                             </ul>

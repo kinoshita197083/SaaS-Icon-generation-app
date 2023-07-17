@@ -32,6 +32,7 @@ const generateIcon = async (prompt: string, numberOfPic: number): Promise<(strin
     if (env.MOCK_DALLE === "true") {
         return [b64Image];
     } else {
+        console.log('Icons generating...')
         const response = await openai.createImage({
             prompt,
             n: numberOfPic,
@@ -83,6 +84,7 @@ export const generateRouter = createTRPCRouter({
                 const summary = `${input.prompt}, 1080p, 8k, ultra-quality, deepth focus, hyper detailed, high-resolution, elegant, perfect face, color theme-${input.color}, ${input.style} style`;
 
                 const base64EncodedImageList = await generateIcon(summary, input.n);
+                console.log('Icons generation completed...')
 
                 // prepare for batch upload to prisma
                 const iconsData = base64EncodedImageList.map(__ => ({
@@ -139,12 +141,12 @@ export const generateRouter = createTRPCRouter({
                 });
 
                 return {
-                    image: preSignedUrls,
+                    images: preSignedUrls,
                 };
 
             } catch (error) {
                 // Proper error handling code goes here
-                console.error(error);
+                console.error('Something wrong: ', error);
                 throw error; // Rethrow the error or handle it accordingly
             }
         }),
