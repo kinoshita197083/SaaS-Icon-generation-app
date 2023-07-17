@@ -57,7 +57,7 @@ const Navbar = (props: NavbarProps) => {
         //TriggerDropDown (profile pic) will only appeared when user logged in
         if (isLoggedIn) {
             if (navbarRef.current && triggerDropDownRef.current) {
-                navbarRef.current.contains(e.target as Node) && !triggerDropDownRef.current.contains(e.target as Node) ?
+                !navbarRef.current.contains(e.target as Node) && !triggerDropDownRef.current.contains(e.target as Node) ?
                     setClick(false) : null;
             }
         }

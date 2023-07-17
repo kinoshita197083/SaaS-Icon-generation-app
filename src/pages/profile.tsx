@@ -2,7 +2,7 @@ import { NextPage } from 'next'
 import { useSession } from 'next-auth/react'
 import Head from 'next/head'
 import Image from 'next/image'
-import React, { useRef } from 'react'
+import React, { Suspense, useRef } from 'react'
 import PageTemplate from '~/component/page/pageTemplate'
 import { api } from '~/utils/api'
 import { requireAuth } from '~/utils/requireAuth'
@@ -13,6 +13,7 @@ import { useInfiniteScroll } from '~/hooks/useInfiniteScroll'
 import Download from '~/component/download'
 import { env } from '~/env.mjs'
 import { GetServerSidePropsContext } from 'next';
+import Spinner from '~/component/spinner'
 
 const Profile: NextPage = () => {
 
@@ -81,28 +82,29 @@ const Profile: NextPage = () => {
                         ref={scrollContainerRef}
                     >
                         <ul className={styles.iconsContainer}>
-                            {icons.map((icon, index) => {
+                            <Suspense fallback={<Spinner isLoading={true} />}>
+                                {icons.map((icon, index) => {
 
-                                const iconSrc = `${env.NEXT_PUBLIC_BUCKET}${icon.id}`
-                                console.log(env.NEXT_PUBLIC_BUCKET)
+                                    const iconSrc = `${env.NEXT_PUBLIC_BUCKET}${icon.id}`
+                                    console.log(env.NEXT_PUBLIC_BUCKET)
 
-                                return (
-                                    <div className='relative' key={index}>
-                                        <IconWrapper
-                                            src={iconSrc}
-                                            heading={icon.prompt || 'Heading mising'}
-                                            content=''
-                                        />
-                                        <Download
-                                            src={iconSrc}
-                                        />
-                                    </div>
-
-                                )
-                            })}
-
+                                    return (
+                                        <div className='relative' key={index}>
+                                            <IconWrapper
+                                                src={iconSrc}
+                                                heading={icon.prompt || 'Heading mising'}
+                                                content=''
+                                            />
+                                            <Download
+                                                src={iconSrc}
+                                            />
+                                        </div>
+                                    )
+                                })}
+                            </Suspense>
                         </ul>
                     </section>
+
                 </div>
 
                 <CloseButton />

@@ -1,6 +1,6 @@
 import { NextPage } from 'next'
 import Head from 'next/head'
-import React, { useRef } from 'react'
+import React, { Suspense, useRef } from 'react'
 import IconWrapper from '~/component/iconWrapper'
 import { api } from '~/utils/api'
 import styles from '../styles/community.module.css'
@@ -39,25 +39,27 @@ const Community: NextPage = () => {
             <PageTemplate>
                 <div className='flex flex-col w-full lg:h-[40rem] md:h-[40rem] h-[72vh]'>
                     <section className='w-full lg:mt-[0%] mt-[5%]'>
-                        <h1 className='text-gray-200 lg:text-[3.5rem] md:text-[3rem] text-[2rem] w-full'>Trending on the community</h1>
-                        <h4 className='text-gray-300 text-[1.5rem] my-[5%]'>Results: {allIcons?.length}</h4>
+                        <h1 className='text-gray-200 lg:text-[3.5rem] md:text-[3rem] text-[1.5rem] w-full'>Trending on the community</h1>
+                        <h4 className='text-gray-300 text-[1rem] my-[5%]'>Results: {allIcons?.length}</h4>
                     </section>
 
                     <section className={styles.iconsContainer}
                         ref={scrollContainerRef}>
-                        {allIcons?.map(icon => {
+                        <Suspense fallback={<Spinner isLoading={true} />}>
+                            {allIcons?.map(icon => {
 
-                            const iconSrc = `${env.NEXT_PUBLIC_BUCKET}${icon.id}`;
+                                const iconSrc = `${env.NEXT_PUBLIC_BUCKET}${icon.id}`;
 
-                            return (
-                                <div key={icon.id} className='lg:my-[10%] md:my-[0] my-[5%]'>
-                                    <IconWrapper
-                                        src={iconSrc}
-                                        heading={icon.prompt || ''}
-                                    />
-                                </div>
-                            )
-                        })}
+                                return (
+                                    <div key={icon.id} className='lg:my-[10%] md:my-[0] my-[5%]'>
+                                        <IconWrapper
+                                            src={iconSrc}
+                                            heading={icon.prompt || ''}
+                                        />
+                                    </div>
+                                )
+                            })}
+                        </Suspense>
                     </section>
 
                     <Spinner
