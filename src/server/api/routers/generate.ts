@@ -18,7 +18,7 @@ const s3 = new AWS.S3({
     region: "ap-southeast-2",
 });
 
-const BUCKET_NAME = "icon-generator-project-haha";
+const BUCKET_NAME = "imagin-icons-storage";
 const preSignedUrlExpireSeconds = 60 * 5;
 
 //OpenAI config & client setup

@@ -16,7 +16,8 @@ const config = {
       'icon-generator-project-haha.s3.ap-southeast-2.amazonaws.com',
       'lh3.googleusercontent.com',
       'd24zvlhubf9n6d.cloudfront.net',
-      'cdn.discordapp.com'
+      'cdn.discordapp.com',
+      'd9tzafiq1eg5o.cloudfront.net'
     ],
 
   },
