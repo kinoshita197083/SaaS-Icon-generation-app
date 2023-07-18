@@ -35,13 +35,18 @@ export const styles = [
     // {
     //     'In the style of retrofuturism, smooth lines': '/retrofuturism.png'
     // },
+
     //  可以补全背景
-    {
-        'a realistic still life depiction of everyday objects.': '/stare.jpg'
-    },
+    // {
+    //     'a realistic still life depiction of everyday objects.': '/stare.jpg'
+    // },
+
     // 补全背景： nature forest background with blur style
     {
         'In a style of compact digital Canon camera, sleek, nature forest background with blur style': '/digital-camera.png'
+    },
+    {
+        '3D, Character centered, prominent and bright, with a relatively darker background, Overall harmonious color palette.': '/small-3-d.png'
     },
     {
         'default': ''
