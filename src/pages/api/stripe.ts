@@ -42,7 +42,7 @@ const webhook = async (req: NextApiRequest, res: NextApiResponse) => {
     if (req.method === 'POST') {
 
         const buf = await buffer(req);
-        const sig = req.headers['stripe-signature'] as string;
+        const sig = req.headers.get['stripe-signature'] as string;
 
         let event;
 

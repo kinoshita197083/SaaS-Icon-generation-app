@@ -32,5 +32,16 @@ const config = {
     locales: ["en"],
     defaultLocale: "en",
   },
+
+  async rewrites() {
+    return [
+      {
+        source: '/api/stripe',
+        destination: '/api/stripe.ts',
+      },
+    ];
+  },
+
+
 };
 export default config;
