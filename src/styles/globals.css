@@ -100,6 +100,11 @@
 
 .loading {
     animation: spin 2s infinite;
+    font-size: 6rem;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    color: white;
 }
 
 @keyframes spin {

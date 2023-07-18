@@ -1,0 +1,14 @@
+.gridContainer {
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(11rem, 1fr));
+    /* height: 30vh; */
+    overflow: auto;
+    scroll-snap-type: y proximity;
+}
+
+@media (max-width: 800px) {
+    .gridContainer {
+        grid-template-columns: repeat(auto-fit, minmax(6rem, 1fr));
+    }
+}

@@ -13,9 +13,7 @@ const Spinner = (props: SpinnerProps) => {
     return (
         <>
             {isLoading &&
-                <div className={''}>
-                    <FontAwesomeIcon icon={faSpinner} />
-                </div>}
+                <FontAwesomeIcon icon={faSpinner} className='loading' />}
         </>
     )
 }

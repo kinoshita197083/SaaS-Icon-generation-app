@@ -2,11 +2,10 @@ import { NextPage } from 'next'
 import { useSession } from 'next-auth/react'
 import Head from 'next/head'
 import Image from 'next/image'
-import React, { Suspense, useRef } from 'react'
+import React, { useRef, useState } from 'react'
 import PageTemplate from '~/component/page/pageTemplate'
 import { api } from '~/utils/api'
 import { requireAuth } from '~/utils/requireAuth'
-import styles from '../styles/profile.module.css'
 import IconWrapper from '~/component/iconWrapper'
 import CloseButton from '~/component/closeButton'
 import { useInfiniteScroll } from '~/hooks/useInfiniteScroll'
@@ -14,10 +13,31 @@ import Download from '~/component/download'
 import { env } from '~/env.mjs'
 import { GetServerSidePropsContext } from 'next';
 import Spinner from '~/component/spinner'
+import IconShowcase from '~/component/iconShowcase'
+import Popup from '~/component/popup'
 
 const Profile: NextPage = () => {
 
     const limit = 30;
+
+    const [clicked, setClicked] = useState(false);
+    const [selectedImage, setSelectedImage] = useState({
+        src: '/brad.jpg',
+        heading: 'A robot holding a flower',
+    });
+
+    const handleClick = (image: string, prompt: string) => {
+        setClicked(true);
+        updateSelectedImage('src', image);
+        updateSelectedImage('heading', prompt)
+    }
+
+    const updateSelectedImage = (key: string, value: string) => {
+        setSelectedImage(prev => ({
+            ...prev,
+            [key]: value
+        }))
+    }
 
     const scrollContainerRef = useRef(null);
 
@@ -76,34 +96,45 @@ const Profile: NextPage = () => {
                     </section>
 
                     {/* All generated icons display section */}
-                    <section
-                        role='icons-display'
-                        className='lg:w-[70%] md:w-[70%] w-full h-full overflow-auto'
-                        ref={scrollContainerRef}
-                    >
-                        <ul className={styles.iconsContainer}>
-                            <Suspense fallback={<Spinner isLoading={true} />}>
-                                {icons.map((icon, index) => {
+                    <div ref={scrollContainerRef} className='w-[70%] p-[1%] overflow-auto'>
+                        <IconShowcase>
+                            {icons.map(icon => {
 
-                                    const iconSrc = `${env.NEXT_PUBLIC_BUCKET}${icon.id}`
-                                    console.log(env.NEXT_PUBLIC_BUCKET)
+                                const iconSrc = `${env.NEXT_PUBLIC_BUCKET}${icon.id}`
 
-                                    return (
-                                        <div className='relative' key={index}>
-                                            <IconWrapper
-                                                src={iconSrc}
-                                                heading={icon.prompt || 'Heading mising'}
-                                                content=''
-                                            />
-                                            <Download
-                                                src={iconSrc}
-                                            />
-                                        </div>
-                                    )
-                                })}
-                            </Suspense>
-                        </ul>
-                    </section>
+                                return (
+                                    <IconWrapper
+                                        key={icon.id}
+                                        iconId={icon.id}
+                                        iconSrc={iconSrc}
+                                        handleClick={() => handleClick(iconSrc, icon.prompt)}
+                                    />
+                                )
+                            })}
+                        </IconShowcase>
+                    </div>
+
+                    {/* Loading spinner */}
+                    <Spinner isLoading={isFetching} />
+
+                    {/* Popup modal */}
+                    <Popup
+                        handleClick={() => setClicked(false)}
+                        state={clicked}
+                        setState={setClicked}
+                        textContent={selectedImage.heading}>
+                        <Image
+                            src={selectedImage.src}
+                            width={150}
+                            height={150}
+                            alt='selected image'
+                            className='rounded-[inherit] object-cover w-[100%] mx-auto'
+                            priority={true}
+                        />
+                        <Download
+                            src={selectedImage.src}
+                        />
+                    </Popup>
 
                 </div>
 
