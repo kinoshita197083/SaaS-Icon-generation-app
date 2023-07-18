@@ -30,11 +30,11 @@ const handleCredits = () => {
 }
 
 
-// export const config = {
-//     api: {
-//         bodyParser: false,
-//     },
-// };
+export const config = {
+    api: {
+        bodyParser: false,
+    },
+};
 
 
 // stripe code docs to create a web hook: https://dashboard.stripe.com/test/webhooks/create
@@ -47,7 +47,7 @@ const webhook = async (req: NextApiRequest, res: NextApiResponse) => {
         let event;
 
         try {
-            event = stripe.webhooks.constructEvent(buf.toString(), sig, env.STRIPE_WEB_HOOK_SECRET);
+            event = stripe.webhooks.constructEvent(buf, sig, env.STRIPE_WEB_HOOK_SECRET);
         } catch (err) {
             let message = "Unknow Error";
             if (err instanceof Error) message = err.message;
