@@ -107,6 +107,21 @@
     color: white;
 }
 
+.color-picker {
+    appearance: none;
+    aspect-ratio: 1/1;
+    /* width: 25%; */
+    height: 80%;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+.color-picker::-webkit-color-swatch {
+    border-radius: 5px;
+    border: none
+}
+
 @keyframes spin {
     from {
         transform: translate(-50%, -50%) rotate(0deg);

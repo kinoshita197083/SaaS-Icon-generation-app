@@ -16,8 +16,8 @@ const Community: NextPage = () => {
 
     const [clicked, setClicked] = useState(false);
     const [selectedImage, setSelectedImage] = useState({
-        src: '/brad.jpg',
-        heading: 'A robot holding a flower',
+        src: '/jene.jpg',
+        heading: '',
     });
 
     const handleClick = (image: string, prompt: string) => {
@@ -64,20 +64,32 @@ const Community: NextPage = () => {
                         <h4 className='text-gray-300 text-[1rem] my-[2%]'>Results: {allIcons?.length}</h4>
                     </section>
 
-                    <div ref={scrollContainerRef}>
+                    <div>
                         <IconShowcase>
-                            {allIcons?.map(icon => {
+                            {allIcons?.map((icon, index) => {
 
                                 const iconSrc = `${env.NEXT_PUBLIC_BUCKET}${icon.id}`;
-
-                                return (
-                                    <IconWrapper
-                                        key={icon.id}
-                                        iconId={icon.id}
-                                        iconSrc={iconSrc}
-                                        handleClick={() => handleClick(iconSrc, icon.prompt)}
-                                    />
-                                )
+                                if (allIcons.length === index + 1) {
+                                    return (
+                                        <div key={icon.id} ref={scrollContainerRef} className='m-0 flex justify-center'>
+                                            <IconWrapper
+                                                key={icon.id}
+                                                iconId={icon.id}
+                                                iconSrc={iconSrc}
+                                                handleClick={() => handleClick(iconSrc, icon.prompt)}
+                                            />
+                                        </div>
+                                    )
+                                } else {
+                                    return (
+                                        <IconWrapper
+                                            key={icon.id}
+                                            iconId={icon.id}
+                                            iconSrc={iconSrc}
+                                            handleClick={() => handleClick(iconSrc, icon.prompt)}
+                                        />
+                                    )
+                                }
                             })}
                         </IconShowcase>
                     </div>

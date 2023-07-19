@@ -1,6 +1,7 @@
 type PricingBoxProps = {
     plan: string,
     price: string,
+    credits: string,
     popular?: boolean,
     promotion?: string,
     eachCost?: string,
@@ -9,7 +10,7 @@ type PricingBoxProps = {
 
 const PricingBox = (props: PricingBoxProps) => {
 
-    const { plan, price, popular, promotion, eachCost, handleClick } = props;
+    const { plan, price, credits, popular, promotion, eachCost, handleClick } = props;
 
     return (
         <div className='relative w-[20rem] h-[28rem] m-auto'>
@@ -28,6 +29,9 @@ const PricingBox = (props: PricingBoxProps) => {
                     <h4 className='text-[3rem] text-gray-100'>
                         {price}
                     </h4>
+                    <h3 className="text-[2rem] text-gray-100">
+                        for {credits} credits
+                    </h3>
                     <p className='text-gray-100 my-[10%]'>
                         As low as {eachCost} per generation
                     </p>

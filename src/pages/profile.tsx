@@ -18,12 +18,12 @@ import Popup from '~/component/popup'
 
 const Profile: NextPage = () => {
 
-    const limit = 30;
+    const limit = 50;
 
     const [clicked, setClicked] = useState(false);
     const [selectedImage, setSelectedImage] = useState({
-        src: '/brad.jpg',
-        heading: 'A robot holding a flower',
+        src: '/jene.jpg',
+        heading: '',
     });
 
     const handleClick = (image: string, prompt: string) => {
@@ -96,12 +96,23 @@ const Profile: NextPage = () => {
                     </section>
 
                     {/* All generated icons display section */}
-                    <div ref={scrollContainerRef} className='w-[70%] p-[1%] overflow-auto'>
+                    <div className='lg:w-[70%] p-[1%] overflow-auto'>
                         <IconShowcase>
-                            {icons.map(icon => {
+                            {icons.map((icon, index) => {
 
                                 const iconSrc = `${env.NEXT_PUBLIC_BUCKET}${icon.id}`
-
+                                if (icons.length === index + 1) {
+                                    return (
+                                        <div key={icon.id} ref={scrollContainerRef} className='m-0 flex justify-center'>
+                                            <IconWrapper
+                                                key={icon.id}
+                                                iconId={icon.id}
+                                                iconSrc={iconSrc}
+                                                handleClick={() => handleClick(iconSrc, icon.prompt)}
+                                            />
+                                        </div>
+                                    )
+                                }
                                 return (
                                     <IconWrapper
                                         key={icon.id}

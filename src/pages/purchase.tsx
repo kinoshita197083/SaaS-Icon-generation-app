@@ -32,19 +32,24 @@ const Purchase: NextPage = () => {
                         <PricingBox
                             plan={'Give it a Try'}
                             price={'AUD $7'}
+                            credits={'50'}
                             eachCost='$0.14'
                             handleClick={() => handleBuyCredits(1)}
                         />
                         <PricingBox
                             plan={'I have ideas'}
                             price={'AUD $13'}
+                            credits={'100'}
                             popular
+                            eachCost='$0.14'
                             promotion={'Fresh Beginnings Sale'}
                             handleClick={() => handleBuyCredits(2)}
                         />
                         <PricingBox
                             plan={'Make something grand'}
                             price={'AUD $27'}
+                            credits={'250'}
+                            eachCost='$0.14'
                             handleClick={() => handleBuyCredits(3)}
                         />
                     </section>

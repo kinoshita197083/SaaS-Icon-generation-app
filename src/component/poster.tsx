@@ -1,11 +1,5 @@
 import Image from 'next/image';
 
-// type PosterProps = {
-//     heading?: string,
-//     src?: string,
-//     alt?: string
-// }
-
 const Poster = () => {
 
     return (
@@ -16,6 +10,7 @@ const Poster = () => {
                         src={'/thinking.png'}
                         width={1200}
                         height={1200}
+                        priority={true}
                         alt='Landing page hero image'
                         className='absolute grayscale-[50] md:top-[-8%] lg:top-[-220px]'
                     />

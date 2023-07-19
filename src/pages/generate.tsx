@@ -35,6 +35,8 @@ const Generate: NextPage = () => {
         loading: false,
     });
 
+    const [colorOption, setColorOption] = useState('default');
+
     //Error Message state
     const [error, setError] = useState(false);
     const [errorMsg, setErrorMsg] = useState('');
@@ -113,27 +115,58 @@ const Generate: NextPage = () => {
                         />
                     </section>
 
-                    <section className="mb-[8%]">
+                    <section className="mb-[8%] ">
                         <FormLabel
                             label="Theme color"
                         />
-                        <div className="flex gap-[1%] flex-wrap mt-[3%]">
-                            {colors.map((color, index) => {
+                        <div>
+                            <div role="button-group"
+                                className="flex my-[5%]"
+                            >
+                                <button type="button"
+                                    className={["lg:w-[20%] w-[50%] text-gray-100 transition-all", colorOption === 'default' ? 'border-b-4 border-indigo-500' : 'border-b-4 border-transparent'].join(' ')}
+                                    onClick={() => setColorOption('default')}>
+                                    Default
+                                </button>
 
-                                const target = formData.color === Object.values(color).toString();
+                                <button type="button"
+                                    className={["lg:w-[20%] w-[50%] text-gray-100 transitional-all", colorOption === 'colorPicker' ? 'border-b-4 border-indigo-500' : 'border-b-4 border-transparent'].join(' ')}
+                                    onClick={() => setColorOption('colorPicker')}>
+                                    ColorPicker
+                                </button>
+                            </div>
 
-                                return (
-                                    <button
-                                        key={index}
-                                        className={[Object.keys(color).toString(), 'w-[2rem] h-[2rem] mt-[1.5%] rounded-full cursor-pointer hover:scale-[1.2] duration-100'].join(' ')}
-                                        onClick={e => updateForm('color', (e.target as HTMLButtonElement).value)}
-                                        type='button'
-                                        value={Object.values(color)}
-                                        style={{ border: target ? '2px solid white' : '', transform: target ? 'scale(1.2)' : '' }}
+
+                            {colorOption === 'colorPicker' &&
+                                <div className="h-[4rem] lg:w-[40%] w-full flex items-center justify-center">
+                                    <input
+                                        type="color"
+                                        className='color-picker'
+                                        value={formData.color || '#4ef4ac'}
+                                        onChange={(e) => updateForm('color', (e.target as HTMLInputElement).value)}
                                     />
-                                )
-                            })}
+                                </div>}
+
+                            {colorOption === 'default' &&
+                                <div className="flex gap-[1%] flex-wrap mt-[3%]">
+                                    {colors.map((color, index) => {
+
+                                        const target = formData.color === Object.values(color).toString();
+
+                                        return (
+                                            <button
+                                                key={index}
+                                                className={[Object.keys(color).toString(), 'w-[2rem] h-[2rem] mt-[1.5%] rounded-full cursor-pointer hover:scale-[1.2] duration-100'].join(' ')}
+                                                onClick={e => updateForm('color', (e.target as HTMLButtonElement).value)}
+                                                type='button'
+                                                value={Object.values(color)}
+                                                style={{ border: target ? '2px solid white' : '', transform: target ? 'scale(1.2)' : '' }}
+                                            />
+                                        )
+                                    })}
+                                </div>}
                         </div>
+
                     </section>
                     <section className="">
                         <FormLabel
