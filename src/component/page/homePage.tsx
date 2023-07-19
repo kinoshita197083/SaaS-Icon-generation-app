@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import React from 'react';
 import Carousel from '~/component/carousel';
 
@@ -27,33 +28,41 @@ const HomePage = () => {
                         </section>
 
                         <section className='grid lg:grid-cols-4 md:grid-cols-2 grid-cols-1 w-full mb-[5%]'>
-                            <div className='aspect-square lg:w-[15rem] w-full lg:h-[15rem] bg-blue-700 rounded-[18px] lg:rounded-[28px] p-[4%] m-auto lg:mb-[0] md:mb-[2%] mb-[5%]'>
-                                <h4 className='text-gray-100 text-[1.6rem]'>
-                                    Community
-                                </h4>
-                            </div>
-                            <div className='aspect-square lg:w-[15rem] w-full  lg:h-[15rem] bg-yellow-300 rounded-[18px] lg:rounded-[28px] p-[4%] m-auto lg:mb-[0] md:mx-[2%] md:mb-[2%] mb-[5%]'>
-                                <h4 className='text-gray-800'>
-                                    Prompt Engineering
-                                </h4>
-                                <img
-                                    src='/lightbulb.svg'
-                                    width='80%'
-                                    height='80%'
-                                    className='m-auto mt-[8%]'
-                                />
-                            </div>
-                            <div className='aspect-square lg:w-[15rem] w-full lg:h-[15rem] bg-gray-100 rounded-[18px] md:mx-[2%] lg:rounded-[28px] p-[4%] m-auto'>
-                                <h4 className='text-gray-500 text-[1.4rem]'>
-                                    Icon Recipe
-                                </h4>
-                                <img
-                                    src='/bread.svg'
-                                    width='80%'
-                                    height='80%'
-                                    className='m-auto mt-[8%]'
-                                />
-                            </div>
+                            <Link href={'/community'}>
+                                <div className='aspect-square lg:w-[15rem] w-full lg:h-[15rem] bg-blue-700 rounded-[18px] lg:rounded-[28px] p-[4%] m-auto lg:mb-[0] md:mb-[2%] mb-[5%]'>
+                                    <h4 className='text-gray-100 text-[1.6rem]'>
+                                        Community
+                                    </h4>
+                                </div>
+                            </Link>
+
+                            <Link href={'/'}>
+                                <div className='aspect-square lg:w-[15rem] w-full  lg:h-[15rem] bg-yellow-300 rounded-[18px] lg:rounded-[28px] p-[4%] m-auto lg:mb-[0] md:mx-[2%] md:mb-[2%] mb-[5%]'>
+                                    <h4 className='text-gray-800'>
+                                        Prompt Engineering
+                                    </h4>
+                                    <img
+                                        src='/lightbulb.svg'
+                                        width='80%'
+                                        height='80%'
+                                        className='m-auto mt-[8%]'
+                                    />
+                                </div>
+                            </Link>
+
+                            <Link href={'/'}>
+                                <div className='aspect-square lg:w-[15rem] w-full lg:h-[15rem] bg-gray-100 rounded-[18px] md:mx-[2%] lg:rounded-[28px] p-[4%] m-auto'>
+                                    <h4 className='text-gray-500 text-[1.4rem]'>
+                                        Icon Recipe
+                                    </h4>
+                                    <img
+                                        src='/bread.svg'
+                                        width='80%'
+                                        height='80%'
+                                        className='m-auto mt-[8%]'
+                                    />
+                                </div>
+                            </Link>
 
                         </section>
 

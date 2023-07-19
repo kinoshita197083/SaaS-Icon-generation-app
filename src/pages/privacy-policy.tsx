@@ -22,7 +22,7 @@ const Privacy: NextPage = () => {
             <br />
             <h4 className='font-bold text-2xl my-[2%]'>Usage Data</h4>
             <p>Usage Data is collected automatically when using the Service.</p><br />
-            <p>Usage Data may include information such as Your Device's Internet Protocol address (e.g. IP address), browser type, browser version, the pages of our Service that You visit, the time and date of Your visit, the time spent on those pages, unique device identifiers and other diagnostic data.</p><br />
+            <p>Usage Data may include information such as Your Device&apos;s Internet Protocol address (e.g. IP address), browser type, browser version, the pages of our Service that You visit, the time and date of Your visit, the time spent on those pages, unique device identifiers and other diagnostic data.</p><br />
             <p>When You access the Service by or through a mobile device, We may collect certain information automatically, including, but not limited to, the type of mobile device You use, Your mobile device unique ID, the IP address of Your mobile device, Your mobile operating system, the type of mobile Internet browser You use, unique device identifiers and other diagnostic data.</p><br />
             <p>We may also collect information that Your browser sends whenever You visit our Service or when You access the Service by or through a mobile device.</p><br />
 
@@ -31,7 +31,7 @@ const Privacy: NextPage = () => {
 
             <h4 className='font-bold text-2xl my-[2%]'>Cookies</h4>
             <p>We use Cookies and similar tracking technologies to track the activity on Our Service and store certain information. Tracking technologies used are beacons, tags, and scripts to collect and track information and to improve and analyze Our Service. The technologies We use may include:</p>
-            <p>Cookies can be "Persistent" or "Session" Cookies. Persistent Cookies remain on Your personal computer or mobile device when You go offline, while Session Cookies are deleted as soon as You close Your web browser.</p>
+            <p>Cookies can be &quot;Persistent&quot; or &quot;Session&quot; Cookies. Persistent Cookies remain on Your personal computer or mobile device when You go offline, while Session Cookies are deleted as soon as You close Your web browser.</p>
 
             <h4 className='font-bold text-2xl my-[2%]'>Use of Your Personal Data</h4>
             <p>he Company may use Personal Data for the following purposes:</p>

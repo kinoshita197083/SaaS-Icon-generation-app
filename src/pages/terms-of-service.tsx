@@ -12,7 +12,7 @@ const Terms: NextPage = () => {
             <p>These Terms and Conditions set out the rights and obligations of all users regarding the use of the Service.</p>
 
             <h4 className='font-bold text-2xl mt-[3%] mb-[2%]'>Definitions</h4>
-            <p>Platform (referred to as either "the platform", "We", "Us" or "Our" in this Agreement) refers to the copyright owner of imagin.</p>
+            <p>Platform (referred to as either &quot;the platform&quot;, &quot;We&quot;, &quot;Us&quot; or &quot;Our&quot; in this Agreement) refers to the copyright owner of imagin.</p>
             <p>Device means any device that can access the Service such as a computer, a cellphone or a digital tablet.</p>
             <p>Service refers to the Website.</p>
             <p>You means the individual accessing or using the Service, or the company, or other legal entity on behalf of which such individual is accessing or using the Service, as applicable.</p>
@@ -35,7 +35,7 @@ const Terms: NextPage = () => {
             <p>Upon termination, Your right to use the Service will cease immediately.</p>
 
             <h4 className='font-bold text-2xl my-[2%]'>Rights and Obligations of the User</h4>
-            <p>By using the service (accessing & interacting with the website), the User agrees not to engage in any activities that may jeopardize the functionality or operation of the software. Specifically, the User is strictly prohibited from conducting scans or tests on the software's vulnerabilities, circumventing security systems, accessing the software's systems, or introducing malware into the software.</p>
+            <p>By using the service (accessing & interacting with the website), the User agrees not to engage in any activities that may jeopardize the functionality or operation of the software. Specifically, the User is strictly prohibited from conducting scans or tests on the software&apos;s vulnerabilities, circumventing security systems, accessing the software&apos;s systems, or introducing malware into the software.</p>
 
             <h4 className='font-bold text-2xl my-[2%]'>Limitation of Liability</h4>
             <p>Our service uses AI provided by OpenAI to generate icons. Please review copyright laws for your country and state in regards to AI generated art or images. By using our services, you agree that our platform and service assumes no responsibility for the images generated. Nor do we assume responsibility for damages or loss caused by these images.</p>

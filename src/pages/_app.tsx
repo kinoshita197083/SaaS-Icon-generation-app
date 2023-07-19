@@ -10,6 +10,10 @@ import "~/styles/designToken.css";
 import "~/styles/utility.css";
 import Navbar from "~/component/navbar";
 import Footer from "~/component/footer";
+import '@fortawesome/fontawesome-svg-core/styles.css';
+import { config } from '@fortawesome/fontawesome-svg-core';
+
+config.autoAddCss = false; /* eslint-disable import/first */
 
 const MyApp: AppType<{ session: Session | null }> = ({
   Component,
