@@ -40,11 +40,11 @@ const Download = ({ src }: DownloadProps) => {
             </button>
 
             <div ref={dropdownRef}
-                className={[clicked ? 'visible opacity-[1] transition-all ease-in-out' : 'invisible opacity-0 transition-all', 'z-[5] absolute top-[18%] md:top-[14%] lg:top-[18%] right-[5%] lg:w-[10rem] w-[8rem] bg-gray-700 rounded'].join(' ')}>
+                className={[clicked ? 'visible opacity-[1] transition-all ease-in-out' : 'invisible opacity-0 transition-all', 'z-[5] absolute top-[16%] md:top-[14%] lg:top-[15%] right-[5%] lg:w-[10rem] md:w-[10rem] w-[8rem] bg-gray-700 rounded'].join(' ')}>
                 <a href={src}
                     target='_blank'
                     download>
-                    <button className='w-full py-[5%] lg:px-[2%] lg:py-[6%] lg:p-[12%] border-b-[1px] border-b-gray-400 bg-gray-600 text-[white] hover:bg-gray-500 rounded-[5px] transition-all'>
+                    <button className='w-full py-[5%] lg:px-[2%] lg:py-[6%] lg:p-[12%] border-b-[1px] border-b-gray-400 bg-gray-700 text-[white] hover:bg-gray-500 rounded-[5px] transition-all'>
                         Download
                     </button>
                 </a>

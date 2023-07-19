@@ -3,7 +3,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { ReactNode, useEffect, useRef } from 'react'
 
 type PopupProps = {
-    handleClick: () => void,
     children?: ReactNode,
     state: boolean,
     setState: React.Dispatch<React.SetStateAction<boolean>>
@@ -12,28 +11,13 @@ type PopupProps = {
 
 const Popup = (props: PopupProps) => {
 
-    const { handleClick, children, state, setState, textContent } = props;
+    const { children, state, setState, textContent } = props;
 
     const popupRef = useRef(null);
-
-    // useEffect(() => {
-    //     const closePopup = (e: MouseEvent) => {
-    //         if (popupRef.current) {
-    //             !popupRef.current.contains(e.target as Node) ? setState(false) : null
-    //         }
-    //     }
-
-    //     document.addEventListener('click', closePopup);
-
-    //     return () => {
-    //         document.removeEventListener('click', closePopup);
-    //     }
-    // }, [])
 
     return (
         <div
             ref={popupRef}
-            // onClick={handleClick}
             className={[state ? 'transition-transform fixed rounded-[35px] blur-dark inset-0 bg-black lg:w-[25rem] md:w-[25rem] w-[80%] lg:h-[30rem] md:h-[28rem] h-[25rem] top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] lg:p-[1%] md:p-[2%] p-[4%] duration-500 ease-in-out' : 'fixed top-[300%] left-[50%] translate-x-[-50%] w-[25rem] h-[30rem] transition-all opacity-0 duration-1000'].join(' ')}
         >
             {children}

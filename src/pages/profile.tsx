@@ -12,7 +12,8 @@ import { useInfiniteScroll } from '~/hooks/useInfiniteScroll'
 import Download from '~/component/download'
 import { env } from '~/env.mjs'
 import { GetServerSidePropsContext } from 'next';
-import Spinner from '~/component/spinner'
+import Backdrop from '@mui/material/Backdrop';
+import CircularProgress from '@mui/material/CircularProgress';
 import IconShowcase from '~/component/iconShowcase'
 import Popup from '~/component/popup'
 
@@ -126,18 +127,22 @@ const Profile: NextPage = () => {
                     </div>
 
                     {/* Loading spinner */}
-                    <Spinner isLoading={isFetching} />
+                    <Backdrop
+                        sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+                        open={isFetching}
+                    >
+                        <CircularProgress color="inherit" />
+                    </Backdrop>
 
                     {/* Popup modal */}
                     <Popup
-                        handleClick={() => setClicked(false)}
                         state={clicked}
                         setState={setClicked}
                         textContent={selectedImage.heading}>
                         <Image
                             src={selectedImage.src}
-                            width={150}
-                            height={150}
+                            width={350}
+                            height={350}
                             alt='selected image'
                             className='rounded-[inherit] object-cover w-[100%] mx-auto'
                             priority={true}

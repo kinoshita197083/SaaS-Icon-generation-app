@@ -6,11 +6,12 @@ import PageTemplate from '~/component/page/pageTemplate'
 import CloseButton from '~/component/closeButton'
 import { useInfiniteScroll } from '~/hooks/useInfiniteScroll'
 import { env } from '~/env.mjs'
-import Spinner from '~/component/spinner'
 import Image from 'next/image'
 import IconShowcase from '~/component/iconShowcase'
 import IconWrapper from '~/component/iconWrapper'
 import Popup from '~/component/popup'
+import Backdrop from '@mui/material/Backdrop';
+import CircularProgress from '@mui/material/CircularProgress';
 
 const Community: NextPage = () => {
 
@@ -95,18 +96,22 @@ const Community: NextPage = () => {
                     </div>
 
                     {/* Loading spinner */}
-                    <Spinner isLoading={isFetching} />
+                    <Backdrop
+                        sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+                        open={isFetching}
+                    >
+                        <CircularProgress color="inherit" />
+                    </Backdrop>
 
                     {/* Popup modal */}
                     <Popup
-                        handleClick={() => setClicked(false)}
                         state={clicked}
                         setState={setClicked}
                         textContent={selectedImage.heading}>
                         <Image
                             src={selectedImage.src}
-                            width={150}
-                            height={150}
+                            width={350}
+                            height={350}
                             alt='selected image'
                             className='rounded-[inherit] object-cover w-[100%] mx-auto'
                             priority={true}

@@ -1,6 +1,3 @@
-import { faSpinner } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { getHTTPStatusCodeFromError } from "@trpc/server/http";
 import { NextPage } from "next"
 import { signIn, useSession } from "next-auth/react";
 import Head from "next/head";
@@ -13,16 +10,28 @@ import PageTemplate from "~/component/page/pageTemplate";
 import { colors } from "~/material/color";
 import { styles } from "~/material/styles";
 import { api } from "~/utils/api";
+import Skeleton from '@mui/material/Skeleton';
+import CircularProgress from '@mui/material/CircularProgress';
+import MuiAlert, { AlertProps } from '@mui/material/Alert';
+import React from "react";
+import Tooltip from '@mui/material/Tooltip';
+import TextField from '@mui/material/TextField';
 
+const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(
+    props,
+    ref,
+) {
+    return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+});
 
 const Generate: NextPage = () => {
 
     //Default Config for initial page load
     const defaultImage = ['/jene.jpg'];
-    const defaultStyle = '';
+    const defaultStyle = 'Default';
     // const defaultColor = 'sky blue';
     const defaultColor = '';
-    const defaultText = 'Abyssinian cat';
+    // const defaultText = 'Abyssinian cat';
     const defaultNumberOfImages = 1;
 
     //Form State
@@ -44,17 +53,7 @@ const Generate: NextPage = () => {
     //Auth verification
     const { status } = useSession()
     const isLoggedIn = status === 'authenticated';
-    const generateInstance = api.generate.generateIcon.useMutation({
-        // onError(error) {
-        //     setError(true);
-        //     if (error.data?.code === 'BAD_REQUEST') {
-        //         setErrorMsg('Not enough credit');
-        //     } else {
-        //         setErrorMsg('Error: Transaction Cancelled')
-        //     }
-        //     setTimeout(() => setError(false), 3000);
-        // }
-    });
+    const generateInstance = api.generate.generateIcon.useMutation();
 
     const inputCSS = 'mt-[1%] mb-[8%] h-[2.5rem] w-full text-gray-200 lg:text-[1.5rem] px-[2%] outline-gray-800 bg-transparent border-b border-white';
 
@@ -77,10 +76,10 @@ const Generate: NextPage = () => {
             }
         }
         catch (error) {
-            setError(true)
-            const httpCode = getHTTPStatusCodeFromError(error);
-            setErrorMsg(`${httpCode}: transaction cancelled`)
-            setTimeout(() => setError(false), 3000);
+            setError(true);
+            const message = error.message;
+            setErrorMsg(message);
+            setTimeout(() => setError(false), 5000);
         }
 
         setFormData(prev => ({ ...prev, prompt: '', color: defaultColor, style: defaultStyle, loading: false }))
@@ -102,16 +101,28 @@ const Generate: NextPage = () => {
             </Head>
 
             <PageTemplate>
-                <form className="mt-[5%] lg:w-[55%]" onSubmit={handleSubmit}>
-                    <section className="">
-                        <FormLabel
-                            label="Descibe your icon"
-                        />
-                        <input
-                            className={inputCSS}
+                <form className="mt-[5%] lg:mt-[1%] md:mt-[3%] lg:w-[55%]" onSubmit={handleSubmit}>
+                    <section className="mb-[5%]">
+                        <TextField
+                            label="Desribe your icon"
+                            maxRows={4}
+                            multiline
+                            variant="standard"
+                            fullWidth
                             value={formData.prompt}
                             onChange={e => updateForm('prompt', e.target.value)}
-                            placeholder={defaultText}
+                            InputLabelProps={{
+                                style: { fontSize: '1.3rem', color: 'white' },
+                            }}
+                            InputProps={{
+                                style: { color: 'white', fontSize: '1.5rem' },
+                            }}
+                            helperText="Shorter prompt usaully works better"
+                            FormHelperTextProps={{
+                                sx: {
+                                    color: 'rgb(129 140 248)',
+                                },
+                            }}
                         />
                     </section>
 
@@ -124,18 +135,17 @@ const Generate: NextPage = () => {
                                 className="flex my-[5%]"
                             >
                                 <button type="button"
-                                    className={["lg:w-[20%] w-[50%] text-gray-100 transition-all", colorOption === 'default' ? 'border-b-4 border-indigo-500' : 'border-b-4 border-transparent'].join(' ')}
+                                    className={["lg:w-[20%] w-[50%] text-gray-100 transition-all", colorOption === 'default' ? 'border-b-4 border-indigo-500' : 'border-b-4 border-gray-700'].join(' ')}
                                     onClick={() => setColorOption('default')}>
                                     Default
                                 </button>
 
                                 <button type="button"
-                                    className={["lg:w-[20%] w-[50%] text-gray-100 transitional-all", colorOption === 'colorPicker' ? 'border-b-4 border-indigo-500' : 'border-b-4 border-transparent'].join(' ')}
+                                    className={["lg:w-[20%] w-[50%] text-gray-100 transitional-all", colorOption === 'colorPicker' ? 'border-b-4 border-indigo-500' : 'border-b-4 border-gray-700'].join(' ')}
                                     onClick={() => setColorOption('colorPicker')}>
                                     ColorPicker
                                 </button>
                             </div>
-
 
                             {colorOption === 'colorPicker' &&
                                 <div className="h-[4rem] lg:w-[40%] w-full flex items-center justify-center">
@@ -173,27 +183,49 @@ const Generate: NextPage = () => {
                             label="Select a style"
                         />
                         <div className="flex gap-[3%] flex-wrap mt-[2%] mb-[8%]">
-                            {styles.map((style, index) => {
-                                const styleSample = Object.values(style).toString();
-                                const styleName = Object.keys(style).toString();
+                            {styles.map(style => {
 
-                                const target = formData.style === styleName
+                                const target = formData.style === style.prompt
 
                                 return (
-                                    <button
-                                        key={index}
-                                        className="aspect-square lg:w-[6rem] lg:h-[6rem] w-[5rem] h-[5rem] mt-[2.5%] border rounded cursor-pointer hover:scale-[1.2] duration-100"
-                                        onClick={e => updateForm('style', (e.target as HTMLButtonElement).value)}
-                                        style={{ background: `url(${styleSample}) no-repeat center`, backgroundSize: 'cover', border: target ? '2px solid white' : '', transform: target ? 'scale(1.2)' : '' }}
-                                        type='button'
-                                        value={styleName}
-                                    />
+                                    <Tooltip key={style.style} title={style.style}>
+                                        <button
+                                            key={style.style}
+                                            className="aspect-square lg:w-[6rem] lg:h-[6rem] w-[5rem] h-[5rem] mt-[2.5%] border rounded cursor-pointer hover:scale-[1.2] duration-100"
+                                            onClick={e => updateForm('style', (e.target as HTMLButtonElement).value)}
+                                            style={{ background: `url(${style.src}) no-repeat center`, backgroundSize: 'cover', border: target ? '2px solid white' : '', transform: target ? 'scale(1.2)' : '' }}
+                                            type='button'
+                                            value={style.prompt}
+                                        />
+                                    </Tooltip>
                                 )
                             })}
                         </div>
                     </section>
 
-                    <section className="">
+                    {/* <section role="advance configuration sub-menu"
+                        className={['h-[2.5rem] overflow-hidden bg-gray-800 rounded py-[1%] mb-[5%] cursor-pointer'].join(' ')}>
+                        <div className="pl-[5%]">
+                            <FormLabel
+                                label="Advance"
+                            />
+                        </div>
+                        <ul>
+                            <li>
+                                <FormLabel
+                                    label="Subject position"
+                                />
+                            </li>
+
+                            <li>
+                                <FormLabel
+                                    label="Subject posture"
+                                />
+                            </li>
+                        </ul>
+                    </section> */}
+
+                    <section>
                         <FormLabel
                             label="Number of images"
                         />
@@ -209,7 +241,7 @@ const Generate: NextPage = () => {
                     {isLoggedIn ?
                         <Button
                             disabled={formData.prompt.length > 1 ? false : true}>
-                            Generate
+                            {formData.loading ? 'Processing ...' : 'Generate'}
                         </Button>
                         :
                         <Button
@@ -220,22 +252,36 @@ const Generate: NextPage = () => {
                         </Button>}
 
                     {error &&
-                        <div className="absolute w-[30%] h-[3rem] flex items-center justify-center rounded bg-red-500 bottom-[1rem] left-[50%] translate-x-[-50%]">
-                            <h3 className="text-gray-100">{errorMsg}</h3>
-                        </div>}
+                        <div className="lg:absolute w-full left-[50%] flex items-center justify-center lg:translate-x-[-50%]">
+                            <Alert severity="error">{errorMsg}</Alert>
+                        </div>
+                    }
                 </form>
                 <section className="relative flex aspect-square lg:w-[45%] h-[auto] w-[100%] my-[8%] mx-auto lg:m-auto bg-gray-700 rounded-[15px]">
-                    <Carousel
-                        images={formData.imageURLs}
-                        downloadable
-                    />
 
-                    {formData.loading &&
-                        <FontAwesomeIcon
-                            icon={faSpinner}
-                            className="absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] text-white text-[5rem] loading"
-                        />
-                    }
+                    {formData.loading ?
+                        <>
+                            <Skeleton
+                                sx={{ bgcolor: 'grey.900' }}
+                                variant="rectangular"
+                                width={'100%'}
+                                height={'100%'}
+                                className='rounded-[inherit]'
+                            /> <CircularProgress
+                                size={54}
+                                sx={{
+                                    position: 'absolute',
+                                    top: '50%',
+                                    left: '50%',
+                                    marginTop: '-25px',
+                                    marginLeft: '-25px',
+                                }}
+                            />
+                        </>
+                        : <Carousel
+                            images={formData.imageURLs}
+                            downloadable
+                        />}
                 </section>
 
                 <CloseButton />

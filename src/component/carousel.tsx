@@ -13,7 +13,6 @@ type CarouselProps = {
 const Carousel = (props: CarouselProps) => {
 
     const { images, downloadable, autoplay } = props;
-
     const [currentIndex, setCurrentIndex] = useState(0);
 
     const currentImage = images[currentIndex];

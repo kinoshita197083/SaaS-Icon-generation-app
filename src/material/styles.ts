@@ -1,37 +1,61 @@
 export const styles = [
     {
-        'modern': '/modern.png'
+        style: 'modern',
+        prompt: '',
+        src: '/modern.png'
     },
     {
-        'anime manga miyazaki anime movie': '/water_paint.png'
+        style: 'charcoal art',
+        prompt: 'charcoal sketch, black and white',
+        src: '/charcoal_sketch.png'
     },
     {
-        'mosaic': ''
+        style: 'pixelated',
+        prompt: 'pixelated',
+        src: '/pixelated.png'
     },
     {
-        'charcoal sketch, black and white': '/charcoal_sketch.png'
+        style: 'Inspired by Alphonse Mucha',
+        prompt: 'painting by Alphonse Mucha',
+        src: '/Alphonse_Mucha.png'
     },
     {
-        'pixelated': '/pixelated.png'
+        style: '3D',
+        prompt: 'Pixar style 3D render, 4k, trending in artstation, unreal engine',
+        src: '/brad.jpg'
     },
     {
-        'painting by Alphonse Mucha': '/Alphonse_Mucha.png'
+        style: 'Anime',
+        prompt: 'Anime key visuals, fate stay night order, 2020s anime, HD, illustrated by Takeuchi Takashi',
+        src: '/anime.png'
     },
     {
-        'Pixar style 3D render, 4k, trending in artstation, unreal engine': '/brad.jpg'
+        style: '90s',
+        prompt: 'In the style of 90s, color contrast',
+        src: '/90s-style.png'
     },
     {
-        'Anime key visuals, fate stay night order, 2020s anime, HD, illustrated by Takeuchi Takashi': '/anime.png'
+        style: 'Film/Camera',
+        prompt: 'distant view, center portrait, a full-length shot, film camera style',
+        src: '/film-camera-style.png'
     },
     {
-        'A series of anime stickers on a white background': '/paint.png'
+        style: 'Digital Camera',
+        prompt: 'In a style of compact digital Canon camera, sleek, nature forest background with blur style',
+        src: '/digital-camera.png'
     },
     {
-        'In the style of 90s, color contrast': '/90s-style.png'
+        style: '3D V2',
+        prompt: '3D, Character centered, prominent and bright, with a relatively darker background, Overall harmonious color palette',
+        src: '/small-3-d.png'
     },
     {
-        'distant view, center portrait, a full-length shot, film camera style': '/film-camera-style.png'
+        style: 'Default',
+        prompt: '',
+        src: ''
     },
+
+
     // {
     //     'In the style of retrofuturism, smooth lines': '/retrofuturism.png'
     // },
@@ -42,13 +66,5 @@ export const styles = [
     // },
 
     // 补全背景： nature forest background with blur style
-    {
-        'In a style of compact digital Canon camera, sleek, nature forest background with blur style': '/digital-camera.png'
-    },
-    {
-        '3D, Character centered, prominent and bright, with a relatively darker background, Overall harmonious color palette.': '/small-3-d.png'
-    },
-    {
-        'default': ''
-    },
+
 ];

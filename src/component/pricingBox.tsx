@@ -29,10 +29,10 @@ const PricingBox = (props: PricingBoxProps) => {
                     <h4 className='text-[3rem] text-gray-100'>
                         {price}
                     </h4>
-                    <h3 className="text-[2rem] text-gray-100">
+                    <h3 className="text-[1.7rem] font-thin text-gray-100">
                         for {credits} credits
                     </h3>
-                    <p className='text-gray-100 my-[10%]'>
+                    <p className='text-gray-100 font-thin my-[10%]'>
                         As low as {eachCost} per generation
                     </p>
                     <p className='text-gray-200 bg-gray-900 w-[12rem] text-center rounded border-[0.5px] border-gray-400 mt-[5%]'>
