@@ -1,13 +1,14 @@
 import Link from "next/link";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import styles from '../styles/navbar.module.css'
-import { useEffect, useRef, useState } from 'react';
+import { Suspense, useEffect, useRef, useState } from 'react';
 import { faGhost } from '@fortawesome/free-solid-svg-icons';
 import { signIn, signOut, useSession } from "next-auth/react";
 import { api } from "~/utils/api";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import MenuIcon from "./menuIcon";
+import { CircularProgress } from "@mui/material";
 
 type NavItem = {
     text: string,
@@ -152,6 +153,17 @@ const Navbar = (props: NavbarProps) => {
                             </li>
 
                             <ul ref={dropDownRef} className={subMenuClicked ? styles.subNavMenu : [styles.subNavMenu, styles.hidden].join(' ')}>
+                                <Suspense fallback={<CircularProgress
+                                    size={54}
+                                    sx={{
+                                        position: 'absolute',
+                                        top: '50%',
+                                        left: '50%',
+                                        marginTop: '-25px',
+                                        marginLeft: '-25px',
+                                    }}
+                                />}>
+                                </Suspense>
                                 <li onClick={() => { router.push('/profile').catch(console.error) }}
                                     className={styles.navItem}>
                                     Profile

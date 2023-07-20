@@ -17,17 +17,20 @@ const Community: NextPage = () => {
 
     const [clicked, setClicked] = useState(false);
     const [selectedImage, setSelectedImage] = useState({
-        src: '/jene.jpg',
+        src: '',
         heading: '',
+        loading: false,
     });
 
     const handleClick = (image: string, prompt: string) => {
-        setClicked(true);
+        updateSelectedImage('src', '');
+        selectedImage.src !== image && updateSelectedImage('loading', true)
         updateSelectedImage('src', image);
         updateSelectedImage('heading', prompt)
+        setClicked(true);
     }
 
-    const updateSelectedImage = (key: string, value: string) => {
+    const updateSelectedImage = (key: string, value: string | boolean) => {
         setSelectedImage(prev => ({
             ...prev,
             [key]: value
@@ -107,6 +110,7 @@ const Community: NextPage = () => {
                     <Popup
                         state={clicked}
                         setState={setClicked}
+                        isLoading={selectedImage.loading}
                         textContent={selectedImage.heading}>
                         <Image
                             src={selectedImage.src}
@@ -114,6 +118,7 @@ const Community: NextPage = () => {
                             height={350}
                             alt='selected image'
                             className='rounded-[inherit] object-cover w-[100%] mx-auto'
+                            onLoad={() => updateSelectedImage('loading', false)}
                             priority={true}
                         />
                     </Popup>

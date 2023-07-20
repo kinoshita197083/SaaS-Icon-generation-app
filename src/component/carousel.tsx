@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useEffect, useState } from 'react';
 import styles from '../styles/carousel.module.css';
 import Download from './download';
+import Image from 'next/image';
 
 type CarouselProps = {
     images: string[],
@@ -71,8 +72,10 @@ const Carousel = (props: CarouselProps) => {
             {images.map((image, index) => {
                 return (
                     <div key={index} className={currentIndex === index ? [styles.slide, styles.active].join(' ') : [styles.slide].join(' ')}>
-                        <img
+                        <Image
                             key={index + 5}
+                            width={800}
+                            height={800}
                             src={image}
                             alt='carousel image'
                             className={styles.carouselImage}

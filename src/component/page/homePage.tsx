@@ -1,3 +1,5 @@
+import { faBookBookmark, faLightbulb } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Link from 'next/link';
 import React from 'react';
 import Carousel from '~/component/carousel';
@@ -5,7 +7,7 @@ import Carousel from '~/component/carousel';
 const HomePage = () => {
     return (
         // Outer White background
-        <div className='min-h-full px-[2%] lg:px-[8%] lg:py-[5%] lg:pt-[0]'>
+        <div className='min-h-full px-[2%] lg:px-[8%] lg:py-[5%] lg:pt-[0] fade-in'>
 
             {/* Gradient Background */}
             <div className='bg-[url(/90s-style.png)] lg:rounded-[45px] md:rounded-[35px] rounded-[15px] bg-no-repeat bg-cover w-full h-full'>
@@ -36,31 +38,21 @@ const HomePage = () => {
                                 </div>
                             </Link>
 
-                            <Link href={'/'}>
-                                <div className='aspect-square lg:w-[15rem] w-full  lg:h-[15rem] bg-yellow-300 rounded-[18px] lg:rounded-[28px] p-[4%] m-auto lg:mb-[0] md:mx-[2%] md:mb-[2%] mb-[5%]'>
+                            <Link href={'/prompt-engineer'}>
+                                <div className='relative aspect-square lg:w-[15rem] w-full  lg:h-[15rem] bg-yellow-300 rounded-[18px] lg:rounded-[28px] p-[4%] m-auto lg:mb-[0] md:mx-[2%] md:mb-[2%] mb-[5%]'>
                                     <h4 className='text-gray-800'>
                                         Prompt Engineering
                                     </h4>
-                                    <img
-                                        src='/lightbulb.svg'
-                                        width='80%'
-                                        height='80%'
-                                        className='m-auto mt-[8%]'
-                                    />
+                                    <FontAwesomeIcon icon={faLightbulb} className='text-[7rem] text-yellow-700 absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%]' />
                                 </div>
                             </Link>
 
-                            <Link href={'/'}>
-                                <div className='aspect-square lg:w-[15rem] w-full lg:h-[15rem] bg-gray-100 rounded-[18px] md:mx-[2%] lg:rounded-[28px] p-[4%] m-auto'>
+                            <Link href={'/recipe'}>
+                                <div className='relative aspect-square lg:w-[15rem] w-full lg:h-[15rem] bg-gray-100 rounded-[18px] md:mx-[2%] lg:rounded-[28px] p-[4%] m-auto'>
                                     <h4 className='text-gray-500 text-[1.4rem]'>
                                         Icon Recipe
                                     </h4>
-                                    <img
-                                        src='/bread.svg'
-                                        width='80%'
-                                        height='80%'
-                                        className='m-auto mt-[8%]'
-                                    />
+                                    <FontAwesomeIcon icon={faBookBookmark} className='text-[6rem] text-gray-400 absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%]' />
                                 </div>
                             </Link>
 
@@ -68,7 +60,7 @@ const HomePage = () => {
 
                         <section className='bg-gray-400 h-[25rem] my-[5%] lg:my-0 lg:w-full lg:h-[31rem] rounded-[25px] overflow-hidden'>
                             <Carousel
-                                images={['/Icon_recipe_1.png', '/ape.jpg', 'chihuahua.png']}
+                                images={['/Icon_recipe_1.png', '/ape.jpg', '/chihuahua.png']}
                                 autoplay
                             />
                         </section>

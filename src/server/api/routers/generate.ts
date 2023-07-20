@@ -81,7 +81,7 @@ export const generateRouter = createTRPCRouter({
 
             try {
                 // masterpiece, hyper detailed, high-resolution, elegant, perfect face, upper body,
-                const summary = `${input.prompt}, 1080p, 8k, ultra-quality, deepth focus, hyper detailed, high-resolution, elegant, perfect face, color theme-${input.color}, ${input.style} style`;
+                const summary = `${input.prompt}, 1080p, 8k, ultra-quality, deepth focus, hyper detailed, high-resolution, elegant, perfect face, ${input.style} style, with a ${input.color} background theme`;
 
                 const base64EncodedImageList = await generateIcon(summary, input.n);
                 console.log('Icons generation completed...')

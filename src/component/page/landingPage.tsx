@@ -39,8 +39,10 @@ const LandingPage = () => {
             <Poster />
 
             <section className={styles.cardContainer}>
-                <Card mainHeading='Fresh Beginning Sales' subHeading="It's happening !" bgImage='./matrix.jpg'></Card>
-                <Card mainHeading={`Celebrating ${icons} Creative Creations!`} subHeading='Iconic Milestone' bgImage='./brad.jpg'></Card>
+                <Link href={'/purchase'} className='lg:mx-[auto] md:mb-[1%]'>
+                    <Card mainHeading='Fresh Beginning Sales' subHeading="It's happening !" bgImage='./sample_girl.png'></Card>
+                </Link>
+                <Card mainHeading={`Celebrating ${icons} Creative Creations!`} subHeading='Iconic Milestone' bgImage='./fuji.png'></Card>
             </section>
 
             <AdBanner

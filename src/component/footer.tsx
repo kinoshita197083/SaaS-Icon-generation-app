@@ -9,10 +9,10 @@ const Footer = () => {
 
             <div className="mt-[2%] flex flex-col justify-center items-center">
                 <Link href={'/terms-of-service'}>
-                    <p className="text-indigo-700">Terms of Service</p>
+                    <p className="text-gray-400 text-[0.8rem] font-thin">Terms of Service</p>
                 </Link>
                 <Link href={'/privacy-policy'}>
-                    <p className="text-indigo-700">Privacy Policy</p>
+                    <p className="text-gray-400 text-[0.8rem] font-thin">Privacy Policy</p>
                 </Link>
             </div>
 
