@@ -50,6 +50,11 @@ export const styles = [
         src: '/small-3-d.png'
     },
     {
+        style: 'Inspired by Abigail Larson',
+        prompt: 'intricate and hauntingly beautiful art style,inspiration from gothic and Victorian aesthetics,features dark, atmospheric settings, macabre themes, and delicate use of line and color.',
+        src: '/female-robot.png'
+    },
+    {
         style: 'Default',
         prompt: '',
         src: ''
