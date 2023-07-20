@@ -24,7 +24,7 @@ const LandingPage = () => {
                 <h3 className='leading-[1.5] mt-[3%]'>Effortlessly Create Eye-Catching Icons</h3>
                 <br />
                 <div role='button-group'>
-                    <Link href={'/generate'}>
+                    <Link href={'/get-started'}>
                         <Button>Get started</Button>
                     </Link>
                     <span className='mr-[2%]' />
