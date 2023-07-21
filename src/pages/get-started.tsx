@@ -49,7 +49,7 @@ const GetStarted: NextPage = () => {
 
             <section>
                 <h2 className='text-[1.4rem] text-center mb-[2%] animate-fadein animate__flipInX'>
-                    Fill out the generation form
+                    Customise your generation
                 </h2>
                 <Player
                     autoplay
@@ -63,7 +63,7 @@ const GetStarted: NextPage = () => {
                 <br />
                 <br />
                 <h2 className='text-[1.4rem] text-center mb-[2%] animate-fadein animate__flipInX'>
-                    Send it to our backend for processing
+                    Dispatch
                 </h2>
                 <Player
                     autoplay

@@ -30,16 +30,9 @@ const PromptEngineer: NextPage = () => {
 
             <section className='flex gap-[2%] lg:mt-0 md:mt-0 mt-[5%]'>
                 <Image
-                    src={'/brad.jpg'}
+                    src={'/crashed.png'}
                     alt={'Example images generated with ambiguous prompts'}
-                    width={150}
-                    height={220}
-                    className='rounded'
-                />
-                <Image
-                    src={'/brad.jpg'}
-                    alt={'Example images generated with ambiguous prompts'}
-                    width={150}
+                    width={250}
                     height={220}
                     className='rounded'
                 />

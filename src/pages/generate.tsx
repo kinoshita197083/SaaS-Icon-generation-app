@@ -16,6 +16,7 @@ import MuiAlert, { AlertProps } from '@mui/material/Alert';
 import React from "react";
 import Tooltip from '@mui/material/Tooltip';
 import TextField from '@mui/material/TextField';
+import { z } from 'zod';
 
 const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(
     props,
@@ -24,15 +25,28 @@ const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(
     return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
 });
 
+const formDataSchema = z.object({
+    prompt: z.string(),
+    color: z.string(),
+    style: z.string(),
+    n: z.number(),
+    imageURLs: z.array(z.string()),
+    loading: z.boolean(),
+});
+
 const Generate: NextPage = () => {
 
     //Default Config for initial page load
     const defaultImage = ['/jene.jpg'];
     const defaultStyle = 'Default';
-    // const defaultColor = 'sky blue';
     const defaultColor = '';
     // const defaultText = 'Abyssinian cat';
     const defaultNumberOfImages = 1;
+
+    //Auth verification
+    const { status } = useSession()
+    const isLoggedIn = status === 'authenticated';
+    const generateInstance = api.generate.generateIcon.useMutation();
 
     //Form State
     const [formData, setFormData] = useState({
@@ -44,52 +58,59 @@ const Generate: NextPage = () => {
         loading: false,
     });
 
-    const [colorOption, setColorOption] = useState('default');
-
-    //Error Message state
-    const [error, setError] = useState(false);
-    const [errorMsg, setErrorMsg] = useState('');
-
-    //Auth verification
-    const { status } = useSession()
-    const isLoggedIn = status === 'authenticated';
-    const generateInstance = api.generate.generateIcon.useMutation();
-
-    const inputCSS = 'mt-[1%] mb-[8%] h-[2.5rem] w-full text-gray-200 lg:text-[1.5rem] px-[2%] outline-gray-800 bg-transparent border-b border-white';
-
-    const handleSubmit = async (e: FormEvent) => {
-        updateForm('loading', true)
-        e.preventDefault();
-
-        try {
-            const response = await generateInstance.mutateAsync({
-                prompt: formData.prompt,
-                color: formData.color,
-                style: formData.style,
-                n: +formData.n,
-            });
-
-            if (response.images) {
-                updateForm('imageURLs', response.images)
-            } else {
-                console.log(response)
-            }
-        }
-        catch (error) {
-            setError(true);
-            const message = error.message;
-            setErrorMsg(message);
-            setTimeout(() => setError(false), 5000);
-        }
-
-        setFormData(prev => ({ ...prev, prompt: '', color: defaultColor, style: defaultStyle, loading: false }))
-    }
-
+    //Update Form property
     const updateForm = (key: string, value: string | boolean | number | string[]) => {
         setFormData(prev => ({
             ...prev,
             [key]: value
         }))
+    }
+
+    //Choosing whether the default pre-configured colors or color-picker
+    const [colorOption, setColorOption] = useState('default');
+
+    //Error Message state
+    const [error, setError] = useState({
+        activate: false,
+        message: ''
+    });
+
+    const validateFormData = () => {
+        try {
+            formDataSchema.parse(formData);
+        } catch (error) {
+            setError({
+                activate: true,
+                message: `Invalid Data: ${error}`
+            })
+            setTimeout(() => setError({ activate: false, message: '' }), 5000);
+        }
+    }
+
+    const handleSubmit = async (e: FormEvent) => {
+        e.preventDefault();
+        updateForm('loading', true)
+        validateFormData();
+
+        try {
+            const response = await generateInstance.mutateAsync({
+                prompt: (formData.prompt).trim(),
+                color: formData.color,
+                style: formData.style,
+                n: +formData.n,
+            });
+
+            if (response.images) updateForm('imageURLs', response.images);
+
+        } catch (error) {
+            setError({
+                activate: true,
+                message: error.message,
+            });
+            setTimeout(() => setError({ activate: false, message: '' }), 5000);
+        } finally {
+            setFormData(prev => ({ ...prev, prompt: '', color: defaultColor, style: defaultStyle, loading: false }))
+        }
     }
 
     return (
@@ -105,19 +126,20 @@ const Generate: NextPage = () => {
                     <section className="mb-[5%]">
                         <TextField
                             label="Desribe your icon"
+                            required
                             maxRows={4}
                             multiline
                             variant="standard"
                             fullWidth
                             value={formData.prompt}
-                            onChange={e => updateForm('prompt', e.target.value)}
+                            onChange={e => updateForm('prompt', (e.target.value).replace(/[!@#$%^&*()\-_=+[\]{};:'",.<>?|`~\\/]/g, ''))}
                             InputLabelProps={{
                                 style: { fontSize: '1.3rem', color: 'white' },
                             }}
                             InputProps={{
                                 style: { color: 'white', fontSize: '1.5rem' },
                             }}
-                            helperText="Shorter prompt usaully works better"
+                            helperText="Detailed prompt usaully works better"
                             FormHelperTextProps={{
                                 sx: {
                                     color: 'rgb(129 140 248)',
@@ -127,10 +149,9 @@ const Generate: NextPage = () => {
                     </section>
 
                     <section className="mb-[8%] ">
-                        <FormLabel
-                            label="Theme color"
-                        />
+                        <FormLabel label="Theme color" />
                         <div>
+                            {/* Button Group let user select either pre-configured colors or color-picker */}
                             <div role="button-group"
                                 className="flex my-[5%]"
                             >
@@ -235,7 +256,8 @@ const Generate: NextPage = () => {
                             onChange={e => updateForm('n', e.target.value)}
                             type="number"
                             min={1}
-                            defaultValue={1} />
+                            max={9}
+                            defaultValue={defaultNumberOfImages} />
                     </section>
 
                     {isLoggedIn ?
@@ -251,12 +273,14 @@ const Generate: NextPage = () => {
                             Sign in to start generating
                         </Button>}
 
-                    {error &&
+                    {error.activate &&
                         <div className="lg:absolute w-full left-[50%] flex items-center justify-center lg:translate-x-[-50%]">
-                            <Alert severity="error">{errorMsg}</Alert>
+                            <Alert severity="error">{error.message}</Alert>
                         </div>
                     }
                 </form>
+
+                {/* The generated image placeholder */}
                 <section className="relative flex aspect-square lg:w-[45%] h-[auto] w-[100%] my-[8%] mx-auto lg:m-auto bg-gray-700 rounded-[15px]">
 
                     {formData.loading ?
@@ -285,7 +309,6 @@ const Generate: NextPage = () => {
                 </section>
 
                 <CloseButton />
-
 
             </PageTemplate>
         </>

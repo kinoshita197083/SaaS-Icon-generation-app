@@ -3,7 +3,7 @@
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(11rem, 1fr));
     height: 70vh;
-    overflow: auto;
+    overflow: scroll;
     scroll-snap-type: y proximity;
 }
 

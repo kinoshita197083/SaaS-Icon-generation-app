@@ -42,8 +42,7 @@ const HomePage = () => {
                                         loop
                                         src="community.json"
                                         style={{ height: '100%', width: '100%' }}
-                                    >
-                                    </Player>
+                                    />
                                 </div>
                             </Link>
 
@@ -57,8 +56,7 @@ const HomePage = () => {
                                         loop
                                         src="bulb.json"
                                         style={{ height: '80%', width: '80%' }}
-                                    >
-                                    </Player>
+                                    />
                                 </div>
                             </Link>
 
@@ -77,7 +75,11 @@ const HomePage = () => {
 
                         <section className='bg-gray-400 h-[25rem] my-[5%] lg:my-0 lg:w-full lg:h-[31rem] rounded-[25px] overflow-hidden'>
                             <Carousel
-                                images={['/Icon_recipe_1.png', '/ape.jpg', '/chihuahua.png']}
+                                images={[
+                                    '/Icon_recipe_1.png',
+                                    '/ape.jpg',
+                                    '/chihuahua.png'
+                                ]}
                                 autoplay
                             />
                         </section>

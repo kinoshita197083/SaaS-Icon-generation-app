@@ -1,10 +1,5 @@
 export const styles = [
     {
-        style: 'modern',
-        prompt: '',
-        src: '/modern.png'
-    },
-    {
         style: 'charcoal art',
         prompt: 'charcoal sketch, black and white',
         src: '/charcoal_sketch.png'
