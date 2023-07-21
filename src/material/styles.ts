@@ -45,11 +45,11 @@ export const styles = [
         prompt: '3D, Character centered, prominent and bright, with a relatively darker background, Overall harmonious color palette',
         src: '/small-3-d.png'
     },
-    {
-        style: 'Inspired by Abigail Larson',
-        prompt: 'intricate and hauntingly beautiful art style,inspiration from gothic and Victorian aesthetics,atmospheric settings, features dark, macabre themes, and delicate use of line and color',
-        src: '/female-robot.png'
-    },
+    // {
+    //     style: 'Inspired by Abigail Larson',
+    //     prompt: 'intricate and hauntingly beautiful art style,inspiration from gothic and Victorian aesthetics,atmospheric settings, features dark, macabre themes, and delicate use of line and color',
+    //     src: '/female-robot.png'
+    // },
     {
         style: 'Default',
         prompt: '',
