@@ -101,6 +101,7 @@ const Profile: NextPage = () => {
 
                         {/* All generated icons display section */}
                         <div className='lg:w-[70%] p-[1%] overflow-auto'>
+                            <h4 className='text-gray-300 text-[1.8rem] lg:ml-[2rem] my-[2%]'>Results: {icons?.length}</h4>
                             <IconShowcase>
                                 {icons.map((icon, index) => {
 

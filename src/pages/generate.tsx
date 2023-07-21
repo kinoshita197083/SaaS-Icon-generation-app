@@ -25,14 +25,14 @@ const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(
     return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
 });
 
-const formDataSchema = z.object({
-    prompt: z.string(),
-    color: z.string(),
-    style: z.string(),
-    n: z.number(),
-    imageURLs: z.array(z.string()),
-    loading: z.boolean(),
-});
+// const formDataSchema = z.object({
+//     prompt: z.string(),
+//     color: z.string(),
+//     style: z.string(),
+//     n: z.number(),
+//     imageURLs: z.array(z.string()),
+//     loading: z.boolean(),
+// });
 
 const Generate: NextPage = () => {
 
@@ -75,22 +75,22 @@ const Generate: NextPage = () => {
         message: ''
     });
 
-    const validateFormData = () => {
-        try {
-            formDataSchema.parse(formData);
-        } catch (error) {
-            setError({
-                activate: true,
-                message: `Invalid Data: ${error}`
-            })
-            setTimeout(() => setError({ activate: false, message: '' }), 5000);
-        }
-    }
+    // const validateFormData = () => {
+    //     try {
+    //         formDataSchema.parse(formData);
+    //     } catch (error) {
+    //         setError({
+    //             activate: true,
+    //             message: `Invalid Data: ${error}`
+    //         })
+    //         setTimeout(() => setError({ activate: false, message: '' }), 5000);
+    //     }
+    // }
 
     const handleSubmit = async (e: FormEvent) => {
         e.preventDefault();
         updateForm('loading', true)
-        validateFormData();
+        // validateFormData();
 
         try {
             const response = await generateInstance.mutateAsync({
@@ -132,7 +132,7 @@ const Generate: NextPage = () => {
                             variant="standard"
                             fullWidth
                             value={formData.prompt}
-                            onChange={e => updateForm('prompt', (e.target.value).replace(/[!@#$%^&*()\-_=+[\]{};:'",.<>?|`~\\/]/g, ''))}
+                            onChange={e => updateForm('prompt', (e.target.value).replace(/[!@#$%^&*()\-_=+[\]{};:'".<>?|`~\\/]/g, ''))}
                             InputLabelProps={{
                                 style: { fontSize: '1.3rem', color: 'white' },
                             }}

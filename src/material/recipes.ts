@@ -14,7 +14,13 @@ export const recipes = [
     {
         id: 3,
         prompt: "A view of a man's back, looking at the horizon",
-        style: 'File/Camera',
+        style: 'Film/Camera',
         image: '/film-camera-style.png',
+    },
+    {
+        id: 4,
+        prompt: "a women sitting in the taxi, stopping in the middle of the street",
+        style: '90s',
+        image: '/woman_taxi.png',
     },
 ];

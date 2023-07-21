@@ -27,7 +27,7 @@ const Recipe: NextPage = () => {
 
 
             <div className='flex justify-center items-center mt-[8%]'>
-                <Link href={'/recipe'}>
+                <Link href={'/prompt-engineer'}>
                     <button type='button' className='btn'>Learn more about prompt</button>
                 </Link>
             </div>

@@ -1,7 +1,7 @@
 export const styles = [
     {
         style: 'charcoal art',
-        prompt: 'charcoal sketch, black and white',
+        prompt: 'black and white, sketched by Rembrandt',
         src: '/charcoal_sketch.png'
     },
     {
@@ -21,7 +21,8 @@ export const styles = [
     },
     {
         style: 'Anime',
-        prompt: 'Anime key visuals, fate stay night order, 2020s anime, HD, illustrated by Takeuchi Takashi',
+        // prompt: 'Anime key visuals, fate stay night order, 2020s anime, HD, illustrated by Takeuchi Takashi',
+        prompt: 'Gelbooru Image Database | Sankakucomplex Image Database | Shuushuu Image Database | Safebooru Digital Art Image | Pixiv',
         src: '/anime.png'
     },
     {
