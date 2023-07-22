@@ -20,7 +20,7 @@ const Profile: NextPage = () => {
     const { data: session, status } = useSession()
     const isLoggedIn = status === 'authenticated';
 
-    const limit = 50;
+    const limit = 200;
 
     const [clicked, setClicked] = useState(false);
     const [selectedImage, setSelectedImage] = useState({
@@ -100,15 +100,15 @@ const Profile: NextPage = () => {
                         </section>
 
                         {/* All generated icons display section */}
-                        <div className='lg:w-[70%] p-[1%] overflow-auto'>
-                            <h4 className='text-gray-300 text-[1.8rem] lg:ml-[2rem] my-[2%]'>Results: {icons?.length}</h4>
+                        <div className='lg:w-[70%] p-[1%]'>
+                            {/* <h4 className='text-gray-300 text-[1.8rem] lg:ml-[2rem] my-[2%]'>Results: {icons?.length}</h4> */}
                             <IconShowcase>
                                 {icons.map((icon, index) => {
 
                                     const iconSrc = `${env.NEXT_PUBLIC_BUCKET}${icon.id}`
                                     if (icons.length === index + 1) {
                                         return (
-                                            <div key={icon.id} ref={scrollContainerRef} className='m-0 flex justify-center'>
+                                            <div key={icon.id} ref={scrollContainerRef} className=' lg:my-[6%] md:my-[0] my-[5%] mx-[auto] snap-always'>
                                                 <IconWrapper
                                                     key={icon.id}
                                                     iconId={icon.id}

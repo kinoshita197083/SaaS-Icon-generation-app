@@ -37,7 +37,7 @@ const Community: NextPage = () => {
         }))
     }
 
-    const limit = 50;
+    const limit = 70;
     const scrollContainerRef = useRef(null);
 
     const { data, fetchNextPage, hasNextPage, isFetching } = api.icons.getAllUsersIcons.useInfiniteQuery(

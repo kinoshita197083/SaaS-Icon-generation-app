@@ -42,7 +42,7 @@ const LandingPage = () => {
                 <Link href={'/purchase'} className='lg:mx-[auto] md:mb-[1%]'>
                     <Card mainHeading='Fresh Beginning Sales' subHeading="It's happening !" bgImage='./sample_girl.png'></Card>
                 </Link>
-                <Card mainHeading={`Celebrating ${icons} Creative Creations!`} subHeading='Iconic Milestone' bgImage='./fuji.png'></Card>
+                <Card mainHeading={`Celebrating ${icons} Creative Creations!`} subHeading='Iconic Milestone' bgImage='./sample_15.png'></Card>
             </section>
 
             <AdBanner

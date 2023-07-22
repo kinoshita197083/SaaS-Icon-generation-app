@@ -16,7 +16,7 @@ import MuiAlert, { AlertProps } from '@mui/material/Alert';
 import React from "react";
 import Tooltip from '@mui/material/Tooltip';
 import TextField from '@mui/material/TextField';
-import { z } from 'zod';
+import { Select, MenuItem, SelectChangeEvent } from "@mui/material";
 
 const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(
     props,
@@ -25,22 +25,13 @@ const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(
     return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
 });
 
-// const formDataSchema = z.object({
-//     prompt: z.string(),
-//     color: z.string(),
-//     style: z.string(),
-//     n: z.number(),
-//     imageURLs: z.array(z.string()),
-//     loading: z.boolean(),
-// });
-
 const Generate: NextPage = () => {
 
     //Default Config for initial page load
     const defaultImage = ['/jene.jpg'];
+    const defaultOrientation = 'side-face';
     const defaultStyle = 'Default';
-    const defaultColor = '';
-    // const defaultText = 'Abyssinian cat';
+    const defaultColor = 'sky-blue';
     const defaultNumberOfImages = 1;
 
     //Auth verification
@@ -54,6 +45,7 @@ const Generate: NextPage = () => {
         color: defaultColor,
         style: defaultStyle,
         n: defaultNumberOfImages,
+        orientation: defaultOrientation,
         imageURLs: defaultImage,
         loading: false,
     });
@@ -75,18 +67,6 @@ const Generate: NextPage = () => {
         message: ''
     });
 
-    // const validateFormData = () => {
-    //     try {
-    //         formDataSchema.parse(formData);
-    //     } catch (error) {
-    //         setError({
-    //             activate: true,
-    //             message: `Invalid Data: ${error}`
-    //         })
-    //         setTimeout(() => setError({ activate: false, message: '' }), 5000);
-    //     }
-    // }
-
     const handleSubmit = async (e: FormEvent) => {
         e.preventDefault();
         updateForm('loading', true)
@@ -97,6 +77,7 @@ const Generate: NextPage = () => {
                 prompt: (formData.prompt).trim(),
                 color: formData.color,
                 style: formData.style,
+                orientation: formData.orientation,
                 n: +formData.n,
             });
 
@@ -109,7 +90,16 @@ const Generate: NextPage = () => {
             });
             setTimeout(() => setError({ activate: false, message: '' }), 5000);
         } finally {
-            setFormData(prev => ({ ...prev, prompt: '', color: defaultColor, style: defaultStyle, loading: false }))
+            setFormData(prev => (
+                {
+                    ...prev,
+                    prompt: '',
+                    color: defaultColor,
+                    style: defaultStyle,
+                    orientation: defaultOrientation,
+                    loading: false,
+                }
+            ))
         }
     }
 
@@ -224,27 +214,23 @@ const Generate: NextPage = () => {
                         </div>
                     </section>
 
-                    {/* <section role="advance configuration sub-menu"
-                        className={['h-[2.5rem] overflow-hidden bg-gray-800 rounded py-[1%] mb-[5%] cursor-pointer'].join(' ')}>
-                        <div className="pl-[5%]">
-                            <FormLabel
-                                label="Advance"
-                            />
-                        </div>
-                        <ul>
-                            <li>
-                                <FormLabel
-                                    label="Subject position"
-                                />
-                            </li>
-
-                            <li>
-                                <FormLabel
-                                    label="Subject posture"
-                                />
-                            </li>
-                        </ul>
-                    </section> */}
+                    <section className="my-[5%]">
+                        <FormLabel
+                            label="Face orientation"
+                        />
+                        <Select
+                            value={formData.orientation}
+                            label="Age"
+                            fullWidth
+                            variant="standard"
+                            onChange={(e: SelectChangeEvent) => updateForm('orientation', e.target.value)}
+                            className="text-gray-100"
+                        >
+                            <MenuItem value={'center portrait'}>Center</MenuItem>
+                            <MenuItem value={'side-face'}>Side Face</MenuItem>
+                            <MenuItem value={'close-up'}>Close-up</MenuItem>
+                        </Select>
+                    </section>
 
                     <section>
                         <FormLabel

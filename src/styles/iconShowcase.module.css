@@ -2,7 +2,7 @@
     position: relative;
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(11rem, 1fr));
-    height: 70vh;
+    height: 73vh;
     overflow: scroll;
     scroll-snap-type: y proximity;
 }
