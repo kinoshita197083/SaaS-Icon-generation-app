@@ -3,7 +3,7 @@ import React from 'react'
 import 'animate.css';
 import { Player } from '@lottiefiles/react-lottie-player';
 import Link from 'next/link';
-import { Head } from 'next/document';
+import Head from 'next/head'
 
 const GetStarted: NextPage = () => {
     return (

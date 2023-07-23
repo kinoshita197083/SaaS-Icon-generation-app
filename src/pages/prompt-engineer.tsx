@@ -1,7 +1,7 @@
 import { faLightbulb } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { NextPage } from 'next'
-import { Head } from 'next/document'
+import Head from 'next/head'
 import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
@@ -12,20 +12,10 @@ const PromptEngineer: NextPage = () => {
     return (
         <>
             <Head>
-                {/* Document Title */}
-                <title>Imagin - AI Powered Icon Generation</title>
+                <title>Prompt Structure - Imagin</title>
+                <meta name='description' content='Learn more about how to structure your prompts to get the best possible results' />
+                <meta name='robots' content='index, follow' />
                 <link rel="icon" href="logo.svg" />
-
-                {/* Meta Tags */}
-                <meta name='description' content='Generate custom icons using AI-powered technology. Imagin empowers you to create unique icons effortlessly.' />
-                <meta name='keywords' content='icon generation, AI-powered icons, custom icons, icon creator' />
-                <meta name='author' content='Imagin World Platform' />
-
-                {/* Open Graph (OG) Tags for Social Media Sharing */}
-                <meta property='og:title' content='Imagin - AI Powered Icon Generation' />
-                <meta property='og:description' content='Generate custom icons using AI-powered technology. Imagin empowers you to create unique icons effortlessly.' />
-                <meta property='og:image' content='logo.svg' />
-                <meta property='og:url' content='https://www.imaginworld.com/' />
             </Head>
             <div className='min-h-[100vh] p-[8%] pt-[18%] lg:pt-[8%] md:pt-[8%] lg:px-[15%] md:px-[10%] px-[6%]'>
                 <h1 className='lg:text-6xl md:text-5xl text-4xl font-thin lg:mb-[8%] md:mb-[6%] animate-fadein'>Prompt Engineering</h1>

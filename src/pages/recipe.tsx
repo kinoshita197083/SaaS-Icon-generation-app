@@ -1,9 +1,8 @@
 import { NextPage } from 'next'
-import Image from 'next/image'
 import Link from 'next/link'
 import RecipeSection from '../component/recipe'
 import { recipes } from '../material/recipes'
-import { Head } from 'next/document'
+import Head from 'next/head'
 
 const Recipe: NextPage = () => {
 

@@ -1,6 +1,6 @@
 import { NextPage } from 'next'
 import Head from 'next/head'
-import React, { useEffect } from 'react'
+import React from 'react'
 import PricingBox from '~/component/pricingBox'
 import styles from '../styles/purchase.module.css'
 import PageTemplate from '~/component/page/pageTemplate'
