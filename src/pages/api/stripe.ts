@@ -22,10 +22,10 @@ const handleCredits = () => {
         incrementCredit = 55
     }
     if (pricePaid === 1300) {
-        incrementCredit = 120
+        incrementCredit = 160
     }
     if (pricePaid === 2700) {
-        incrementCredit = 250
+        incrementCredit = 270
     }
 }
 
