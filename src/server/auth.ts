@@ -70,8 +70,6 @@ export const authOptions: NextAuthOptions = {
       from: process.env.EMAIL_FROM
     }),
 
-
-
     // EmailProvider({
     //   server: `smtp://${process.env.EMAIL_SERVER_USER}:${process.env.EMAIL_SERVER_PASSWORD}@${process.env.EMAIL_SERVER_HOST}`,
     //   from: process.env.EMAIL_FROM,
