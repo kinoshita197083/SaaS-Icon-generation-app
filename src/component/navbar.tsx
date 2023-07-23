@@ -142,7 +142,7 @@ const Navbar = (props: NavbarProps) => {
                                 ref={triggerDropDownRef}
                                 onClick={() => setSubMenuClicked(!subMenuClicked)}
                             >
-                                <Image src={session?.user.image || '/ape.jpg'}
+                                <Image src={session?.user.image || '/user.jpg'}
 
                                     alt='profile picture'
                                     width='35'

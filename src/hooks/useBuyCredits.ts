@@ -1,4 +1,5 @@
 import { loadStripe } from '@stripe/stripe-js';
+import { Dispatch } from 'react';
 import { env } from '~/env.mjs';
 import { api } from '~/utils/api';
 
@@ -19,21 +20,14 @@ export function useBuyCredits() {
     }
 
     return {
-        // buyCredits: async (priceId: number) => {
-        //     const response = await checkout.mutateAsync({
-        //         priceId: priceId,
-        //     });
-        //     const stripe = await stripePromise;
-        //     await stripe?.redirectToCheckout({
-        //         sessionId: response.id,
-        //     })
-        // },
-
-        handleBuyCredits: async (priceId: number) => {
+        handleBuyCredits: async (priceId: number, setLoading?: Dispatch<React.SetStateAction<boolean>>) => {
+            setLoading(true);
             try {
                 await buyCredits(priceId);
             } catch (err) {
                 console.log(err);
+            } finally {
+                setLoading(false);
             }
         }
     }

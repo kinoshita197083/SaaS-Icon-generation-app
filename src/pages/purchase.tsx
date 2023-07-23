@@ -1,12 +1,15 @@
 import { NextPage } from 'next'
 import Head from 'next/head'
-import React from 'react'
+import React, { useState } from 'react'
 import PricingBox from '~/component/pricingBox'
 import styles from '../styles/purchase.module.css'
 import PageTemplate from '~/component/page/pageTemplate'
 import { useBuyCredits } from '~/hooks/useBuyCredits'
+import { Backdrop, CircularProgress } from '@mui/material'
 
 const Purchase: NextPage = () => {
+
+    const [isLoading, setLoading] = useState(false);
 
     const { handleBuyCredits } = useBuyCredits();
 
@@ -37,7 +40,7 @@ const Purchase: NextPage = () => {
                             price={'AUD $7'}
                             credits={'55'}
                             eachCost='$0.13'
-                            handleClick={() => handleBuyCredits(1)}
+                            handleClick={() => handleBuyCredits(1, setLoading)}
                         />
                         <PricingBox
                             plan={'I have ideas'}
@@ -46,17 +49,26 @@ const Purchase: NextPage = () => {
                             popular
                             eachCost='$0.08'
                             promotion={'Fresh Beginnings Sale'}
-                            handleClick={() => handleBuyCredits(2)}
+                            handleClick={() => handleBuyCredits(2, setLoading)}
                         />
                         <PricingBox
                             plan={'Make something grand'}
                             price={'AUD $27'}
                             credits={'270'}
                             eachCost='$0.1'
-                            handleClick={() => handleBuyCredits(3)}
+                            handleClick={() => handleBuyCredits(3, setLoading)}
                         />
                     </section>
                 </div>
+
+                {isLoading &&
+                    <Backdrop
+                        sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+                        open={isLoading}
+                    >
+                        <CircularProgress color="inherit" />
+                    </Backdrop>
+                }
             </PageTemplate>
 
         </>
