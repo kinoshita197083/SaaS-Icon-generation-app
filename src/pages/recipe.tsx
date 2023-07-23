@@ -18,6 +18,7 @@ const Recipe: NextPage = () => {
                             key={recipe.id}
                             prompt={recipe.prompt}
                             style={recipe.style}
+                            color={recipe.color}
                             imageSrc={recipe.image}
                             reverse={recipe.id % 2 === 0}
                         />

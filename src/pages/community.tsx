@@ -37,7 +37,7 @@ const Community: NextPage = () => {
         }))
     }
 
-    const limit = 70;
+    const limit = 50;
     const scrollContainerRef = useRef(null);
 
     const { data, fetchNextPage, hasNextPage, isFetching } = api.icons.getAllUsersIcons.useInfiniteQuery(
@@ -68,7 +68,7 @@ const Community: NextPage = () => {
                         <h4 className='text-gray-300 text-[1rem] my-[2%]'>Results: {allIcons?.length}</h4>
                     </section>
 
-                    <div>
+                    <div className='h-[85%]'>
                         <IconShowcase>
                             {allIcons?.map((icon, index) => {
 
@@ -122,7 +122,6 @@ const Community: NextPage = () => {
                             priority={true}
                         />
                     </Popup>
-
                 </div>
                 <CloseButton />
             </PageTemplate>

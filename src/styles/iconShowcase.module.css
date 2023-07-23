@@ -1,15 +1,28 @@
 .gridContainer {
+    background-color: black;
     position: relative;
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(11rem, 1fr));
-    height: 73vh;
+    border-radius: 15px;
+    /* height: 70vh; */
+    height: 95%;
+    padding-inline: 1%;
+    padding-bottom: 2%;
     overflow: scroll;
-    scroll-snap-type: y proximity;
 }
 
 @media (max-width: 800px) {
     .gridContainer {
         grid-template-columns: repeat(auto-fit, minmax(6rem, 1fr));
+        column-gap: 1%;
         height: 50vh;
+    }
+}
+
+@media (max-width: 600px) {
+    .gridContainer {
+        grid-template-columns: repeat(auto-fit, minmax(4rem, 1fr));
+        column-gap: 1%;
+        height: 53vh;
     }
 }

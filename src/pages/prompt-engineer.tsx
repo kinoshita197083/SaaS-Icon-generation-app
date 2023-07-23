@@ -18,15 +18,20 @@ const PromptEngineer: NextPage = () => {
             <p>After thousands of trials and certain amount of research, we have come to a conclusion that prompts structured as follows are more likely to yield good images:</p>
 
             <br />
-            <p className='text-center lg:my-[3%] text-gray-600 text-[1.3rem]'>&#123;adjective&#125; &#123;emotion&#125; &#123;Subject&#125;, &#123;behavior&#125;, &#123;position&#125;, &#123;background&#125;</p>
+            <p className='text-center lg:my-[3%] text-gray-600 text-[1.3rem]'>&#123;adjective&#125; &#123;emotion&#125; &#123;Subject&#125;, &#123;behavior&#125;, &#123;background&#125;</p>
 
-            <p className='lg:mt-[5%] md:mt-[5%] mt-[10%]'>Ideally, your prompt should include at least two components:</p>
+            <p className='lg:mt-[5%] lg:mb-[3%]'>By abstracting much of the complexity and handling the heavy lifting for you, you can solely focus on transforming your imagination into real artwork.</p>
+
+            <p className='lg:mt-[5%] md:mt-[5%] mt-[10%]'>Ideally, your prompt should still include at least two components:</p>
             <ul className='my-[2%]'>
                 <li>- A Subject</li>
-                <li>- A Style</li>
+                <li>- Some characteristics</li>
             </ul>
 
-            <p className='lg:mt-[8%] lg:mb-[3%]'>For ambiguous prompts (without: style, color, behaviour, posture, etc.)</p>
+            <p className=''>For example:</p><br />
+            <p className='text-gray-500 font-bold pl-[5%]'>&apos;A girl with pink hair&apos;</p>
+
+            <p className='lg:mt-[8%] lg:mb-[3%]'>For ambiguous prompts (without: pre-configurations, style, color, behaviour, posture, etc.)</p>
 
             <section className='flex gap-[2%] lg:mt-0 md:mt-0 mt-[5%]'>
                 <Image

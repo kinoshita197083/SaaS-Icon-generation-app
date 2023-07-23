@@ -18,6 +18,7 @@ export function useInfiniteScroll(
             const target = entries[0];
             if (target.isIntersecting && hasNextPage && !isFetching) {
                 fetchNextPage && fetchNextPage();
+                observer.unobserve(target.target);
             }
         }, options);
 

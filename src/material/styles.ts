@@ -59,11 +59,11 @@ export const styles = [
     {
         style: 'Realism Art',
         prompt: 'realism painting by Gustave Courbet, realist, 19th century, elegant, deepth focus, perfect face',
-        src: '/realism.jpg'
+        src: '/realism_2.jpg'
     },
     {
         style: 'Urban Photography',
-        prompt: 'street photgraphy shoot by George Hurrell, urban, black & white, wide shot, perfect face, elegant, hyper detailed, deepth focus, 8k, ultra-quality',
+        prompt: 'street photography shoot by George Hurrell, urban, black & white, wide shot, perfect face, elegant, hyper detailed, deepth focus, 8k, ultra-quality',
         src: '/uban_photo.jpg'
     },
     {

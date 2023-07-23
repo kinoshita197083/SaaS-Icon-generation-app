@@ -31,7 +31,7 @@ const Generate: NextPage = () => {
     const defaultImage = ['/jene.jpg'];
     const defaultOrientation = 'side-face';
     const defaultStyle = 'Default';
-    const defaultColor = 'sky-blue';
+    const defaultColor = 'clean';
     const defaultNumberOfImages = 1;
 
     //Auth verification
@@ -129,7 +129,7 @@ const Generate: NextPage = () => {
                             InputProps={{
                                 style: { color: 'white', fontSize: '1.5rem' },
                             }}
-                            helperText="Detailed prompt usaully works better"
+                            helperText="Concise and precise prompts generally yield better results"
                             FormHelperTextProps={{
                                 sx: {
                                     color: 'rgb(129 140 248)',
@@ -140,6 +140,7 @@ const Generate: NextPage = () => {
 
                     <section className="mb-[8%] ">
                         <FormLabel label="Theme color" />
+                        <p className="text-indigo-400 text-[0.8rem]">* Color applies only to styles without pre-configured colors</p>
                         <div>
                             {/* Button Group let user select either pre-configured colors or color-picker */}
                             <div role="button-group"
@@ -224,7 +225,7 @@ const Generate: NextPage = () => {
                             fullWidth
                             variant="standard"
                             onChange={(e: SelectChangeEvent) => updateForm('orientation', e.target.value)}
-                            className="text-gray-100"
+                            style={{ color: 'white' }}
                         >
                             <MenuItem value={'center portrait'}>Center</MenuItem>
                             <MenuItem value={'side-face'}>Side Face</MenuItem>

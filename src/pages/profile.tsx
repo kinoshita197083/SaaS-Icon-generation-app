@@ -20,7 +20,7 @@ const Profile: NextPage = () => {
     const { data: session, status } = useSession()
     const isLoggedIn = status === 'authenticated';
 
-    const limit = 200;
+    const limit = 50;
 
     const [clicked, setClicked] = useState(false);
     const [selectedImage, setSelectedImage] = useState({
@@ -56,7 +56,7 @@ const Profile: NextPage = () => {
         }
     );
 
-    useInfiniteScroll(scrollContainerRef, hasNextPage, isFetching, void fetchNextPage)
+    useInfiniteScroll(scrollContainerRef, hasNextPage, isFetching, fetchNextPage)
 
     const icons = data?.pages.flatMap((page) => page.icons) || [];
 
@@ -73,7 +73,7 @@ const Profile: NextPage = () => {
                     <div className='w-full lg:h-[35rem] md:h-[35rem] h-[45rem] flex flex-col lg:flex-row md:flex-row gap-0 lg:mt-0 md:mt-0 mt-[8%]'>
                         <section
                             role='profile-tab'
-                            className='lg:w-[30%] md:w-[30%] w-[full] p-[5%] bg-black rounded-bl-[25px] rounded-tl-[25px]'
+                            className='lg:w-[30%] md:w-[30%] w-[full] p-[5%] bg-black lg:rounded-bl-[25px] rounded-tl-[25px] lg:rounded-tr-[0px] md:rounded-tr-[0px] rounded-tr-[25px] md:rounded-bl-[25px]'
                         >
                             <Image
                                 src={session?.user.image || '/ape.jpg'}
@@ -95,20 +95,20 @@ const Profile: NextPage = () => {
                                 </h2>
                             </div>
 
-
                             <hr className='my-[8%]' />
+
+                            <h2 className='text-gray-100'>Results: {icons.length}</h2>
                         </section>
 
                         {/* All generated icons display section */}
-                        <div className='lg:w-[70%] p-[1%]'>
-                            {/* <h4 className='text-gray-300 text-[1.8rem] lg:ml-[2rem] my-[2%]'>Results: {icons?.length}</h4> */}
+                        <div className='lg:w-[70%] md:w-[70%] p-[1%] h-[35rem] bg-black lg:rounded-tr-[25px] md:rounded-tr-[25px] rounded-br-[25px] lg:rounded-bl-[0px] md:rounded-bl-[0px] rounded-bl-[25px]'>
                             <IconShowcase>
                                 {icons.map((icon, index) => {
 
                                     const iconSrc = `${env.NEXT_PUBLIC_BUCKET}${icon.id}`
                                     if (icons.length === index + 1) {
                                         return (
-                                            <div key={icon.id} ref={scrollContainerRef} className=' lg:my-[6%] md:my-[0] my-[5%] mx-[auto] snap-always'>
+                                            <div key={icon.id} ref={scrollContainerRef} className='mx-[auto] h-[fit-content]'>
                                                 <IconWrapper
                                                     key={icon.id}
                                                     iconId={icon.id}
@@ -160,7 +160,6 @@ const Profile: NextPage = () => {
                                 src={selectedImage.src}
                             />
                         </Popup>
-
                     </div>
 
                     <CloseButton />
