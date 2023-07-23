@@ -30,7 +30,7 @@ export const checkoutRouter = createTRPCRouter({
             }
 
             return stripe.checkout.sessions.create({
-                payment_method_types: ['card', 'au_becs_debit'],
+                // payment_method_types: ['card', 'au_becs_debit'],
                 metadata: {
                     // keep tracking user id per payment, so that credits can apply to the user
                     userId: ctx.session.user.id,
