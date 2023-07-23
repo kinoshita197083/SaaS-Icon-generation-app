@@ -18,7 +18,7 @@ let incrementCredit: number;
 let pricePaid: number;
 
 const handleCredits = () => {
-    if (pricePaid === 55) {
+    if (pricePaid === 700) {
         incrementCredit = 55
     }
     if (pricePaid === 1300) {
