@@ -62,7 +62,7 @@ const PromptEngineer: NextPage = () => {
 
             <div className='flex items-center justify-center my-[2%]'>
                 <Image
-                    src={'/90s-a middle age asian man, sadly standing in the middle of the street.png'}
+                    src={'/a_middle_age asian_man_sadly_standing_in_the_middle_of_the_street.jpg'}
                     alt={'Example images generated with ambiguous prompts'}
                     width={350}
                     height={420}
