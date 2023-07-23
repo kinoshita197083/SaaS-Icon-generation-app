@@ -76,7 +76,7 @@ const Profile: NextPage = () => {
                             className='lg:w-[30%] md:w-[30%] w-[full] p-[5%] bg-black lg:rounded-bl-[25px] rounded-tl-[25px] lg:rounded-tr-[0px] md:rounded-tr-[0px] rounded-tr-[25px] md:rounded-bl-[25px]'
                         >
                             <Image
-                                src={session?.user.image || '/ape.jpg'}
+                                src={session?.user.image || '/user.jpg'}
                                 alt='user profile picture'
                                 width='100'
                                 height='100'
