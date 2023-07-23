@@ -81,7 +81,8 @@ const Generate: NextPage = () => {
                 n: +formData.n,
             });
 
-            if (response.images) updateForm('imageURLs', response.images);
+            // if (response.images) updateForm('imageURLs', response.images);
+            updateForm('imageURLs', response.images);
 
         } catch (error) {
             setError({
