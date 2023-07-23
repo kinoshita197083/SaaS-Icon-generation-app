@@ -63,9 +63,10 @@ const Profile: NextPage = () => {
     return (
         <>
             <Head>
-                <title>Icon Generation</title>
-                <meta name='ai-generation' content='ai powered icon generation' />
-                {/* <link rel="icon" href="" /> */}
+                <title>{session?.user.name}'s Profile - Your Website Name</title>
+                <meta name='description' content={`View ${session?.user.name}'s profile on our website. Get to know more about ${session?.user.name}'s interests and activities.`} />
+                <meta name='robots' content='index, follow' />
+                <link rel="icon" href="logo.svg" />
             </Head>
 
             {isLoggedIn ?

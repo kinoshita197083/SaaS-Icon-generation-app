@@ -42,6 +42,21 @@ const Home: NextPage = () => {
   return (
     <>
       <Head>
+        {/* Document Title */}
+        <title>Imagin - AI Powered Icon Generation</title>
+
+        {/* Meta Tags */}
+        <meta name='description' content='Generate custom icons using AI-powered technology. Imagin empowers you to create unique icons effortlessly.' />
+        <meta name='keywords' content='icon generation, AI-powered icons, custom icons, icon creator' />
+        <meta name='author' content='Imagin World Platform' />
+        <meta name='robots' content='index, follow' />
+        <link rel='canonical' href='https://www.imaginworld.com/' />
+
+        {/* Open Graph (OG) Tags for Social Media Sharing */}
+        <meta property='og:title' content='Imagin - AI Powered Icon Generation' />
+        <meta property='og:description' content='Generate custom icons using AI-powered technology. Imagin empowers you to create unique icons effortlessly.' />
+        <meta property='og:image' content='logo.svg' />
+        <meta property='og:url' content='https://www.imaginworld.com/' />
       </Head>
       <main ref={main} className='frame py-[8%] lg:py-[2%] font-sans'>
         {pages.map((page) => {

@@ -106,9 +106,10 @@ const Generate: NextPage = () => {
     return (
         <>
             <Head>
-                <title>Icon Generation</title>
-                <meta name='ai-generation' content='ai powered icon generation' />
-                {/* <link rel="icon" href="" /> */}
+                <title>Imagin - AI Powered Icon Generation</title>
+                <link rel="icon" href="logo.svg" />
+                <meta name='description' content='Generate custom icons by filling out our icon-generation form. Create unique icons for your projects with ease.' />
+                <meta name='robots' content='index, follow' />
             </Head>
 
             <PageTemplate>
