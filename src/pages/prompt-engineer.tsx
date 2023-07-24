@@ -15,7 +15,7 @@ const PromptEngineer: NextPage = () => {
                 <title>Prompt Structure - Imagin</title>
                 <meta name='description' content='Learn more about how to structure your prompts to get the best possible results' />
                 <meta name='robots' content='index, follow' />
-                <link rel="icon" href="logo.svg" />
+                <link rel="icon" href="logo_bulb.png" />
             </Head>
             <div className='min-h-[100vh] p-[8%] pt-[18%] lg:pt-[8%] md:pt-[8%] lg:px-[15%] md:px-[10%] px-[6%]'>
                 <h1 className='lg:text-6xl md:text-5xl text-4xl font-thin lg:mb-[8%] md:mb-[6%] animate-fadein'>Prompt Engineering</h1>

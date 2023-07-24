@@ -8,7 +8,7 @@ const Terms: NextPage = () => {
             <Head>
                 {/* Document Title */}
                 <title>Terms of Service - Imagin</title>
-                <link rel="icon" href="logo.svg" />
+                <link rel="icon" href="logo_bulb.png" />
 
                 {/* Meta Tags */}
                 <meta name='description' content='Read our terms of service to learn about the terms and conditions that apply to your use of our website.' />
@@ -56,6 +56,7 @@ const Terms: NextPage = () => {
                 <p>To the maximum extent permitted under applicable law, the Platform, on its own behalf and on behalf of its Affiliates and its and their respective licensors and service providers, expressly disclaims all warranties, whether express, implied, statutory or otherwise, with respect to the Service, including all implied warranties of merchantability, fitness for a particular purpose, title and non-infringement, and warranties that may arise out of course of dealing, course of performance, usage or trade practice. Without limitation to the foregoing, the Platform provides no warranty or undertaking, and makes no representation of any kind that the Service will meet Your requirements, achieve any intended results, be compatible or work with any other software, applications, systems or services, operate without interruption, meet any performance or reliability standards or be error free or that any errors or defects can or will be corrected.</p>
 
                 <h4 className='font-bold text-2xl my-[2%]'>Disputes Resolution</h4>
+                <p>Please note that, generations are not refundable.</p>
                 <p>If You have any concern or dispute about the Service, You agree to first try to resolve the dispute informally by contacting the Platform.</p>
 
                 <h4 className='font-bold text-2xl my-[2%]'>Changes to These Terms and Conditions</h4>

@@ -108,7 +108,7 @@ const Generate: NextPage = () => {
         <>
             <Head>
                 <title>Imagin - AI Powered Icon Generation</title>
-                <link rel="icon" href="logo.svg" />
+                <link rel="icon" href="logo_bulb.png" />
                 <meta name='description' content='Generate custom icons by filling out our icon-generation form. Create unique icons for your projects with ease.' />
                 <meta name='robots' content='index, follow' />
             </Head>

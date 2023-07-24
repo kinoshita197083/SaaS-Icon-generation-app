@@ -42,7 +42,7 @@ const Home: NextPage = () => {
       <Head>
         {/* Document Title */}
         <title>Imagin - AI Powered Icon Generation</title>
-        <link rel="icon" href="logo.svg" />
+        <link rel="icon" href="logo_bulb.png" />
 
         {/* Meta Tags */}
         <meta name='description' content='Generate custom icons using AI-powered technology. Imagin empowers you to create unique icons effortlessly.' />

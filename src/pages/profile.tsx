@@ -66,7 +66,7 @@ const Profile: NextPage = () => {
                 <title>{session?.user.name}&apos;s Profile - Your Website Name</title>
                 <meta name='description' content={`View ${session?.user.name}'s profile on our website. Get to know more about ${session?.user.name}'s interests and activities.`} />
                 <meta name='robots' content='index, follow' />
-                <link rel="icon" href="logo.svg" />
+                <link rel="icon" href="logo_bulb.png" />
             </Head>
 
             {isLoggedIn ?

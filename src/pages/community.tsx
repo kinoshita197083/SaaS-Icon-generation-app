@@ -62,7 +62,7 @@ const Community: NextPage = () => {
                 <title>Community Icons - Imagin</title>
                 <meta name='description' content='Explore the community-generated icons on our website. See the creative work of various users and discover unique icon designs.' />
                 <meta name='robots' content='index, follow' />
-                <link rel="icon" href="logo.svg" />
+                <link rel="icon" href="logo_bulb.png" />
             </Head>
             <PageTemplate>
                 <div className='flex flex-col w-full lg:h-[40rem] md:h-[40rem] h-[72vh] relative'>

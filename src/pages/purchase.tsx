@@ -19,7 +19,7 @@ const Purchase: NextPage = () => {
                 <title>Buy Credits - Imagin</title>
                 <meta name='description' content='Purchase credits to test out your ideas and boost your imagination further.' />
                 <meta name='robots' content='index, follow' />
-                <link rel="icon" href="logo.svg" />
+                <link rel="icon" href="logo_bulb.png" />
             </Head>
 
             <PageTemplate>

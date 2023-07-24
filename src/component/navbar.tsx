@@ -103,8 +103,14 @@ const Navbar = (props: NavbarProps) => {
                 {/* Logo Group */}
                 <Link href={'/'}>
                     <div className={[styles.logoGroup, 'font-semibold'].join(' ')}>
-                        <FontAwesomeIcon icon={faGhost} size='2x' className={styles.navLogo} />
-                        <h2 className='text-[1.6rem]'>{projectName}</h2>
+                        {/* <FontAwesomeIcon icon={faGhost} size='2x' className={styles.navLogo} /> */}
+                        <Image
+                            src={'/logo_bulb.png'}
+                            width={42}
+                            height={42}
+                            alt="logo"
+                        />
+                        <h2 className='ml-[3%] text-[1.6rem]'>{projectName}</h2>
                     </div>
                 </Link>
 

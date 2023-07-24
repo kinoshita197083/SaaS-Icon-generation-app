@@ -13,7 +13,7 @@ const Recipe: NextPage = () => {
                 <title>Icon Recipe - Imagin</title>
                 <meta name='description' content='Explore our icon recipe to boost your imagination further. Find the perfect icons for your projects.' />
                 <meta name='robots' content='index, follow' />
-                <link rel="icon" href="logo.svg" />
+                <link rel="icon" href="logo_bulb.png" />
             </Head>
 
             <div className='min-h-[100vh] p-[8%] pt-[18%] lg:pt-[8%] md:pt-[8%] lg:px-[15%] md:px-[10%] px-[2%]'>

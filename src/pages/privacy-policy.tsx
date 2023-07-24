@@ -8,7 +8,7 @@ const Privacy: NextPage = () => {
             <Head>
                 {/* Document Title */}
                 <title>Privacy Policy - Imagin</title>
-                <link rel="icon" href="logo.svg" />
+                <link rel="icon" href="logo_bulb.png" />
 
                 {/* Meta Tags */}
                 <meta name='description' content='Read our Privacy Policy to learn how we handle and protect your personal information.' />
