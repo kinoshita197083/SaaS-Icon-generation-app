@@ -44,15 +44,19 @@ const Home: NextPage = () => {
         <title>Imagin - AI Powered Icon Generation</title>
         <link rel="icon" href="logo_bulb.png" />
 
+        {/* Google Verification */}
+        <meta name="google-site-verification" content="h4Sv-GJ7Xfp15IVuzm8JvzkjIGaaVY7Ly-GWi0zC-jg" />
+
         {/* Meta Tags */}
         <meta name='description' content='Generate custom icons using AI-powered technology. Imagin empowers you to create unique icons effortlessly.' />
-        <meta name='keywords' content='icon generation, AI-powered icons, custom icons, icon creator' />
+        <meta name='keywords' content='icon generation, AI-powered icons, custom icons, icon creator, beautiful icons in a few clicks, open-ai' />
         <meta name='author' content='Imagin World Platform' />
         <meta name='robots' content='index, follow' />
         <link rel='canonical' href='https://www.imaginworld.com/' />
 
         {/* Open Graph (OG) Tags for Social Media Sharing */}
         <meta property='og:title' content='Imagin - AI Powered Icon Generation' />
+        <meta property="og:instagram" content="@imaginworld2023" />
         <meta property='og:description' content='Generate custom icons using AI-powered technology. Imagin empowers you to create unique icons effortlessly.' />
         <meta property='og:image' content='logo.svg' />
         <meta property='og:url' content='https://www.imaginworld.com/' />
