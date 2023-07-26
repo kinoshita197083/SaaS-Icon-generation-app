@@ -10,9 +10,11 @@ const Poster = () => {
                         src={'/thinking.png'}
                         width={900}
                         height={900}
-                        priority={true}
+                        // priority={true}
                         alt='Landing page hero image'
                         className='absolute grayscale-[50] md:top-[-8%] lg:top-[-220px]'
+                        placeholder='blur'
+                        blurDataURL='/thinking.png'
                     />
 
                     <h2 className='text-gray-100 text-3xl lg:text-5xl md:text-5xl ml-[5%] mt-[5%] z-[+1]'>

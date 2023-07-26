@@ -33,7 +33,7 @@ const HomePage = () => {
 
                         <section className={styles.gridContainer}>
                             <Link href={'/community'}>
-                                <div className='aspect-square flex flex-col gap-[12%] lg:w-[15rem] w-full lg:h-[15rem] bg-blue-700 rounded-[18px] lg:rounded-[28px] p-[4%] m-auto lg:mb-[0] md:mb-[2%] mb-[5%]'>
+                                <div className='aspect-square flex flex-col gap-[12%] lg:w-[15rem] w-full lg:h-[15rem] bg-[#1d4ed8] rounded-[18px] lg:rounded-[28px] p-[4%] m-auto lg:mb-[0] md:mb-[2%] mb-[5%]'>
                                     <h4 className='text-gray-100 text-[1.6rem]'>
                                         Community
                                     </h4>

@@ -15,6 +15,7 @@ const Carousel = (props: CarouselProps) => {
 
     const { images, downloadable, autoplay } = props;
     const [currentIndex, setCurrentIndex] = useState(0);
+    const [clicked, setClicked] = useState(false);
 
     const currentImage = images[currentIndex];
 
@@ -27,6 +28,11 @@ const Carousel = (props: CarouselProps) => {
             }
         }
     }, [autoplay, currentIndex])
+
+    const handleClick = () => {
+        setClicked(prevClicked => !prevClicked);
+        // document.body.style.overflow = 'hidden';
+    }
 
     const nextImage = () => {
         setCurrentIndex(currentIndex === images.length - 1 ? 0 : currentIndex + 1)
@@ -71,7 +77,10 @@ const Carousel = (props: CarouselProps) => {
             {/* Carousel */}
             {images.map((image, index) => {
                 return (
-                    <div key={index} className={currentIndex === index ? [styles.slide, styles.active].join(' ') : [styles.slide].join(' ')}>
+                    <div key={index}
+                        className={currentIndex === index ? [styles.slide, styles.active].join(' ') : [styles.slide].join(' ')}
+                        onClick={handleClick}
+                    >
                         <Image
                             key={index + 5}
                             width={800}
@@ -97,7 +106,18 @@ const Carousel = (props: CarouselProps) => {
                 })}
             </span>
 
-
+            <div className='fixed inset-0 blur-dark flex justify-center items-center z-[99]'
+                style={{ display: clicked ? 'block' : 'none' }}
+                onClick={handleClick}
+            >
+                <Image
+                    src={currentImage}
+                    fill
+                    alt='selected image'
+                    className='object-contain'
+                    placeholder='empty'
+                />
+            </div>
 
         </div>
     )

@@ -19,6 +19,7 @@ const IconWrapper = (props: IconWrapper) => {
                 width='65'
                 height='65'
                 alt='previously generated icon'
+                placeholder='empty'
             />
         </div>
     )
