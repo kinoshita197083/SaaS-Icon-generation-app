@@ -49,7 +49,7 @@ const Home: NextPage = () => {
 
         {/* Meta Tags */}
         <meta name='description' content='Generate custom icons using AI-powered technology. Imagin empowers you to create unique icons effortlessly.' />
-        <meta name='keywords' content='icon generation, AI-powered icons, custom icons, icon creator, beautiful icons in a few clicks, open-ai' />
+        <meta name='keywords' content='icon generation, logo generation, AI-powered icons, custom icons, icon creator, create logo, design logo, anime icon, logo, professional, beautiful icons in a few clicks, open-ai' />
         <meta name='author' content='Imagin World Platform' />
         <meta name='robots' content='index, follow' />
         <link rel='canonical' href='https://www.imaginworld.com/' />
@@ -59,9 +59,9 @@ const Home: NextPage = () => {
         <meta property="og:instagram" content="@imaginworld2023" />
         <meta property='og:description' content='Generate custom icons using AI-powered technology. Imagin empowers you to create unique icons effortlessly.' />
         <meta property='og:image' content='logo.svg' />
-        <meta property='og:url' content='https://www.imaginworld.com/' />
       </Head>
-      <main ref={main} className='frame py-[8%] lg:py-[2%] font-sans'>
+
+      <main ref={main} className='py-[8%] lg:py-[2%] font-sans'>
         {pages.map((page) => {
           return (
             <div key={page.id} className={'snap-center flex-screen overflow-hidden'}>

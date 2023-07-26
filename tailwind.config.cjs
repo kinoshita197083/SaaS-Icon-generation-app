@@ -22,6 +22,9 @@ const config = {
       animation: {
         fadein: 'fadein 1s ease-in-out',
       },
+      colors: {
+        blue: '#2684F7'
+      }
     }
   },
   plugins: [],

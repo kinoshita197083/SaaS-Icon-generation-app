@@ -6,6 +6,8 @@
 
 @media (max-width: 800px) {
     .pricingContainer {
-        margin-top: 1%;
+        padding-block: 25%;
+        padding-top: 0%;
+        row-gap: 3%;
     }
 }

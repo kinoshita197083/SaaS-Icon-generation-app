@@ -14,7 +14,7 @@ const PricingBox = (props: PricingBoxProps) => {
 
     return (
         <div className='relative w-[20rem] h-[28rem] m-auto'>
-            <p className='text-center bg-transparent text-gray-100 text-2xl absolute left-[50%] top-[-5%] lg:top-[-8%] rounded-tr rounded-tl w-full py-[0] translate-x-[-50%]'
+            <p className='text-center bg-blue md:bg-transparent lg:bg-transparent text-gray-100 text-2xl absolute left-[50%] top-[-5%] lg:top-[-8%] rounded-tr-[12px] rounded-tl-[12px] w-full py-[0] translate-x-[-50%]'
                 style={{ display: popular ? 'block' : 'none' }}>
                 Most Popular
             </p>
@@ -23,7 +23,7 @@ const PricingBox = (props: PricingBoxProps) => {
                 style={{ border: popular ? '12px solid rgb(38, 132, 247)' : '' }}
             >
                 <article className='h-full'>
-                    <h3 className='text-left text-[1.5rem] mb-[10%]' style={{ color: 'rgb(38, 132, 247)' }}>
+                    <h3 className='text-left text-[1.5rem] mb-[10%] text-blue'>
                         {plan}
                     </h3>
                     <h4 className='text-[3rem] text-gray-100'>
@@ -35,7 +35,7 @@ const PricingBox = (props: PricingBoxProps) => {
                     <p className='text-gray-100 font-thin my-[10%]'>
                         As low as {eachCost} per generation
                     </p>
-                    <p className='text-gray-200 bg-gray-900 w-[12rem] text-center rounded border-[0.5px] border-gray-400 mt-[5%]'>
+                    <p className='text-gray-200 bg-gray-900 w-[12rem] text-center rounded border-[0.5px] border-gray-400 mt-[5%] animateCharacter'>
                         {promotion}
                     </p>
 
