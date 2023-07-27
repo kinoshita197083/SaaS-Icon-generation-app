@@ -50,7 +50,7 @@ const LandingPage = () => {
                 <p className='text-gray-100 hidden lg:block'>Embrace Iconic Possibilities</p>
                 <article className='mt-0 lg:mt-[22%] lg:pl-0 pl-[12%]'>
                     <h4 className='text-white'>Join Now and Dive into Icon Brainstorming</h4>
-                    <h3 className='text-[3rem] text-white'>Join {users || 'xxx'} users</h3>
+                    <h3 className='text-[2.8rem] text-white'>Join {users < 1400 ? '260+' : users || 'xxx'} users</h3>
                 </article>
                 <div className='flex items-center justify-center gap-[5%] mb-[5%] absolute bottom-0 right-10'>
                     <Link href={'/generate'}>

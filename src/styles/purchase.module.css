@@ -1,13 +1,15 @@
 .pricingContainer {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(min(21rem, 100%), 1fr));
-    row-gap: 2%;
+    display: flex;
+    /* grid-template-columns: repeat(auto-fit, minmax(min(21rem, 100%), 1fr)); */
+    /* row-gap: 2%; */
 }
 
-@media (max-width: 800px) {
+@media (max-width: 1000px) {
     .pricingContainer {
-        padding-block: 25%;
+        /* padding-block: 25%;
         padding-top: 0%;
-        row-gap: 3%;
+        row-gap: 3%; */
+        flex-direction: column;
+        row-gap: 15px;
     }
 }
