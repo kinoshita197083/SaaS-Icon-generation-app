@@ -51,6 +51,7 @@ export const generateRouter = createTRPCRouter({
             color: z.string(),
             style: z.string(),
             orientation: z.string().optional(),
+            // text: z.string().optional(),
             n: z.number(),
         }))
         .mutation(async ({ ctx, input }) => {

@@ -32,6 +32,7 @@ const Generate: NextPage = () => {
     const defaultOrientation = 'side-face';
     const defaultStyle = 'Default';
     const defaultColor = 'clean';
+    // const defaultText = '';
     const defaultNumberOfImages = 1;
 
     //Auth verification
@@ -46,6 +47,7 @@ const Generate: NextPage = () => {
         style: defaultStyle,
         n: defaultNumberOfImages,
         orientation: defaultOrientation,
+        // text: defaultText,
         imageURLs: defaultImage,
         loading: false,
     });
@@ -234,6 +236,30 @@ const Generate: NextPage = () => {
                             <MenuItem value={'close-up'}>Close-up</MenuItem>
                         </Select>
                     </section>
+
+                    {/* <section className="my-[5%]">
+                        <TextField
+                            label="Add text to your image"
+                            maxRows={4}
+                            multiline
+                            variant="standard"
+                            fullWidth
+                            value={formData.text}
+                            onChange={e => updateForm('text', (e.target.value).replace(/[!@#$%^&*()\-_=+[\]{};:'".<>?|`~\\/]/g, ''))}
+                            InputLabelProps={{
+                                style: { fontSize: '1.3rem', color: 'white' },
+                            }}
+                            InputProps={{
+                                style: { color: 'white', fontSize: '1.5rem' },
+                            }}
+                            helperText="* AI might sometimes include additional text"
+                            FormHelperTextProps={{
+                                sx: {
+                                    color: 'rgb(129 140 248)',
+                                },
+                            }}
+                        />
+                    </section> */}
 
                     <section>
                         <FormLabel
