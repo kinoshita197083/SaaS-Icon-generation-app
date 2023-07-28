@@ -1,19 +1,16 @@
 import { NextPage } from 'next'
-import Head from 'next/head'
 import React from 'react'
+import CustomHead from '~/component/head'
 
 const Terms: NextPage = () => {
     return (
         <>
-            <Head>
-                {/* Document Title */}
-                <title>Terms of Service - Imagin</title>
-                <link rel="icon" href="logo_bulb.png" />
+            <CustomHead
+                title="Terms of Service - Imagin"
+                description="Read our terms of service to learn about the terms and conditions that apply to your use of our website."
+                follow={false}
+            />
 
-                {/* Meta Tags */}
-                <meta name='description' content='Read our terms of service to learn about the terms and conditions that apply to your use of our website.' />
-                <meta name='robots' content='noindex, nofollow' />
-            </Head>
             <div className='p-[8%] pt-[18%] lg:pt-[8%] md:pt-[8%] lg:px-[15%] md:px-[10%] px-[2%]'>
 
                 <h1 className='font-extrabold lg:text-5xl md:text-4xl text-3xl mb-[5%]'>Terms and Conditions</h1>

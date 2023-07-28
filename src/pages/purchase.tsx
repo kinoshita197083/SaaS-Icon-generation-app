@@ -6,6 +6,7 @@ import styles from '../styles/purchase.module.css'
 import PageTemplate from '~/component/page/pageTemplate'
 import { useBuyCredits } from '~/hooks/useBuyCredits'
 import { Backdrop, CircularProgress } from '@mui/material'
+import CustomHead from '~/component/head'
 
 const Purchase: NextPage = () => {
 
@@ -15,12 +16,11 @@ const Purchase: NextPage = () => {
 
     return (
         <>
-            <Head>
-                <title>Buy Credits - Imagin</title>
-                <meta name='description' content='Purchase credits to test out your ideas and boost your imagination further.' />
-                <meta name='robots' content='index, follow' />
-                <link rel="icon" href="logo_bulb.png" />
-            </Head>
+            <CustomHead
+                title="Buy Credits - Imagin"
+                description="Purchase credits to test out your ideas and boost your imagination further."
+                follow
+            />
 
             <PageTemplate>
                 <div className='flex flex-col w-full h-full mt-[5%] lg:mt-0 md:mt-0'>

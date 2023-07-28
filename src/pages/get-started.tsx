@@ -3,17 +3,16 @@ import React from 'react'
 import 'animate.css';
 import { Player } from '@lottiefiles/react-lottie-player';
 import Link from 'next/link';
-import Head from 'next/head'
+import CustomHead from '~/component/head';
 
 const GetStarted: NextPage = () => {
     return (
         <>
-            <Head>
-                <title>Get Started - Imagin</title>
-                <meta name='description' content='Learn how to get started with our services and products. Follow our step-by-step guide to begin your journey with us.' />
-                <meta name='robots' content='index, follow' />
-                <link rel="icon" href="logo_bulb.png" />
-            </Head>
+            <CustomHead
+                title="Get Started - Imagin"
+                description="Learn how to get started with our services and products. Follow our step-by-step guide to begin your journey with us."
+                follow
+            />
 
             <div className='min-h-[100vh] p-[8%] pt-[18%] lg:pt-[8%] md:pt-[8%] lg:px-[15%] md:px-[10%] px-[2%]'>
                 <h1 className='lg:text-6xl md:text-5xl text-4xl font-thin lg:mb-[8%] md:mb-[6%] mb-[15%] animate-fadein'>

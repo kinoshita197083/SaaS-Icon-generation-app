@@ -1,19 +1,16 @@
 import { NextPage } from 'next'
-import Head from 'next/head'
 import React from 'react'
+import CustomHead from '~/component/head'
 
 const Privacy: NextPage = () => {
     return (
         <>
-            <Head>
-                {/* Document Title */}
-                <title>Privacy Policy - Imagin</title>
-                <link rel="icon" href="logo_bulb.png" />
+            <CustomHead
+                title="Privacy Policy - Imagin"
+                description="Read our Privacy Policy to learn how we handle and protect your personal information."
+                follow={false}
+            />
 
-                {/* Meta Tags */}
-                <meta name='description' content='Read our Privacy Policy to learn how we handle and protect your personal information.' />
-                <meta name='robots' content='noindex, nofollow' />
-            </Head>
             <div className='p-[8%] pt-[18%] lg:pt-[8%] md:pt-[8%] lg:px-[15%] md:px-[10%] px-[2%]'>
 
                 <h1 className='font-extrabold lg:text-5xl md:text-4xl text-3xl mb-[5%]'>Privacy and Policy</h1>

@@ -1,22 +1,22 @@
 import { faLightbulb } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { NextPage } from 'next'
-import Head from 'next/head'
 import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
+import CustomHead from '~/component/head'
 
 const PromptEngineer: NextPage = () => {
 
 
     return (
         <>
-            <Head>
-                <title>Prompt Structure - Imagin</title>
-                <meta name='description' content='Learn more about how to structure your prompts to get the best possible results' />
-                <meta name='robots' content='index, follow' />
-                <link rel="icon" href="logo_bulb.png" />
-            </Head>
+            <CustomHead
+                title="Prompt Structure - Imagin"
+                description="Learn more about how to structure your prompts to get the best possible results"
+                follow
+            />
+
             <div className='min-h-[100vh] p-[8%] pt-[18%] lg:pt-[8%] md:pt-[8%] lg:px-[15%] md:px-[10%] px-[6%]'>
                 <h1 className='lg:text-6xl md:text-5xl text-4xl font-thin lg:mb-[8%] md:mb-[6%] animate-fadein'>Prompt Engineering</h1>
 

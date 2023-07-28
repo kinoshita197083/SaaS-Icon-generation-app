@@ -1,5 +1,4 @@
 import { NextPage } from 'next'
-import Head from 'next/head'
 import React, { useRef, useState } from 'react'
 import { api } from '~/utils/api'
 import PageTemplate from '~/component/page/pageTemplate'
@@ -12,6 +11,7 @@ import IconWrapper from '~/component/iconWrapper'
 import Popup from '~/component/popup'
 import Backdrop from '@mui/material/Backdrop';
 import CircularProgress from '@mui/material/CircularProgress';
+import CustomHead from '~/component/head'
 
 const Community: NextPage = () => {
 
@@ -58,12 +58,12 @@ const Community: NextPage = () => {
 
     return (
         <>
-            <Head>
-                <title>Community Icons - Imagin</title>
-                <meta name='description' content='Explore the community-generated icons on our website. See the creative work of various users and discover unique icon designs.' />
-                <meta name='robots' content='index, follow' />
-                <link rel="icon" href="logo_bulb.png" />
-            </Head>
+            <CustomHead
+                title="Community Icons - Imagin"
+                description="Explore the community-generated icons on our website. See the creative work of various users and discover unique icon designs."
+                follow
+            />
+
             <PageTemplate>
                 <div className='flex flex-col w-full lg:h-[40rem] md:h-[40rem] h-[72vh] relative'>
                     <section className='w-full lg:mt-[0%] mt-[5%]'>

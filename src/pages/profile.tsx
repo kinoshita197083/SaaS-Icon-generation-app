@@ -14,6 +14,7 @@ import Backdrop from '@mui/material/Backdrop';
 import CircularProgress from '@mui/material/CircularProgress';
 import IconShowcase from '~/component/iconShowcase'
 import Popup from '~/component/popup'
+import CustomHead from '~/component/head'
 
 const Profile: NextPage = () => {
 
@@ -62,12 +63,11 @@ const Profile: NextPage = () => {
 
     return (
         <>
-            <Head>
-                <title>{session?.user.name}&apos;s Profile - Your Website Name</title>
-                <meta name='description' content={`View ${session?.user.name}'s profile on our website. Get to know more about ${session?.user.name}'s interests and activities.`} />
-                <meta name='robots' content='index, follow' />
-                <link rel="icon" href="logo_bulb.png" />
-            </Head>
+            <CustomHead
+                title={`${session?.user.name}'s Profile - Imagin`}
+                description={`View ${session?.user.name}'s profile on our website. Get to know more about ${session?.user.name}'s interests and activities.`}
+                follow
+            />
 
             {isLoggedIn ?
                 <PageTemplate>

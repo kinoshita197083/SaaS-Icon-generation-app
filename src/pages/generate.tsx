@@ -1,6 +1,5 @@
 import { NextPage } from "next"
 import { signIn, useSession } from "next-auth/react";
-import Head from "next/head";
 import { FormEvent, useState } from "react";
 import Button from "~/component/button";
 import Carousel from "~/component/carousel";
@@ -17,6 +16,7 @@ import React from "react";
 import Tooltip from '@mui/material/Tooltip';
 import TextField from '@mui/material/TextField';
 import { Select, MenuItem, SelectChangeEvent } from "@mui/material";
+import CustomHead from "~/component/head";
 
 const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(
     props,
@@ -83,7 +83,6 @@ const Generate: NextPage = () => {
                 n: +formData.n,
             });
 
-            // if (response.images) updateForm('imageURLs', response.images);
             updateForm('imageURLs', response.images);
 
         } catch (error) {
@@ -108,12 +107,11 @@ const Generate: NextPage = () => {
 
     return (
         <>
-            <Head>
-                <title>Imagin - AI Powered Icon Generation</title>
-                <link rel="icon" href="logo_bulb.png" />
-                <meta name='description' content='Generate custom icons by filling out our icon-generation form. Create unique icons for your projects with ease.' />
-                <meta name='robots' content='index, follow' />
-            </Head>
+            <CustomHead
+                title="Generation - Imagin"
+                description="Generate custom icons by filling out our icon-generation form. Create unique icons for your projects with ease."
+                follow
+            />
 
             <PageTemplate>
                 <form className="mt-[5%] lg:mt-[1%] md:mt-[3%] lg:w-[55%]" onSubmit={handleSubmit}>

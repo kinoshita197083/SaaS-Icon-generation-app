@@ -1,10 +1,10 @@
 import { type NextPage } from "next";
 import Head from "next/head";
-// import { signIn, signOut, useSession } from "next-auth/react";
 import { useRef, useState, useEffect } from "react";
 import LandingPage from "~/component/page/landingPage";
 import HomePage from "~/component/page/homePage";
 import Trackbar from "~/component/Trackbar";
+import CustomHead from "~/component/head";
 
 const pages = [{ id: 1, page: <LandingPage /> }, { id: 2, page: <HomePage /> }];
 const pagesIndex = [...pages.keys()];
@@ -39,27 +39,14 @@ const Home: NextPage = () => {
 
   return (
     <>
-      <Head>
-        {/* Document Title */}
-        <title>Imagin - AI Powered Icon Generation</title>
-        <link rel="icon" href="logo_bulb.png" />
-
-        {/* Google Verification */}
-        <meta name="google-site-verification" content="h4Sv-GJ7Xfp15IVuzm8JvzkjIGaaVY7Ly-GWi0zC-jg" />
-
-        {/* Meta Tags */}
-        <meta name='description' content='Generate custom icons using AI-powered technology. Imagin empowers you to create unique icons effortlessly.' />
-        <meta name='keywords' content='icon generation, logo generation, AI-powered icons, custom icons, icon creator, create logo, design logo, anime icon, logo, professional, beautiful icons in a few clicks, open-ai' />
-        <meta name='author' content='Imagin World Platform' />
-        <meta name='robots' content='index, follow' />
-        <link rel='canonical' href='https://www.imaginworld.com/' />
-
-        {/* Open Graph (OG) Tags for Social Media Sharing */}
-        <meta property='og:title' content='Imagin - AI Powered Icon Generation' />
-        <meta property="og:instagram" content="@imaginworld2023" />
-        <meta property='og:description' content='Generate custom icons using AI-powered technology. Imagin empowers you to create unique icons effortlessly.' />
-        <meta property='og:image' content='logo.svg' />
-      </Head>
+      <CustomHead
+        title="Imagin - AI Powered Icon Generation"
+        googleVerified
+        indexPage
+        description="Generate custom icons using AI-powered technology. Imagin empowers you to create unique icons effortlessly."
+        keywords="icon generation, logo generation, AI-powered icons, custom icons, icon creator, create logo, design logo, anime icon, logo, professional, beautiful icons in a few clicks, open-ai"
+        follow
+      />
 
       <main ref={main} className='py-[8%] lg:py-[2%] font-sans'>
         {pages.map((page) => {
