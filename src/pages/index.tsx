@@ -44,7 +44,7 @@ const Home: NextPage = () => {
         googleVerified
         indexPage
         description="Generate custom icons using AI-powered technology. Imagin empowers you to create unique icons effortlessly."
-        keywords="icon generation, logo generation, AI-powered icons, custom icons, icon creator, create logo, design logo, anime icon, logo, professional, beautiful icons in a few clicks, open-ai"
+        keywords="icon generation, logo generation, free AI-powered icons, custom icons, free icon creator, create logo, design logo, anime icon, logo, professional, beautiful icons in a few clicks"
         follow
       />
 

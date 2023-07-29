@@ -17,6 +17,7 @@ import Tooltip from '@mui/material/Tooltip';
 import TextField from '@mui/material/TextField';
 import { Select, MenuItem, SelectChangeEvent } from "@mui/material";
 import CustomHead from "~/component/head";
+import CustomButtonGroup from "~/component/buttonGroup";
 
 const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(
     props,
@@ -61,7 +62,7 @@ const Generate: NextPage = () => {
     }
 
     //Choosing whether the default pre-configured colors or color-picker
-    const [colorOption, setColorOption] = useState('default');
+    const [colorOption, setColorOption] = useState('Default');
 
     //Error Message state
     const [error, setError] = useState({
@@ -145,23 +146,14 @@ const Generate: NextPage = () => {
                         <p className="text-indigo-400 text-[0.8rem]">* Color applies only to styles without pre-configured colors</p>
                         <div>
                             {/* Button Group let user select either pre-configured colors or color-picker */}
-                            <div role="button-group"
-                                className="flex my-[5%]"
-                            >
-                                <button type="button"
-                                    className={["lg:w-[20%] w-[50%] text-gray-100 transition-all", colorOption === 'default' ? 'border-b-4 border-indigo-500' : 'border-b-4 border-gray-700'].join(' ')}
-                                    onClick={() => setColorOption('default')}>
-                                    Default
-                                </button>
+                            <CustomButtonGroup
+                                state={colorOption}
+                                setState={setColorOption}
+                                option1='Default'
+                                option2='ColorPicker'
+                            />
 
-                                <button type="button"
-                                    className={["lg:w-[20%] w-[50%] text-gray-100 transitional-all", colorOption === 'colorPicker' ? 'border-b-4 border-indigo-500' : 'border-b-4 border-gray-700'].join(' ')}
-                                    onClick={() => setColorOption('colorPicker')}>
-                                    ColorPicker
-                                </button>
-                            </div>
-
-                            {colorOption === 'colorPicker' &&
+                            {colorOption === 'ColorPicker' &&
                                 <div className="h-[4rem] lg:w-[40%] w-full flex items-center justify-center">
                                     <input
                                         type="color"
@@ -171,7 +163,7 @@ const Generate: NextPage = () => {
                                     />
                                 </div>}
 
-                            {colorOption === 'default' &&
+                            {colorOption === 'Default' &&
                                 <div className="flex gap-[1%] flex-wrap mt-[3%]">
                                     {colors.map((color, index) => {
 
