@@ -50,8 +50,8 @@ export const generateRouter = createTRPCRouter({
             prompt: z.string(),
             color: z.string(),
             style: z.string(),
+            styleType: z.string(),
             orientation: z.string().optional(),
-            // text: z.string().optional(),
             n: z.number(),
         }))
         .mutation(async ({ ctx, input }) => {
@@ -82,10 +82,21 @@ export const generateRouter = createTRPCRouter({
             }
 
             try {
-                //{illustration}{emoji}{digitalCamera}
-                // const summary = `${input.prompt}, 1080p, 8k, ultra-quality, deepth focus, hyper detailed, high-resolution, elegant, perfect face, ${input.style} style, with a ${input.color} color theme`;
-                const summary = `a professional, high resolution, ${input.style} featuring ${input.prompt}, ${input.orientation}, calm, quiet, elaborate, detailed, with ${input.color} as theme color`;
-                // const summary = `A professional high quality ${input.category} of ${input.prompt} in a ${input.style} style and a ${input.color} color background.`;
+                console.log(input.styleType)
+                // const summary = input.styleType === 'icon' ?
+                //     `a professional, high resolution, ${input.style} featuring ${input.prompt}, ${input.orientation}, calm, quiet, elaborate, detailed, with ${input.color} as theme color`
+                //     :
+                //     `a logo of ${input.prompt}, ${input.style}, with ${input.color} as background color`;
+
+                let summary = '';
+
+                if (input.styleType === 'icon') {
+                    summary = `a professional, high resolution, ${input.style} featuring ${input.prompt}, ${input.orientation}, calm, quiet, elaborate, detailed, with ${input.color} as theme color`
+                }
+
+                if (input.styleType === 'Logo') {
+                    summary = `a professional, high quality logo of ${input.prompt}, ${input.style}, with ${input.color} background color`;
+                }
 
                 const base64EncodedImageList = await generateIcon(summary, input.n);
                 console.log('Icons generation completed...')
@@ -98,7 +109,7 @@ export const generateRouter = createTRPCRouter({
                 }));
 
                 // save icon prompt & user id to prisma database and generate a unique icon id to use as s3 bucket Key
-                const createdIcons = await ctx.prisma.icon.createMany({
+                await ctx.prisma.icon.createMany({
                     data: iconsData,
                     skipDuplicates: true,
                 });

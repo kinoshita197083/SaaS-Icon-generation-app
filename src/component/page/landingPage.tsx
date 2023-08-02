@@ -23,16 +23,14 @@ const LandingPage = () => {
                 </h1>
                 <h3 className='leading-[1.5] mt-[3%]'>Effortlessly Create Eye-Catching Icons</h3>
                 <br />
-                <div role='button-group'>
+                <div role='button-group' className='flex'>
                     <Link href={'/get-started'}>
                         <Button>Get started</Button>
                     </Link>
                     <span className='mr-[2%]' />
-                    <Button
-                        bgColor={'transparent'}
-                        borderColor='tomato'
-                        textColor='tomato'
-                    ><FontAwesomeIcon icon={faProductHunt} /> Product Hunt</Button>
+                    <a href="https://www.producthunt.com/posts/imagin?utm_source=badge-featured&utm_medium=badge&utm_souce=badge-imagin" target="_blank">
+                        <img src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=407281&theme=light" alt="Imagin - Generate&#0032;custom&#0032;icons&#0032;using&#0032;AI&#0045;powered&#0032;technology | Product Hunt" style={{ width: "195px", height: "40px" }} />
+                    </a>
                 </div>
             </section>
 
