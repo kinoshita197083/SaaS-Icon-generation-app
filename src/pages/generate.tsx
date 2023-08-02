@@ -35,7 +35,7 @@ const Generate: NextPage = () => {
     const defaultOrientation = 'side-face';
     const defaultStyle = 'Default';
     const defaultStyleOption = 'icon';
-    const defaultColor = 'pink';
+    const defaultColor = 'clean';
     const defaultNumberOfImages = 1;
 
     //Auth verification

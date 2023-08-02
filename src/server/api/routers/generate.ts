@@ -91,11 +91,11 @@ export const generateRouter = createTRPCRouter({
                 let summary = '';
 
                 if (input.styleType === 'icon') {
-                    summary = `a professional, high resolution, ${input.style} featuring ${input.prompt}, ${input.orientation}, calm, quiet, elaborate, detailed, with ${input.color} as theme color`
+                    summary = `a professional, high resolution, ${input.style} featuring ${input.prompt}, ${input.orientation}, calm, quiet, elaborate, detailed, clean, with ${input.color} as theme color`
                 }
 
                 if (input.styleType === 'Logo') {
-                    summary = `a professional, high quality logo of ${input.prompt}, ${input.style}, with ${input.color} background color`;
+                    summary = `a professional, high quality logo of ${input.prompt}, ${input.style}, with ${input.color} background color, elaborate, detailed, clean`;
                 }
 
                 const base64EncodedImageList = await generateIcon(summary, input.n);
