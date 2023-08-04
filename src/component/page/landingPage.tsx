@@ -4,8 +4,6 @@ import Button from '~/component/button';
 import Poster from '~/component/poster';
 import Card from '~/component/Card';
 import Link from 'next/link';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faProductHunt } from '@fortawesome/free-brands-svg-icons';
 import { api } from '~/utils/api';
 import AdBanner from '../adBanner';
 
@@ -18,7 +16,7 @@ const LandingPage = () => {
         <div className='px-[2%] md:px-[3%] lg:px-[8%]'>
             <section className='pl-[5%] md:px-[15%] lg:pl-[15%] animate-fadein'>
                 <h1 className='text-6xl leading-[1.2] max-w-[80%] lg:mt-[5%] lg:max-w-[70%] md:text-6xl md:leading-[1.3] lg:text-7xl lg:leading-[1.2] font-semibold'>
-                    <span className={styles.animateCharacter}>Icon Generator</span>
+                    <span className={styles.animateCharacter}>Icon Generator (Dev)</span>
                     <span className='text-5xl lg:text-6xl'>Unleash Visual Brilliance</span>
                 </h1>
                 <h3 className='leading-[1.5] mt-[3%]'>Effortlessly Create Eye-Catching Icons</h3>

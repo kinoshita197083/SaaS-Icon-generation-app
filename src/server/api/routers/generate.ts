@@ -18,7 +18,12 @@ const s3 = new AWS.S3({
     region: "ap-southeast-2",
 });
 
+//production
 const BUCKET_NAME = "imagin-icons-storage";
+
+//Dev
+// const BUCKET_NAME = "imagin-dev-env";
+
 const preSignedUrlExpireSeconds = 60 * 5;
 
 //OpenAI config & client setup
@@ -82,12 +87,6 @@ export const generateRouter = createTRPCRouter({
             }
 
             try {
-                console.log(input.styleType)
-                // const summary = input.styleType === 'icon' ?
-                //     `a professional, high resolution, ${input.style} featuring ${input.prompt}, ${input.orientation}, calm, quiet, elaborate, detailed, with ${input.color} as theme color`
-                //     :
-                //     `a logo of ${input.prompt}, ${input.style}, with ${input.color} as background color`;
-
                 let summary = '';
 
                 if (input.styleType === 'icon') {
@@ -95,7 +94,7 @@ export const generateRouter = createTRPCRouter({
                 }
 
                 if (input.styleType === 'Logo') {
-                    summary = `a professional, high quality logo of ${input.prompt}, ${input.style}, with ${input.color} background color, elaborate, detailed, clean`;
+                    summary = `a professional, modern, high resolution, 1080p, centered, logo, textless, ${input.prompt}, ${input.style}, with ${input.color} background color, elaborate, detailed, clean`;
                 }
 
                 const base64EncodedImageList = await generateIcon(summary, input.n);
@@ -113,6 +112,13 @@ export const generateRouter = createTRPCRouter({
                     data: iconsData,
                     skipDuplicates: true,
                 });
+
+                //Dev environment: SQLite doesn't support createMany()
+                // for (const iconData of iconsData) {
+                //     await ctx.prisma.icon.create({
+                //         data: iconData,
+                //     });
+                // }
 
                 // batch saving b64 encoded images to s3 bucket
                 const putEvents: any[] = [];
