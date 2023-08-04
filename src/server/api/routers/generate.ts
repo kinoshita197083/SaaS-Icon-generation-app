@@ -18,10 +18,12 @@ const s3 = new AWS.S3({
     region: "ap-southeast-2",
 });
 
-// const BUCKET_NAME = "imagin-icons-storage";
+//production
+const BUCKET_NAME = "imagin-icons-storage";
 
 //Dev
-const BUCKET_NAME = "imagin-dev-env";
+// const BUCKET_NAME = "imagin-dev-env";
+
 const preSignedUrlExpireSeconds = 60 * 5;
 
 //OpenAI config & client setup
@@ -85,12 +87,6 @@ export const generateRouter = createTRPCRouter({
             }
 
             try {
-                console.log(input.styleType)
-                // const summary = input.styleType === 'icon' ?
-                //     `a professional, high resolution, ${input.style} featuring ${input.prompt}, ${input.orientation}, calm, quiet, elaborate, detailed, with ${input.color} as theme color`
-                //     :
-                //     `a logo of ${input.prompt}, ${input.style}, with ${input.color} as background color`;
-
                 let summary = '';
 
                 if (input.styleType === 'icon') {
@@ -112,17 +108,17 @@ export const generateRouter = createTRPCRouter({
                 }));
 
                 // save icon prompt & user id to prisma database and generate a unique icon id to use as s3 bucket Key
-                // await ctx.prisma.icon.createMany({
-                //     data: iconsData,
-                //     skipDuplicates: true,
-                // });
+                await ctx.prisma.icon.createMany({
+                    data: iconsData,
+                    skipDuplicates: true,
+                });
 
                 //Dev environment: SQLite doesn't support createMany()
-                for (const iconData of iconsData) {
-                    await ctx.prisma.icon.create({
-                        data: iconData,
-                    });
-                }
+                // for (const iconData of iconsData) {
+                //     await ctx.prisma.icon.create({
+                //         data: iconData,
+                //     });
+                // }
 
                 // batch saving b64 encoded images to s3 bucket
                 const putEvents: any[] = [];
