@@ -18,6 +18,7 @@ const config = {
       'cdn.discordapp.com',
       'd9tzafiq1eg5o.cloudfront.net',
       'imagin-icons-storage.s3.ap-southeast-2.amazonaws.com',
+      'imagin-dev-env.s3.ap-southeast-2.amazonaws.com',
     ],
 
   },
