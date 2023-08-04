@@ -98,7 +98,7 @@ export const generateRouter = createTRPCRouter({
                 }
 
                 if (input.styleType === 'Logo') {
-                    summary = `a professional, high quality logo of ${input.prompt}, ${input.style}, with ${input.color} background color, elaborate, detailed, clean`;
+                    summary = `a professional, modern, high resolution, 1080p, centered, logo, textless, ${input.prompt}, ${input.style}, with ${input.color} background color, elaborate, detailed, clean`;
                 }
 
                 const base64EncodedImageList = await generateIcon(summary, input.n);

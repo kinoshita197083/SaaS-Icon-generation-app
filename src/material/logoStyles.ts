@@ -1,34 +1,39 @@
 export const logoStyles = [
-    // {
-    //     id: 1,
-    //     style: '3D',
-    //     // prompt: 'artwork in the style of 90s, color contrast, neon, pink, blue, futuristic, 1080p, 8k, ultra-quality, deepth focus, hyper detailed, high-resolution, elegant, perfect face, smoke, sharp, close-up',
-    //     prompt: 'emoji inspired by Pixar, 3D render, Cinema 4D, 8k, trending in artstation, unreal engine, 1080p, ultra-quality, hyper detailed',
-    //     src: '/neon.jpg'
-    // },
-    // {
-    //     id: 2,
-    //     style: 'Emoji',
-    //     prompt: 'emoji, Computer Aid Graphic Design, icongraph, 1080p, detailed emoji, trending in artstation',
-    //     src: '/jene.jpg'
-    // },
-    // {
-    //     id: 3,
-    //     style: 'Flat',
-    //     prompt: 'flat vector, minimal graphic, by Sagi Haviv, hyper detailed, 1080p, ultra quality',
-    //     src: '/jene.jpg'
-    // },
-    // {
-    //     id: 4,
-    //     style: 'Japanese',
-    //     prompt: 'flat vector logo,simple minimal, style of japanese cover, centered position, 30% size of canvas, no words',
-    //     src: '/jene.jpg'
-    // },
     {
         id: 4,
-        style: 'High-end premium',
-        prompt: 'High-end premium modern logo',
-        src: '/highend.jpg'
+        style: 'Minimalistic',
+        prompt: 'High-end premium modern logo, symmetrical, minimalistic',
+        src: '/minimalistic.jpg'
+    },
+    {
+        id: 5,
+        style: 'High-end Premium',
+        prompt: 'High-end premium modern logo, symmetrical, gradient, dark background',
+        src: '/highend_2.jpg'
+    },
+    {
+        id: 6,
+        style: 'Japanese / 和風',
+        prompt: 'minimalistic logo, japanese, japanese wall art tapestry, centered position',
+        src: '/japanese.jpg'
+    },
+    {
+        id: 2,
+        style: 'Emoji',
+        prompt: 'emoji, minimalistic, 1080p, detailed emoji, trending in artstation',
+        src: '/cartoon.jpg'
+    },
+    {
+        id: 1,
+        style: 'pixelated',
+        prompt: 'pixelated emoji, minimalistic, 1080p, detailed emoji, trending in artstation',
+        src: '/pixelated.jpg'
+    },
+    {
+        id: 7,
+        style: '3D',
+        prompt: 'High-end premium modern logo, Pixar, 3D render, Cinema 4D, trending in artstation, unreal engine, 1080p, ultra-quality, centered position',
+        src: '/logo_3d.jpg'
     },
     {
         id: 11,
