@@ -110,7 +110,7 @@ const Navbar = (props: NavbarProps) => {
                             height={42}
                             alt="logo"
                         />
-                        <h2 className='ml-[3%] text-[1.6rem]'>{projectName}</h2>
+                        <h2 className={'ml-[3%] text-[1.6rem]'}>{projectName}</h2>
                     </div>
                 </Link>
 
@@ -121,11 +121,11 @@ const Navbar = (props: NavbarProps) => {
                     {/* Nav items front portion */}
                     <ul className={styles.navFrontPortion}>
                         <Link href='/community' className="p-0">
-                            <li className={styles.navFrontPortionItem}>Community</li>
+                            <li className={[styles.navFrontPortionItem, scroll ? 'text-gray-100' : 'text-gray-700'].join(' ')}>Community</li>
                         </Link>
 
                         <Link href={'/generate'}>
-                            <li className={styles.navFrontPortionItem}>Generate</li>
+                            <li className={[styles.navFrontPortionItem, scroll ? 'text-gray-100' : 'text-gray-700'].join(' ')}>Generate</li>
                         </Link>
                     </ul>
 
@@ -139,7 +139,8 @@ const Navbar = (props: NavbarProps) => {
                         :
                         <>
                             <Link href='/purchase' className='w-full lg:w-[6rem]'>
-                                <li className='w-full lg:min-h-max flex items-center justify-center border-b border-gray-400 md:border-0 lg:border-0 lg:w-[6rem] md:w-[6rem] md:mx-auto text-gray-100 lg:text-gray-400 md:text-gray-400 lg:text-center hover:bg-gray-800 hover:text-gray-100 transition-all lg:rounded-[15px] md:rounded-[15px] min-h-[3rem]'>
+                                <li
+                                    className={['w-full lg:min-h-max flex items-center justify-center border-b border-gray-400 md:border-0 lg:border-0 lg:w-[6rem] md:w-[6rem] md:mx-auto text-gray-100 md:text-gray-400 lg:text-center hover:bg-gray-800 hover:text-gray-100 transition-all lg:rounded-[15px] md:rounded-[15px] min-h-[3rem]', scroll ? 'lg:text-gray-100' : 'lg:text-gray-500'].join(' ')}>
                                     Credits: {user.data?.credits}
                                 </li>
                             </Link>
