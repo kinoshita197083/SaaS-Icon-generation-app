@@ -20,6 +20,7 @@ import CustomButtonGroup from "~/component/buttonGroup";
 import StyleOption from "~/component/styleOption";
 import { logoStyles } from "~/material/logoStyles";
 import { GetColorName } from 'hex-color-to-color-name';
+import { useRouter } from "next/router";
 
 const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(
     props,
@@ -41,6 +42,7 @@ const Generate: NextPage = () => {
     //Auth verification
     const { status } = useSession()
     const isLoggedIn = status === 'authenticated';
+    const { push } = useRouter();
     const generateInstance = api.generate.generateIcon.useMutation();
 
     //Form State
@@ -70,7 +72,8 @@ const Generate: NextPage = () => {
     //Error Message state
     const [error, setError] = useState({
         activate: false,
-        message: ''
+        message: '',
+        promotion: false,
     });
 
     const handleSubmit = async (e: FormEvent) => {
@@ -89,11 +92,20 @@ const Generate: NextPage = () => {
             updateForm('imageURLs', response.images);
 
         } catch (error) {
-            setError({
+            setError(prev => ({
+                ...prev,
                 activate: true,
                 message: error.message,
-            });
-            setTimeout(() => setError({ activate: false, message: '' }), 5000);
+            }));
+            setTimeout(() => setError(prev => ({ ...prev, activate: false, message: '' })), 5000);
+
+            if (error.message === 'Not enough credits') {
+                setTimeout(() =>
+                    setError(prev => ({
+                        ...prev,
+                        promotion: true
+                    })), 2000);
+            }
         } finally {
             setFormData(prev => (
                 {
@@ -265,6 +277,7 @@ const Generate: NextPage = () => {
                             label="Number of images"
                         />
                         <label className="block text-[1rem] text-gray-400 mb-[1%]">1 credit per image</label>
+
                         <input
                             className="w-full lg:h-[2rem] p-[2%] mb-[5%] rounded bg-gray-700 text-white focus:outline-[transparent]"
                             onChange={e => updateForm('n', e.target.value)}
@@ -280,12 +293,21 @@ const Generate: NextPage = () => {
                             {formData.loading ? 'Processing ...' : 'Generate'}
                         </Button>
                         :
-                        <Button
-                            type="button"
-                            onClick={() => { signIn().catch(console.error) }}
-                            className="bg-gradient-to-r from-sky-500 to-indigo-500 text-gray-100 p-[2%] px-[3%] rounded">
-                            Sign in to start generating
-                        </Button>}
+                        <>
+                            <Alert variant="outlined" severity="info" style={{ color: 'white' }}>
+                                Quick sign-in to get 5 free credits!
+                            </Alert>
+
+                            <div role="spacer" className="my-[3%]" />
+
+                            <Button
+                                type="button"
+                                onClick={() => { signIn().catch(console.error) }}
+                                className="bg-gradient-to-r from-sky-500 to-indigo-500 text-gray-100 p-[2%] px-[3%] rounded">
+                                Get Started
+                            </Button>
+                        </>
+                    }
 
                     {error.activate &&
                         <div className="lg:absolute w-full left-[50%] flex items-center justify-center lg:translate-x-[-50%]">
@@ -325,6 +347,15 @@ const Generate: NextPage = () => {
                 <CloseButton />
 
             </PageTemplate>
+            {error.promotion &&
+                <Alert
+                    // onClose={() => { setError(prev => ({ ...prev, promotion: false })) }}
+                    onClick={() => push('/purchase')}
+                    variant="filled"
+                    severity="info"
+                    style={{ color: 'white', position: 'fixed', top: '10%', right: '2%', backgroundColor: '#71A2F6', cursor: 'pointer' }}>
+                    Get 160 generations with 38% off for limited time
+                </Alert>}
         </>
     )
 }
