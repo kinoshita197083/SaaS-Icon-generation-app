@@ -1,10 +1,22 @@
+import AWS from "aws-sdk";
 import { z } from "zod";
+import { env } from "~/env.mjs";
 
 import {
     createTRPCRouter,
     protectedProcedure,
     publicProcedure,
 } from "~/server/api/trpc";
+
+const s3 = new AWS.S3({
+    credentials: {
+        accessKeyId: env.ACCESS_KEY_ID,
+        secretAccessKey: env.SECRET_ACCESS_KEY,
+    },
+    region: "ap-southeast-2",
+});
+
+const BUCKET_NAME = 'imagin-icons-storage';
 
 export const iconsRouter = createTRPCRouter({
     getIcons: protectedProcedure.input(z.object({
@@ -56,7 +68,6 @@ export const iconsRouter = createTRPCRouter({
                 take: limit + 1,
                 skip: skip,
                 cursor: cursor ? { id: cursor } : undefined,
-                // select: { id: true },
             });
 
             let nextCursor: typeof cursor | undefined = undefined;
@@ -65,10 +76,31 @@ export const iconsRouter = createTRPCRouter({
                 nextCursor = nextItem?.id;
             }
 
-            // iconIds.map((icon) => icon.id);
             return {
                 iconIds,
                 nextCursor,
+            }
+        }),
+
+    deleteIcon: protectedProcedure.input(z.object({
+        iconId: z.string()
+    }))
+        .mutation(async ({ ctx, input }) => {
+            try {
+                await ctx.prisma.icon.delete({
+                    where: {
+                        id: input.iconId,
+                    },
+                });
+
+                await s3.deleteObject({
+                    Bucket: BUCKET_NAME,
+                    Key: input.iconId,
+                }).promise();
+
+            } catch (error) {
+                console.error('Something wrong: ', error);
+                throw error; // Rethrow the error or handle it accordingly
             }
         })
 });
