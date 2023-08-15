@@ -1,8 +1,8 @@
-import React, { ReactNode } from 'react'
+import React, { type ReactNode } from 'react'
 import styles from '../styles/iconShowcase.module.css'
 
 type IconShowcaseProps = {
-    children: ReactNode
+    children: ReactNode,
 }
 
 const IconShowcase = (props: IconShowcaseProps) => {

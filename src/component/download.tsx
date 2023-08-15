@@ -1,11 +1,12 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { type ReactNode, useEffect, useRef, useState } from 'react'
 import MenuIcon from './menuIcon';
 
 type DownloadProps = {
     src: string,
+    children?: ReactNode
 }
 
-const Download = ({ src }: DownloadProps) => {
+const Download = ({ src, children }: DownloadProps) => {
 
     const [clicked, setClicked] = useState(false);
     const dropdownTriggerRef = useRef<HTMLButtonElement>(null);
@@ -44,10 +45,11 @@ const Download = ({ src }: DownloadProps) => {
                 <a href={src}
                     target='_blank'
                     download>
-                    <button className='w-full py-[5%] lg:px-[2%] lg:py-[6%] lg:p-[12%] border-b-[1px] border-b-gray-400 bg-gray-700 text-[white] hover:bg-gray-500 rounded-[5px] transition-all'>
+                    <button className='w-full py-[5%] lg:px-[2%] lg:py-[6%] lg:p-[12%] border-b-[1px] border-b-gray-400 bg-gray-700 text-[white] hover:bg-gray-500 rounded-tl-[5px] rounded-tr-[5px] transition-all'>
                         Download
                     </button>
                 </a>
+                {children}
             </div>
         </div>
     )

@@ -1,6 +1,5 @@
 import { NextPage } from 'next'
 import { signIn, useSession } from 'next-auth/react'
-import Head from 'next/head'
 import Image from 'next/image'
 import React, { useRef, useState } from 'react'
 import PageTemplate from '~/component/page/pageTemplate'
@@ -16,18 +15,27 @@ import IconShowcase from '~/component/iconShowcase'
 import Popup from '~/component/popup'
 import CustomHead from '~/component/head'
 
+
 const Profile: NextPage = () => {
+
+    //Icons display container: use for infinite scroll
+    const scrollContainerRef = useRef(null);
 
     const { data: session, status } = useSession()
     const isLoggedIn = status === 'authenticated';
 
-    const limit = 50;
+    //Delete Icon
+    const deleteInstance = api.icons.deleteIcon.useMutation();
 
+    //How many icons to fetch for the initial render
+    const limit = 100;
+
+    //Pop up: selected icon
     const [clicked, setClicked] = useState(false);
     const [selectedImage, setSelectedImage] = useState({
         src: '',
         heading: '',
-        loading: false
+        loading: false,
     });
 
     const handleClick = (image: string, prompt: string) => {
@@ -38,6 +46,21 @@ const Profile: NextPage = () => {
         setClicked(true);
     }
 
+    const handleDelete = async () => {
+        const iconId = selectedImage.src.replace(env.NEXT_PUBLIC_BUCKET, '');
+        try {
+            updateSelectedImage('loading', true);
+            await deleteInstance.mutateAsync({
+                iconId: iconId
+            })
+            setClicked(false);
+            updateSelectedImage('loading', false);
+            refetch();
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
     const updateSelectedImage = (key: string, value: string | boolean) => {
         setSelectedImage(prev => ({
             ...prev,
@@ -45,20 +68,19 @@ const Profile: NextPage = () => {
         }))
     }
 
-    const scrollContainerRef = useRef(null);
-
-    const { data, fetchNextPage, hasNextPage, isFetching } = api.icons.getIcons.useInfiniteQuery(
+    const { data, fetchNextPage, hasNextPage, isFetching, refetch } = api.icons.getIcons.useInfiniteQuery(
         {
             limit: limit,
-            // categoryId: category?.id, // this is optional - remember
         },
         {
             getNextPageParam: (lastPage) => lastPage.nextCursor,
         }
     );
 
+    //Setup inifinite scrolling
     useInfiniteScroll(scrollContainerRef, hasNextPage, isFetching, fetchNextPage)
 
+    //All Icons
     const icons = data?.pages.flatMap((page) => page.icons) || [];
 
     return (
@@ -105,7 +127,6 @@ const Profile: NextPage = () => {
                         <div className='lg:w-[70%] md:w-[70%] p-[1%] h-[35rem] bg-black lg:rounded-tr-[25px] md:rounded-tr-[25px] rounded-br-[25px] lg:rounded-bl-[0px] md:rounded-bl-[0px] rounded-bl-[25px]'>
                             <IconShowcase>
                                 {icons.map((icon, index) => {
-
                                     const iconSrc = `${env.NEXT_PUBLIC_BUCKET}${icon.id}`
                                     if (icons.length === index + 1) {
                                         return (
@@ -127,7 +148,8 @@ const Profile: NextPage = () => {
                                             handleClick={() => handleClick(iconSrc, icon.prompt)}
                                         />
                                     )
-                                })}
+                                })
+                                }
                             </IconShowcase>
                         </div>
 
@@ -159,7 +181,13 @@ const Profile: NextPage = () => {
 
                             <Download
                                 src={selectedImage.src}
-                            />
+                            >
+                                <button
+                                    onClick={handleDelete}
+                                    className='w-full py-[5%] lg:px-[2%] lg:py-[6%] lg:p-[12%] border-b-[1px] border-b-gray-400 bg-gray-700 text-[white] hover:bg-gray-500 rounded-bl-[5px] rounded-br-[5px] transition-all'>
+                                    Delete
+                                </button>
+                            </Download>
                         </Popup>
                     </div>
 
@@ -178,13 +206,5 @@ const Profile: NextPage = () => {
         </>
     )
 }
-
-// export async function getServerSideProps(context: GetServerSidePropsContext) {
-//     return requireAuth(context, ({ session }) => {
-//         return {
-//             props: { session }
-//         }
-//     })
-// }
 
 export default Profile
