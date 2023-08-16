@@ -41,7 +41,7 @@ const Home: NextPage = () => {
     <>
 
       <Script async src="https://www.googletagmanager.com/gtag/js?id=G-WPVQX5D8MP"></Script>
-      <Script>
+      <Script id="google-analytics">
         {`
         window.dataLayer = window.dataLayer || [];
         function gtag(){dataLayer.push(arguments);}
