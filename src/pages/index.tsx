@@ -4,6 +4,7 @@ import LandingPage from "~/component/page/landingPage";
 import HomePage from "~/component/page/homePage";
 import Trackbar from "~/component/Trackbar";
 import CustomHead from "~/component/head";
+import Script from "next/script";
 
 const pages = [{ id: 1, page: <LandingPage /> }, { id: 2, page: <HomePage /> }];
 const pagesIndex = [...pages.keys()];
@@ -38,6 +39,18 @@ const Home: NextPage = () => {
 
   return (
     <>
+
+      <Script async src="https://www.googletagmanager.com/gtag/js?id=G-WPVQX5D8MP"></Script>
+      <Script>
+        {`
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-WPVQX5D8MP');`
+        }
+      </Script>
+
       <CustomHead
         title="Imagin - AI Powered Icon Generation"
         googleVerified
