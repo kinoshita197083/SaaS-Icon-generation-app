@@ -23,7 +23,7 @@ const CustomHead = (props: CustomHeadProps) => {
             {
                 googleVerified &&
                 <>
-                    <meta name="google-site-verification" content="h4Sv-GJ7Xfp15IVuzm8JvzkjIGaaVY7Ly-GWi0zC-jg" />
+                    {/* <meta name="google-site-verification" content="h4Sv-GJ7Xfp15IVuzm8JvzkjIGaaVY7Ly-GWi0zC-jg" /> */}
                 </>
             }
 
