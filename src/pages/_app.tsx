@@ -22,10 +22,14 @@ const MyApp: AppType<{ session: Session | null }> = ({
 
   return (
     <SessionProvider session={session}>
-      <NextTopLoader />
-      <Navbar logo={'/logo.svg'} projectName='Imagin' navbarItems={[{ text: 'Sign in', type: 'auth' }]} />
-      <Component {...pageProps} />
-      <Footer />
+      <div className='flex justify-center'>
+        <div className="max-w-[1480px]">
+          <NextTopLoader />
+          <Navbar logo={'/logo.svg'} projectName='Imagin' navbarItems={[{ text: 'Sign in', type: 'auth' }]} />
+          <Component {...pageProps} />
+          <Footer />
+        </div>
+      </div>
     </SessionProvider>
   );
 };
