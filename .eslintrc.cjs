@@ -4,6 +4,8 @@ const config = {
     {
       extends: [
         // "plugin:@typescript-eslint/recommended-requiring-type-checking",
+        "plugin:testing-library/react",
+        "plugin:jest-dom/recommended",
       ],
       files: ["*.ts", "*.tsx"],
       parserOptions: {
