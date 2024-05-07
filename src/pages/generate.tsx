@@ -14,7 +14,7 @@ import CircularProgress from '@mui/material/CircularProgress';
 import MuiAlert, { AlertProps } from '@mui/material/Alert';
 import React from "react";
 import TextField from '@mui/material/TextField';
-import { Select, MenuItem, SelectChangeEvent } from "@mui/material";
+import { Select, MenuItem, SelectChangeEvent, Tooltip } from "@mui/material";
 import CustomHead from "~/component/head";
 import CustomButtonGroup from "~/component/buttonGroup";
 import StyleOption from "~/component/styleOption";
@@ -277,14 +277,16 @@ const Generate: NextPage = () => {
                             label="Number of images"
                         />
                         <label className="block text-[1rem] text-gray-400 mb-[1%]">1 credit per image</label>
-
-                        <input
-                            className="w-full lg:h-[2rem] p-[2%] mb-[5%] rounded bg-gray-700 text-white focus:outline-[transparent]"
-                            onChange={e => updateForm('n', e.target.value)}
-                            type="number"
-                            min={1}
-                            max={9}
-                            defaultValue={defaultNumberOfImages} />
+                        <Tooltip title={'Currently only support 1 generation at a time'}>
+                            <input
+                                className="w-full lg:h-[2rem] p-[2%] mb-[5%] rounded bg-gray-700 text-white focus:outline-[transparent]"
+                                onChange={e => updateForm('n', e.target.value)}
+                                type="number"
+                                disabled
+                                min={1}
+                                max={9}
+                                defaultValue={defaultNumberOfImages} />
+                        </Tooltip>
                     </section>
 
                     {isLoggedIn ?
