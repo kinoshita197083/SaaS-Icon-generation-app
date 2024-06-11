@@ -35,6 +35,9 @@ export const iconsRouter = createTRPCRouter({
                 take: limit + 1,
                 skip: skip,
                 cursor: cursor ? { id: cursor } : undefined,
+                orderBy: {
+                    createdAt: 'desc',
+                },
                 where: {
                     userId: ctx.session.user.id
                 }
@@ -68,6 +71,9 @@ export const iconsRouter = createTRPCRouter({
                 take: limit + 1,
                 skip: skip,
                 cursor: cursor ? { id: cursor } : undefined,
+                orderBy: {
+                    createdAt: 'desc',
+                },
             });
 
             let nextCursor: typeof cursor | undefined = undefined;
