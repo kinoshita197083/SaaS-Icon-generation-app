@@ -318,17 +318,17 @@ const Generate: NextPage = () => {
             <label className="mb-[1%] block text-[1rem] text-gray-400">
               1 credit per image
             </label>
-            {/* <Tooltip title={"Currently only support 1 generation at a time"}> */}
-            <input
-              className="mb-[5%] w-full rounded bg-gray-700 p-[2%] text-white focus:outline-[transparent] lg:h-[2rem]"
-              onChange={(e) => updateForm("n", e.target.value)}
-              type="number"
-              // disabled
-              min={1}
-              max={9}
-              defaultValue={defaultNumberOfImages}
-            />
-            {/* </Tooltip> */}
+            <Tooltip title={"Currently only support 1 generation at a time"}>
+              <input
+                className="mb-[5%] w-full rounded bg-gray-700 p-[2%] text-white focus:outline-[transparent] lg:h-[2rem]"
+                onChange={(e) => updateForm("n", e.target.value)}
+                type="number"
+                disabled
+                min={1}
+                max={9}
+                defaultValue={defaultNumberOfImages}
+              />
+            </Tooltip>
           </section>
 
           {isLoggedIn ? (
