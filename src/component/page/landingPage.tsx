@@ -13,7 +13,7 @@ const LandingPage = () => {
     const icons: number | undefined = api.statistic.getStatistic.useQuery().data?.[1] || 0;
 
     return (
-        <div className='px-[2%] md:px-[3%] lg:px-[8%]'>
+        <div className='px-[2%] md:px-[3%] lg:px-[8%] xl:px-[18%]'>
             <section className='pl-[5%] md:px-[15%] lg:pl-[15%] animate-fadein'>
                 <h1 className='text-6xl leading-[1.2] max-w-[80%] lg:mt-[5%] lg:max-w-[70%] md:text-6xl md:leading-[1.3] lg:text-7xl lg:leading-[1.2] font-semibold'>
                     <span className={styles.animateCharacter}>Icon Generator</span>
@@ -35,10 +35,8 @@ const LandingPage = () => {
             <Poster />
 
             <section className={styles.cardContainer}>
-                <Link href={'/purchase'} className='lg:mx-[auto] md:mb-[1%]'>
-                    <Card mainHeading='Fresh Beginning Sales' subHeading="It's happening !" bgImage='./sample_girl.png'></Card>
-                </Link>
-                <Card mainHeading={`Celebrating ${icons} Creative Creations!`} subHeading='Iconic Milestone' bgImage='./sample_15.png'></Card>
+                <Card mainHeading='Fresh Beginning Sales' subHeading="It's happening !" bgImage='./sample_girl.png' href={'/purchase'}></Card>
+                <Card mainHeading={`Celebrating ${icons} Creative Creations!`} subHeading='Iconic Milestone' bgImage='./sample_15.png' href={'/community'}></Card>
             </section>
 
             <AdBanner
